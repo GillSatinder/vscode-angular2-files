@@ -26,6 +26,8 @@ const writeFiles = async (files: IFiles[]) => {
 };
 
 
+
+
 // Create the new folder
 export const createFolder = async (loc: IPath) => {
   console.log('this is from folder 1');
@@ -43,87 +45,87 @@ export const createFolder = async (loc: IPath) => {
 };
 
 // Create another folder
-export const createFolder2 = async (loc: IPath) => {
+export const createFolder2 = async (loc2: IPath) => {
   
-  if (loc.dirName2) {
-    const exists: boolean = await fsExists(loc.dirPath2);
+  if (loc2.dirName2) {
+    const exists: boolean = await fsExists(loc2.dirPath2);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath2);
+    await fsMkdir(loc2.dirPath2);
   }
 
-  return loc;
+  return loc2;
 };
 
-export const createFolder3 = async (loc: IPath) => {
+export const createFolder3 = async (loc3: IPath) => {
  
-  if (loc.dirName3) {
-    const exists: boolean = await fsExists(loc.dirPath3);
+  if (loc3.dirName3) {
+    const exists: boolean = await fsExists(loc3.dirPath3);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath3);
+    await fsMkdir(loc3.dirPath3);
   }
 
-  return loc;
+  return loc3;
 };
 
-export const createFolder4 = async (loc: IPath) => {
+export const createFolder4 = async (loc4: IPath) => {
  
-  if (loc.dirName4) {
-    const exists: boolean = await fsExists(loc.dirPath4);
+  if (loc4.dirName4) {
+    const exists: boolean = await fsExists(loc4.dirPath4);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath4);
+    await fsMkdir(loc4.dirPath4);
   }
 
-  return loc;
+  return loc4;
 };
 
-export const createFolder5 = async (loc: IPath) => {
+export const createFolder5 = async (loc5: IPath) => {
  
-  if (loc.dirName5) {
-    const exists: boolean = await fsExists(loc.dirPath5);
+  if (loc5.dirName5) {
+    const exists: boolean = await fsExists(loc5.dirPath5);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath5);
+    await fsMkdir(loc5.dirPath5);
   }
 
-  return loc;
+  return loc5;
 };
 
-export const createFolder6 = async (loc: IPath) => {
+export const createFolder6 = async (loc6: IPath) => {
  
-  if (loc.dirName6) {
-    const exists: boolean = await fsExists(loc.dirPath6);
+  if (loc6.dirName6) {
+    const exists: boolean = await fsExists(loc6.dirPath6);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath6);
+    await fsMkdir(loc6.dirPath6);
   }
 
-  return loc;
+  return loc6;
 };
 
-export const createFolder7 = async (loc: IPath) => {
+export const createFolder7 = async (loc7: IPath) => {
  
-  if (loc.dirName7) {
-    const exists: boolean = await fsExists(loc.dirPath7);
+  if (loc7.dirName7) {
+    const exists: boolean = await fsExists(loc7.dirPath7);
     if (exists) {
       throw new Error('Folder already exists');
     }
 
-    await fsMkdir(loc.dirPath7);
+    await fsMkdir(loc7.dirPath7);
   }
 
-  return loc;
+  return loc7;
 };
 

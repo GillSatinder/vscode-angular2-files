@@ -18,6 +18,12 @@ export interface IResource {
   locDirPath6?:Function;
   locDirPath7?:Function;
   files: IResourceFile[];
+  files2?: IResourceFile [];
+  files3?: IResourceFile [];
+  files4?: IResourceFile [];
+  files5?: IResourceFile [];
+  files6?: IResourceFile [];
+  files7?: IResourceFile [];
   createFolder?: Function;
   createFolder2?: Function;
   createFolder3?: Function;
