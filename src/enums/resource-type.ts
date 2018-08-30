@@ -9,4 +9,5 @@ export enum ResourceType {
     Interface = 'interface',
     Route = 'route',
     Guard = 'guard',
+    AerionProject = 'aerionProject',
 }

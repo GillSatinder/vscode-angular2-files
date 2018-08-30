@@ -20,6 +20,22 @@ export const config: IConfig = {
       skipImport: false,
       module: 'app',
     },
+    aerionProject: {
+      spec: true,
+      inlineStyle: false,
+      inlineTemplate: false,
+      flat: false,
+      changeDetection: 'Default',
+      viewEncapsulation: 'Emulated',
+      styleext: null,
+      prefix: null,
+      skipImport: false,
+     // these three lines are added from module to behave as both
+      routing: false,
+      routingScope: 'Child',
+      commonModule: true,
+      module: 'app',
+    },
     class: {
       spec: false,
     },
@@ -51,5 +67,6 @@ export const config: IConfig = {
       flat: true,
       spec: true,
     },
+   
   },
 };

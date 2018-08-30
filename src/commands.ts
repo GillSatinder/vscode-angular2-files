@@ -12,4 +12,5 @@ export const commandsMap = new Map<CommandType, ICommand>([
   [CommandType.Route, { fileName: 'my-route', resource: ResourceType.Route }],
   [CommandType.Enum, { fileName: 'my-enum', resource: ResourceType.Enum }],
   [CommandType.Module, { fileName: 'my-module', resource: ResourceType.Module }],
+  [CommandType.AerionProject, { fileName: 'my-project', resource: ResourceType.AerionProject }],
 ]);

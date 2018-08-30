@@ -17,4 +17,9 @@ export enum TemplateType {
     Enum = 'enum.tmpl',
     Inteface = 'interface.tmpl',
     Route = 'route.tmpl',
+    AerionProject = 'aerionProject.tmpl',
+    AerionProjectSpec = 'aerionProject.spec.tmpl',
+    AerionProjectHtml = 'aerionProject.html.tmpl',
+    AerionProjectStyle = 'aerionProject.style.tmpl',
+
 }

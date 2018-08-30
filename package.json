@@ -1,12 +1,12 @@
 {
-    "name": "vscode-angular2-files",
+    "name": "aerion-module-generator",
     "displayName": "Angular Files",
     "description": "Quickly scaffold angular file templates",
     "version": "1.6.1",
     "icon": "images/icon.png",
-    "publisher": "alexiv",
+    "publisher": "gill",
     "author": {
-        "name": "Alexander Ivanichev"
+        "name": "gill"
     },
     "engines": {
         "vscode": "^1.22.0"
@@ -26,9 +26,7 @@
         "Templates"
     ],
     "categories": [
-        "Other",
-        "Languages",
-        "Snippets"
+        "Programming Languages"
     ],
     "scripts": {
         "templates": "copyfiles templates/**/*.tmpl templates/**/*.tmpl ./out/src/",
@@ -44,7 +42,7 @@
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "Angular Files menu option configuration",
+            "title": "Angular Files",
             "properties": {
                 "angular2-files.menu.component": {
                     "type": "boolean",
@@ -90,6 +88,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Shows or hides the menu item."
+                },
+                "angular2-files.menu.aerionProject": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Shows or hides the menu item."
                 }
             }
         },
@@ -129,10 +132,19 @@
             {
                 "command": "extension.addAngular2Module",
                 "title": "Generate Module"
+            },
+            {
+                "command": "extension.addAngular2AerionProject",
+                "title": "Generate Aerion Project"
             }
         ],
         "menus": {
             "explorer/context": [
+                {
+                    "when": "config.angular2-files.menu.aerionProject",
+                    "command": "extension.addAngular2AerionProject",
+                    "group": "Angular2"
+                },
                 {
                     "when": "config.angular2-files.menu.component",
                     "command": "extension.addAngular2Component",
@@ -182,6 +194,7 @@
         }
     },
     "devDependencies": {
+        "@angular/cli": "^6.1.5",
         "@types/chai": "^4.1.2",
         "@types/mocha": "^5.0.0",
         "@types/node": "^9.4.7",

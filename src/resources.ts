@@ -3,12 +3,15 @@ import { TemplateType } from './enums/template-type';
 import { ResourceType } from './enums/resource-type';
 import { IResource } from './models/resource';
 import { OptionType } from './enums/option-type';
-
+import { createFolder, createFolder3 } from './ioutil';
+import { config } from './config/cli-config';
+// tslint:disable-next-line:ter-indent
 export const resources = new Map<ResourceType, IResource>([
   [ResourceType.Module, {
     locDirName: (loc, config) => (!config.defaults.module.flat) ? loc.fileName : loc.dirName,
     locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
-    files: [{ name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle },
+    files: 
+    [{ name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle },
     { name: config => `component.html`, type: TemplateType.ComponentHtml },
     { name: config => `component.ts`, type: TemplateType.Component },
     { name: config => `module.ts`, type: TemplateType.Module },
@@ -98,5 +101,66 @@ export const resources = new Map<ResourceType, IResource>([
       OptionType.Selector,
       OptionType.Module,
       OptionType.Export],
+  }],
+  [ResourceType.AerionProject,{
+    
+    locDirName: (loc, config) => (!config.defaults.module.flat) ? loc.fileName : loc.dirName,
+    locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
+    createFolder: config => !config.defaults.module.flat,
+    files: 
+    [{ name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle },
+    { name: config => `component.html`, type: TemplateType.ComponentHtml },
+    { name: config => `component.ts`, type: TemplateType.Component },
+    { name: config => `module.ts`, type: TemplateType.Module },
+    { name: config => `-routing.module.ts`, type: TemplateType.ModuleRouting, condition: (config, params) => config.defaults.module.routing },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.module.spec },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec },
+    { name: config => `routing.ts`, type: TemplateType.Route },
+    { name: config => `service.ts`, type: TemplateType.Service, condition: (config, params) => config.version === 'ng5' },
+    { name: config => `service.ts`, type: TemplateType.ServiceNg6, condition: (config, params) => config.version === 'ng6' },
+    { name: config => `service.spec.ts`, type: TemplateType.ServiceSpec, condition: (config, params) => config.defaults.service.spec }],
+    options: [OptionType.Routing,
+      OptionType.RoutingScope,
+      OptionType.Spec,
+      OptionType.Flat,
+      OptionType.CommonModule,
+      OptionType.Module,
+      OptionType.Export,
+      OptionType.InlineTemplate,
+      OptionType.InlineStyle,
+      OptionType.ViewEncapsulation],
+
+    
+    // for models folder
+    locDirName2: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName2 : loc.dirName2,
+    locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
+    createFolder2: config => !config.defaults.module.flat,
+
+    // for store folder
+    locDirName3: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName3 : loc.dirName3,
+    locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
+
+    locDirName4: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName4 : loc.dirName4,
+    locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
+
+    locDirName5: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName5 : loc.dirName5,
+    locDirPath5: (loc, config) => path.join(loc.dirPath5, loc.dirName5),
+
+    locDirName6: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName6 : loc.dirName6,
+    locDirPath6: (loc, config) => path.join(loc.dirPath6, loc.dirName6),
+
+    locDirName7: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName7 : loc.dirName7,
+    locDirPath7: (loc, config) => path.join(loc.dirPath7, loc.dirName7),
+
+   
+    
+    
+    createFolder3: config => !config.defaults.module.flat,
+    createFolder4: config => !config.defaults.module.flat,
+    createFolder5: config => !config.defaults.module.flat,
+    createFolder6: config => !config.defaults.module.flat,
+    createFolder7: config => !config.defaults.module.flat,
+    
+    
   }],
 ]);

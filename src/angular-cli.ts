@@ -7,7 +7,7 @@ import { FileContents } from './file-contents';
 import { IFiles } from './models/file';
 import { promisify } from './promisify';
 import { toCamelCase, toUpperCase } from './formatting';
-import { createFiles, createFolder } from './ioutil';
+import { createFiles, createFolder, createFolder2, createFolder3, createFolder4, createFolder5, createFolder6, createFolder7 } from './ioutil';
 import { TemplateType } from './enums/template-type';
 import { resources } from './resources';
 import { ResourceType } from './enums/resource-type';
@@ -54,6 +54,7 @@ export class AngularCli {
     const fileNameUpper = toUpperCase(fileName);
 
     const lastImportInx = data.lastIndexOf('import ');
+
     const endOfLastImportInx = data.indexOf('\n', lastImportInx);
     const fileLength = data.length;
     return data.substring(0, endOfLastImportInx) + `\nimport { ${fileNameUpper}${typeUpper} } from '${relativePath}/${fileName}.${type}';` + data.substring(endOfLastImportInx, fileLength);
@@ -167,8 +168,41 @@ export class AngularCli {
   async generateResources(name: ResourceType, loc: IPath, config: IConfig) {
     const resource = resources.get(name);
 
+    
     loc.dirName = resource.hasOwnProperty('locDirName') ? resource.locDirName(loc, config) : loc.dirName;
     loc.dirPath = resource.hasOwnProperty('locDirPath') ? resource.locDirPath(loc, config) : loc.dirPath;
+    
+    // edited
+    // this is not letting anyhthing happening.
+    loc.dirName2 = resource.hasOwnProperty('locDirName2') ? resource.locDirName2(loc, config) : loc.dirName2;
+    console.log('this is the name of second direc name 2' + loc.dirName2);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath2 = resource.hasOwnProperty('locDirPath2') ? resource.locDirPath2(loc, config) : loc.dirPath2;
+    
+    loc.dirName3 = resource.hasOwnProperty('locDirName3') ? resource.locDirName3(loc, config) : loc.dirName3;
+    console.log('this is the name of second direc name 3 ' + loc.dirName3);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath3 = resource.hasOwnProperty('locDirPath3') ? resource.locDirPath3(loc, config) : loc.dirPath3;
+
+    loc.dirName4 = resource.hasOwnProperty('locDirName4') ? resource.locDirName4(loc, config) : loc.dirName4;
+    console.log('this is the name of second direc name 4 ' + loc.dirName4);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath4 = resource.hasOwnProperty('locDirPath4') ? resource.locDirPath4(loc, config) : loc.dirPath4;
+
+    loc.dirName5 = resource.hasOwnProperty('locDirName5') ? resource.locDirName5(loc, config) : loc.dirName5;
+    console.log('this is the name of second direc name 5 ' + loc.dirName5);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath5 = resource.hasOwnProperty('locDirPath5') ? resource.locDirPath5(loc, config) : loc.dirPath5;
+
+    loc.dirName6 = resource.hasOwnProperty('locDirName6') ? resource.locDirName6(loc, config) : loc.dirName6;
+    console.log('this is the name of second direc name 6 ' + loc.dirName6);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath6 = resource.hasOwnProperty('locDirPath6') ? resource.locDirPath6(loc, config) : loc.dirPath6;
+
+    loc.dirName7 = resource.hasOwnProperty('locDirName7') ? resource.locDirName7(loc, config) : loc.dirName7;
+    console.log('this is the name of second direc name 7 ' + loc.dirName7);
+    // loc.dirName2 = loc.dirName + '\\models';
+    loc.dirPath7 = resource.hasOwnProperty('locDirPath7') ? resource.locDirPath7(loc, config) : loc.dirPath7;
 
     if (resource.hasOwnProperty('declaration') &&
       resource.declaration &&
@@ -186,9 +220,16 @@ export class AngularCli {
 
 
     if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
+      
       await createFolder(loc);
+      await createFolder2(loc);
+      await createFolder3(loc);
+      await createFolder4(loc);
+      await createFolder5(loc);
+      await createFolder6(loc);
+      await createFolder7(loc);
     }
-
     await createFiles(loc, files);
+  
   }
 }

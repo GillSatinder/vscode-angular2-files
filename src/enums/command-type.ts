@@ -8,4 +8,5 @@ export enum CommandType {
     Enum = 'extension.addAngular2Enum',
     Interface = 'extension.addAngular2Interface',
     Route = 'extension.addAngular2Route',
+    AerionProject = 'extension.addAngular2AerionProject',
 }

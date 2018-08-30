@@ -52,6 +52,7 @@ Angular Files will automatically scan you angular.json to determine which defaul
 ```json
   "angular2-files.menu.class": false,
   "angular2-files.menu.component": true,
+  "angular2-files.menu.aerionProject": true,
   "angular2-files.menu.directive": true,
   "angular2-files.menu.enum": false,
   "angular2-files.menu.interface": false,
@@ -87,6 +88,14 @@ Angular Files will automatically scan you angular.json to determine which defaul
     "defaults": {
         "styleExt": "css",
         "component": {
+            "spec": true,
+            "inlineStyle": false,
+            "inlineTemplate": false,
+            "flat": false,
+            "changeDetection": "Default",
+            "viewEncapsulation": "Emulated"
+        },
+        "aerionProject":{
             "spec": true,
             "inlineStyle": false,
             "inlineTemplate": false,
@@ -176,6 +185,7 @@ New Directive |
 New Pipe      |
 New Service   | 
 New Module    |
+New AerionProject |
 
 Menu Options  |
 ---           | 

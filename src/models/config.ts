@@ -50,6 +50,7 @@ export interface IDefaults {
   module?: IProperties;
   pipe?: IProperties;
   service?: IProperties;
+  aerionProject?: IProperties;
 }
 
 export interface IConfig {

@@ -28,6 +28,8 @@ const writeFiles = async (files: IFiles[]) => {
 
 // Create the new folder
 export const createFolder = async (loc: IPath) => {
+  console.log('this is from folder 1');
+  console.log(loc);
   if (loc.dirName) {
     const exists: boolean = await fsExists(loc.dirPath);
     if (exists) {
@@ -39,3 +41,89 @@ export const createFolder = async (loc: IPath) => {
 
   return loc;
 };
+
+// Create another folder
+export const createFolder2 = async (loc: IPath) => {
+  
+  if (loc.dirName2) {
+    const exists: boolean = await fsExists(loc.dirPath2);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath2);
+  }
+
+  return loc;
+};
+
+export const createFolder3 = async (loc: IPath) => {
+ 
+  if (loc.dirName3) {
+    const exists: boolean = await fsExists(loc.dirPath3);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath3);
+  }
+
+  return loc;
+};
+
+export const createFolder4 = async (loc: IPath) => {
+ 
+  if (loc.dirName4) {
+    const exists: boolean = await fsExists(loc.dirPath4);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath4);
+  }
+
+  return loc;
+};
+
+export const createFolder5 = async (loc: IPath) => {
+ 
+  if (loc.dirName5) {
+    const exists: boolean = await fsExists(loc.dirPath5);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath5);
+  }
+
+  return loc;
+};
+
+export const createFolder6 = async (loc: IPath) => {
+ 
+  if (loc.dirName6) {
+    const exists: boolean = await fsExists(loc.dirPath6);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath6);
+  }
+
+  return loc;
+};
+
+export const createFolder7 = async (loc: IPath) => {
+ 
+  if (loc.dirName7) {
+    const exists: boolean = await fsExists(loc.dirPath7);
+    if (exists) {
+      throw new Error('Folder already exists');
+    }
+
+    await fsMkdir(loc.dirPath7);
+  }
+
+  return loc;
+};
+

@@ -12,7 +12,9 @@ import { OptionItem } from './models/option-item';
 export const displayStatusMessage = (type: string, name: string, timeout = 2000) => vscode.window.setStatusBarMessage(`${type} ${name} was successfully generated`, timeout);
 
 export const openFileInEditor = async (folderName) => {
+ 
   const inputName = path.parse(folderName).name;
+
   const fullFilePath = path.join(folderName, `${inputName}.component.ts`);
   const textDocument = await vscode.workspace.openTextDocument(fullFilePath);
   return await vscode.window.showTextDocument(textDocument);
@@ -32,27 +34,47 @@ export const showFileNameDialog = async (args, type: ResourceType, defaultTypeNa
   }
 
   const rootPath = fs.lstatSync(clickedFolderPath).isDirectory() ? clickedFolderPath : path.dirname(clickedFolderPath);
-
+  
   if (vscode.workspace.rootPath === undefined) {
     throw new Error('Please open a project first. Thanks! :-)');
   } else {
     let fileName = await vscode.window.showInputBox({ prompt: `Type the name of the new ${type}`, value: `${defaultTypeName}` });
+    let fileName2 = 'models';
+    let fileName3 = 'store';
+    let fileName4 = fileName + '-create';
+    let fileName5 = fileName + '-edit';
+    let fileName6 = fileName + '-form';
+    let fileName7 = fileName + '-list';
+    const rootPath2 = rootPath + '\\' + fileName;
+    const rootPath3 = rootPath2;
+    const rootPath4 = rootPath2;
+    const rootPath5 = rootPath2;
+    const rootPath6 = rootPath2;
+    const rootPath7 = rootPath2;
+    
 
     if (!fileName) {
       throw new Error('That\'s not a valid name! (no whitespaces or special characters)');
     } else {
       let dirName = '';
+      let dirName2 = '';
+      let dirName3 = '';
+      let dirName4 = '';
+      let dirName5 = '';
+      let dirName6 = '';
+      let dirName7 = '';
 
       const [showOptionsCmd] = optionsCommands.get(OptionType.ShowOptions).commands;
       const resoureParamsMap = resources.get(type).options ? resources.get(type).options.map(op => optionsCommands.get(op).commands.map(v => [v, op] as [string, OptionType])) : [];
       const optionsMap = new Map<string, OptionType>(Array.prototype.concat.apply([], [...resoureParamsMap, [[showOptionsCmd, OptionType.ShowOptions]]]));
       const resourceOptionsTags = resources.get(type).options ? Array.prototype.concat.apply([], resources.get(type).options.map(op => optionsCommands.get(op).commands)) : [];
-
+      
       const separators = ['--', ' -'];
       const optionValuesSparator = ['=', ' '];
       const filenameTokens = fileName.split(' ');
       const optionsString = filenameTokens.slice(1, filenameTokens.length).join(' ');
       [fileName] = filenameTokens;
+     
 
       const optionsTokens = optionsString.split(new RegExp(separators.join('|'), 'g'))
         .filter(item => item.trim() !== '')
@@ -72,11 +94,50 @@ export const showFileNameDialog = async (args, type: ResourceType, defaultTypeNa
 
       const paramsMap = new Map<OptionType, string>(params);
       const fullPath = path.join(rootPath, fileName);
+      const fullPath2 = path.join(rootPath2, fileName2);
+      const fullPath3 = path.join(rootPath3, fileName3);
+      const fullPath4 = path.join(rootPath4, fileName4);
+      const fullPath5 = path.join(rootPath5, fileName5);
+      const fullPath6 = path.join(rootPath6, fileName6);
+      const fullPath7 = path.join(rootPath7, fileName7);
+     
 
       if (fileName.indexOf('\\') !== -1) {
         [dirName, fileName] = fileName.split('\\');
+
+      
       }
+      if (fileName2.indexOf('\\') !== -1) {
+        [dirName2, fileName2] = fileName2.split('\\');
+      }
+
+      if (fileName3.indexOf('\\') !== -1) {
+        [dirName3, fileName3] = fileName3.split('\\');
+      }
+
+      if (fileName4.indexOf('\\') !== -1) {
+        [dirName4, fileName4] = fileName4.split('\\');
+      }
+
+      if (fileName5.indexOf('\\') !== -1) {
+        [dirName5, fileName5] = fileName5.split('\\');
+      }
+
+      if (fileName6.indexOf('\\') !== -1) {
+        [dirName6, fileName6] = fileName6.split('\\');
+      }
+
+      if (fileName7.indexOf('\\') !== -1) {
+        [dirName7, fileName7] = fileName7.split('\\');
+      }
+      
       const dirPath = path.join(rootPath, dirName);
+      const dirPath2 = path.join(rootPath2, dirName2);
+      const dirPath3 = path.join(rootPath3, dirName3);
+      const dirPath4 = path.join(rootPath4, dirName4);
+      const dirPath5 = path.join(rootPath5, dirName5);
+      const dirPath6 = path.join(rootPath6, dirName6);
+      const dirPath7 = path.join(rootPath7, dirName7);
 
 
       return {
@@ -86,6 +147,41 @@ export const showFileNameDialog = async (args, type: ResourceType, defaultTypeNa
         dirPath,
         rootPath,
         paramsMap,
+        fullPath2,
+        fileName2,
+        dirName2,
+        dirPath2,
+        rootPath2,
+
+        fullPath3,
+        fileName3,
+        dirName3,
+        dirPath3,
+        rootPath3,
+
+        fullPath4,
+        fileName4,
+        dirName4,
+        dirPath4,
+        rootPath4,
+
+        fullPath5,
+        fileName5,
+        dirName5,
+        dirPath5,
+        rootPath5,
+
+        fullPath6,
+        fileName6,
+        dirName6,
+        dirPath6,
+        rootPath6,
+
+        fullPath7,
+        fileName7,
+        dirName7,
+        dirPath7,
+        rootPath7,
         params: [...paramsMap.keys()],
       };
     }
