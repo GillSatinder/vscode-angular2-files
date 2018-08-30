@@ -3,5 +3,4 @@ export interface IResourceFile {
   name: Function;
   type: TemplateType;
   condition?: Function;
-  ewq?:Function;
 }
