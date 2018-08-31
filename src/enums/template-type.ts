@@ -21,5 +21,6 @@ export enum TemplateType {
     AerionProjectSpec = 'aerionProject.spec.tmpl',
     AerionProjectHtml = 'aerionProject.html.tmpl',
     AerionProjectStyle = 'aerionProject.style.tmpl',
+    
 
 }

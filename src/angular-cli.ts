@@ -7,8 +7,10 @@ import { FileContents } from './file-contents';
 import { IFiles } from './models/file';
 import { promisify } from './promisify';
 import { toCamelCase, toUpperCase } from './formatting';
-import { createFiles, createFiles2, createFiles3, createFiles4, createFiles5, createFiles6, createFiles7,  createFolder, createFolder2,
-   createFolder3, createFolder4, createFolder5, createFolder6, createFolder7 } from './ioutil';
+import {
+  createFiles, createFiles2, createFiles3, createFiles4, createFiles5, createFiles6, createFiles7, createSameFiles, createFolder, createFolder2,
+  createFolder3, createFolder4, createFolder5, createFolder6, createFolder7
+} from './ioutil';
 import { TemplateType } from './enums/template-type';
 import { resources } from './resources';
 import { ResourceType } from './enums/resource-type';
@@ -169,19 +171,25 @@ export class AngularCli {
   async generateResources(name: ResourceType, loc: IPath, config: IConfig) {
     const resource = resources.get(name);
 
-    
+
     loc.dirName = resource.hasOwnProperty('locDirName') ? resource.locDirName(loc, config) : loc.dirName;
     loc.dirPath = resource.hasOwnProperty('locDirPath') ? resource.locDirPath(loc, config) : loc.dirPath;
+
     loc.dirName2 = resource.hasOwnProperty('locDirName2') ? resource.locDirName2(loc, config) : loc.dirName2;
     loc.dirPath2 = resource.hasOwnProperty('locDirPath2') ? resource.locDirPath2(loc, config) : loc.dirPath2;
+
     loc.dirName3 = resource.hasOwnProperty('locDirName3') ? resource.locDirName3(loc, config) : loc.dirName3;
     loc.dirPath3 = resource.hasOwnProperty('locDirPath3') ? resource.locDirPath3(loc, config) : loc.dirPath3;
+
     loc.dirName4 = resource.hasOwnProperty('locDirName4') ? resource.locDirName4(loc, config) : loc.dirName4;
     loc.dirPath4 = resource.hasOwnProperty('locDirPath4') ? resource.locDirPath4(loc, config) : loc.dirPath4;
+
     loc.dirName5 = resource.hasOwnProperty('locDirName5') ? resource.locDirName5(loc, config) : loc.dirName5;
     loc.dirPath5 = resource.hasOwnProperty('locDirPath5') ? resource.locDirPath5(loc, config) : loc.dirPath5;
+
     loc.dirName6 = resource.hasOwnProperty('locDirName6') ? resource.locDirName6(loc, config) : loc.dirName6;
     loc.dirPath6 = resource.hasOwnProperty('locDirPath6') ? resource.locDirPath6(loc, config) : loc.dirPath6;
+
     loc.dirName7 = resource.hasOwnProperty('locDirName7') ? resource.locDirName7(loc, config) : loc.dirName7;
     loc.dirPath7 = resource.hasOwnProperty('locDirPath7') ? resource.locDirPath7(loc, config) : loc.dirPath7;
 
@@ -202,10 +210,21 @@ export class AngularCli {
     const files2: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
       const fileName2: string = file2.name(config);
       return {
-       // name: path.join(loc.dirPath2, fileName2.startsWith('-') ? `${loc.fileName2}${fileName2}` : `${loc.fileName2}.${fileName2}`),
-       name: path.join(loc.dirPath2,  `${loc.fileName}Page.${fileName2}`),
-       content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+        name: path.join(loc.dirPath2, `${loc.fileName}Page.${fileName2}`),
+        content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+
+      };
+    });
+
+    const sameFiles: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
+      // this is the extension of the file.
+      const fileName2: string = file2.name(config);
+      // const fileName2 = 'iol';
+      return {
        
+        name: path.join(loc.dirPath2, `${loc.fileName}Page.${fileName2}`),
+        content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+
       };
     });
 
@@ -252,7 +271,7 @@ export class AngularCli {
 
 
     if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
-      
+
       await createFolder(loc);
       await createFolder2(loc);
       await createFolder3(loc);
@@ -268,8 +287,9 @@ export class AngularCli {
     await createFiles5(loc, files5);
     await createFiles6(loc, files6);
     await createFiles7(loc, files7);
-    
-    
-  
+    await createSameFiles(loc, sameFiles);
+
+
+
   }
 }

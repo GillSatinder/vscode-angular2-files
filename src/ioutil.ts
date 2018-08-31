@@ -79,6 +79,14 @@ export const createFiles7 = async (loc: IPath, files7: IFiles[]) => {
   return loc.dirPath7;
 };
 
+export const createSameFiles = async (loc: IPath, sameFiles: IFiles[]) => {
+  try {
+      await writeSameFiles(sameFiles);
+    } catch (ex) {
+        await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+    }return loc.sameDirPath;
+};
+
 const writeFiles = async (files: IFiles[]) => {
   const filesPromises: Promise<any>[] = files.map(file => fsWriteFile(file.name, file.content));
 
@@ -121,6 +129,11 @@ const writeFiles7 = async (files7: IFiles[]) => {
   await Promise.all(filesPromises2);
 };
 
+const writeSameFiles = async (sameFiles: IFiles[]) => {
+  const filesPromises2: Promise<any>[] = sameFiles.map(file2 => fsWriteFile(file2.name, file2.content));
+  await Promise.all(filesPromises2);
+};
+
 
 
 // Create the new folder
@@ -141,8 +154,7 @@ export const createFolder = async (loc: IPath) => {
 
 // Create another folder
 export const createFolder2 = async (loc2: IPath) => {
-  console.log('this is from folder 2');
-  console.log(loc2);
+  
 
   if (loc2.dirName2) {
     const exists: boolean = await fsExists(loc2.dirPath2);
