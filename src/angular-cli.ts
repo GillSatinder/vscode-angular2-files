@@ -9,7 +9,7 @@ import { promisify } from './promisify';
 import { toCamelCase, toUpperCase } from './formatting';
 import {
   createFiles, createFiles2, createFiles3, createFiles4, createFiles5, createFiles6, createFiles7, createSameFiles, createFolder, createFolder2,
-  createFolder3, createFolder4, createFolder5, createFolder6, createFolder7
+  createFolder3, createFolder4, createFolder5, createFolder6, createFolder7,
 } from './ioutil';
 import { TemplateType } from './enums/template-type';
 import { resources } from './resources';

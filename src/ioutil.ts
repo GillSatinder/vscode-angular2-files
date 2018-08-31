@@ -81,10 +81,10 @@ export const createFiles7 = async (loc: IPath, files7: IFiles[]) => {
 
 export const createSameFiles = async (loc: IPath, sameFiles: IFiles[]) => {
   try {
-      await writeSameFiles(sameFiles);
-    } catch (ex) {
-        await window.showErrorMessage(`File(s) could not be created. ${ex}`);
-    }return loc.sameDirPath;
+    await writeSameFiles(sameFiles);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  } return loc.sameDirPath;
 };
 
 const writeFiles = async (files: IFiles[]) => {
@@ -154,7 +154,7 @@ export const createFolder = async (loc: IPath) => {
 
 // Create another folder
 export const createFolder2 = async (loc2: IPath) => {
-  
+
 
   if (loc2.dirName2) {
     const exists: boolean = await fsExists(loc2.dirPath2);
@@ -169,7 +169,7 @@ export const createFolder2 = async (loc2: IPath) => {
 };
 
 export const createFolder3 = async (loc3: IPath) => {
- 
+
   if (loc3.dirName3) {
     const exists: boolean = await fsExists(loc3.dirPath3);
     if (exists) {
@@ -183,7 +183,7 @@ export const createFolder3 = async (loc3: IPath) => {
 };
 
 export const createFolder4 = async (loc4: IPath) => {
- 
+
   if (loc4.dirName4) {
     const exists: boolean = await fsExists(loc4.dirPath4);
     if (exists) {
@@ -197,7 +197,7 @@ export const createFolder4 = async (loc4: IPath) => {
 };
 
 export const createFolder5 = async (loc5: IPath) => {
- 
+
   if (loc5.dirName5) {
     const exists: boolean = await fsExists(loc5.dirPath5);
     if (exists) {
@@ -211,7 +211,7 @@ export const createFolder5 = async (loc5: IPath) => {
 };
 
 export const createFolder6 = async (loc6: IPath) => {
- 
+
   if (loc6.dirName6) {
     const exists: boolean = await fsExists(loc6.dirPath6);
     if (exists) {
@@ -225,7 +225,7 @@ export const createFolder6 = async (loc6: IPath) => {
 };
 
 export const createFolder7 = async (loc7: IPath) => {
- 
+
   if (loc7.dirName7) {
     const exists: boolean = await fsExists(loc7.dirPath7);
     if (exists) {
