@@ -24,6 +24,7 @@ export interface IResource {
   files5?: IResourceFile [];
   files6?: IResourceFile [];
   files7?: IResourceFile [];
+  sameFiles?: IResourceFile [];
   createFolder?: Function;
   createFolder2?: Function;
   createFolder3?: Function;

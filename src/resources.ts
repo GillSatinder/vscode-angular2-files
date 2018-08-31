@@ -121,18 +121,21 @@ export const resources = new Map<ResourceType, IResource>([
     { name: config => `service.ts`, type: TemplateType.ServiceNg6, condition: (config, params) => config.version === 'ng6' },
     { name: config => `service.spec.ts`, type: TemplateType.ServiceSpec, condition: (config, params) => config.defaults.service.spec }],
     files2: 
-    [{ name: config => `ts`, type: TemplateType.ServiceSpec, condition: (config, params) => config.defaults.service.spec },
-        { name: config => `ts`, type: TemplateType.Component }],
-
-    files3: [{ name: config => `component.ts`, type: TemplateType.Component },
+    [{ name: config => `ts`, type: TemplateType.Component }],
+    sameFiles :
+    [{ name: config => `ts`, type: TemplateType.Component }],
+    files3: 
+    [{ name: config => `component.ts`, type: TemplateType.Component },
     { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
     { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
     { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files4: [{ name: config => `component.ts`, type: TemplateType.Component },
+    files4: 
+    [{ name: config => `component.ts`, type: TemplateType.Component },
     { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
     { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
     { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files5: [{ name: config => `component.ts`, type: TemplateType.Component },
+    files5: 
+    [{ name: config => `component.ts`, type: TemplateType.Component },
     { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
     { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
     { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
