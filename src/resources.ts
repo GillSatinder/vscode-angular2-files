@@ -145,28 +145,22 @@ export const resources = new Map<ResourceType, IResource>([
     // for store folder
     locDirName3: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName3 : loc.dirName3,
     locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
+    createFolder3: config => !config.defaults.module.flat,
 
     locDirName4: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName4 : loc.dirName4,
     locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
+    createFolder4: config => !config.defaults.module.flat,
 
     locDirName5: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName5 : loc.dirName5,
     locDirPath5: (loc, config) => path.join(loc.dirPath5, loc.dirName5),
+    createFolder5: config => !config.defaults.module.flat,
 
     locDirName6: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName6 : loc.dirName6,
     locDirPath6: (loc, config) => path.join(loc.dirPath6, loc.dirName6),
+    createFolder6: config => !config.defaults.module.flat,
 
     locDirName7: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName7 : loc.dirName7,
     locDirPath7: (loc, config) => path.join(loc.dirPath7, loc.dirName7),
-
-   
-    
-    
-    createFolder3: config => !config.defaults.module.flat,
-    createFolder4: config => !config.defaults.module.flat,
-    createFolder5: config => !config.defaults.module.flat,
-    createFolder6: config => !config.defaults.module.flat,
     createFolder7: config => !config.defaults.module.flat,
-    
-    
   }],
 ]);

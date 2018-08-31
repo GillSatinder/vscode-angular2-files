@@ -19,12 +19,107 @@ export const createFiles = async (loc: IPath, files: IFiles[]) => {
   return loc.dirPath;
 };
 
+export const createFiles2 = async (loc: IPath, files2: IFiles[]) => {
+  try {
+    await writeFiles2(files2);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath2;
+};
+
+export const createFiles3 = async (loc: IPath, files3: IFiles[]) => {
+  try {
+    await writeFiles3(files3);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath3;
+};
+
+export const createFiles4 = async (loc: IPath, files4: IFiles[]) => {
+  try {
+    await writeFiles4(files4);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath4;
+};
+
+export const createFiles5 = async (loc: IPath, files5: IFiles[]) => {
+  try {
+    await writeFiles5(files5);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath5;
+};
+
+export const createFiles6 = async (loc: IPath, files6: IFiles[]) => {
+  try {
+    await writeFiles6(files6);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath6;
+};
+
+export const createFiles7 = async (loc: IPath, files7: IFiles[]) => {
+  try {
+    await writeFiles7(files7);
+  } catch (ex) {
+    await window.showErrorMessage(`File(s) could not be created. ${ex}`);
+  }
+
+  return loc.dirPath7;
+};
+
 const writeFiles = async (files: IFiles[]) => {
   const filesPromises: Promise<any>[] = files.map(file => fsWriteFile(file.name, file.content));
 
   await Promise.all(filesPromises);
 };
 
+const writeFiles2 = async (files2: IFiles[]) => {
+  const filesPromises2: Promise<any>[] = files2.map(file2 => fsWriteFile(file2.name, file2.content));
+
+  await Promise.all(filesPromises2);
+};
+
+const writeFiles3 = async (files3: IFiles[]) => {
+  const filesPromises3: Promise<any>[] = files3.map(file3 => fsWriteFile(file3.name, file3.content));
+
+  await Promise.all(filesPromises3);
+};
+
+const writeFiles4 = async (files4: IFiles[]) => {
+  const filesPromises4: Promise<any>[] = files4.map(file2 => fsWriteFile(file2.name, file2.content));
+
+  await Promise.all(filesPromises4);
+};
+
+const writeFiles5 = async (files5: IFiles[]) => {
+  const filesPromises2: Promise<any>[] = files5.map(file2 => fsWriteFile(file2.name, file2.content));
+
+  await Promise.all(filesPromises2);
+};
+
+const writeFiles6 = async (files6: IFiles[]) => {
+  const filesPromises2: Promise<any>[] = files6.map(file2 => fsWriteFile(file2.name, file2.content));
+
+  await Promise.all(filesPromises2);
+};
+
+const writeFiles7 = async (files7: IFiles[]) => {
+  const filesPromises2: Promise<any>[] = files7.map(file2 => fsWriteFile(file2.name, file2.content));
+
+  await Promise.all(filesPromises2);
+};
 
 
 
@@ -46,7 +141,9 @@ export const createFolder = async (loc: IPath) => {
 
 // Create another folder
 export const createFolder2 = async (loc2: IPath) => {
-  
+  console.log('this is from folder 2');
+  console.log(loc2);
+
   if (loc2.dirName2) {
     const exists: boolean = await fsExists(loc2.dirPath2);
     if (exists) {

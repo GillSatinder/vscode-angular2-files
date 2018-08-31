@@ -7,7 +7,8 @@ import { FileContents } from './file-contents';
 import { IFiles } from './models/file';
 import { promisify } from './promisify';
 import { toCamelCase, toUpperCase } from './formatting';
-import { createFiles, createFolder, createFolder2, createFolder3, createFolder4, createFolder5, createFolder6, createFolder7 } from './ioutil';
+import { createFiles, createFiles2, createFiles3, createFiles4, createFiles5, createFiles6, createFiles7,  createFolder, createFolder2,
+   createFolder3, createFolder4, createFolder5, createFolder6, createFolder7 } from './ioutil';
 import { TemplateType } from './enums/template-type';
 import { resources } from './resources';
 import { ResourceType } from './enums/resource-type';
@@ -171,37 +172,17 @@ export class AngularCli {
     
     loc.dirName = resource.hasOwnProperty('locDirName') ? resource.locDirName(loc, config) : loc.dirName;
     loc.dirPath = resource.hasOwnProperty('locDirPath') ? resource.locDirPath(loc, config) : loc.dirPath;
-    
-    // edited
-    // this is not letting anyhthing happening.
     loc.dirName2 = resource.hasOwnProperty('locDirName2') ? resource.locDirName2(loc, config) : loc.dirName2;
-    console.log('this is the name of second direc name 2' + loc.dirName2);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath2 = resource.hasOwnProperty('locDirPath2') ? resource.locDirPath2(loc, config) : loc.dirPath2;
-    
     loc.dirName3 = resource.hasOwnProperty('locDirName3') ? resource.locDirName3(loc, config) : loc.dirName3;
-    console.log('this is the name of second direc name 3 ' + loc.dirName3);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath3 = resource.hasOwnProperty('locDirPath3') ? resource.locDirPath3(loc, config) : loc.dirPath3;
-
     loc.dirName4 = resource.hasOwnProperty('locDirName4') ? resource.locDirName4(loc, config) : loc.dirName4;
-    console.log('this is the name of second direc name 4 ' + loc.dirName4);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath4 = resource.hasOwnProperty('locDirPath4') ? resource.locDirPath4(loc, config) : loc.dirPath4;
-
     loc.dirName5 = resource.hasOwnProperty('locDirName5') ? resource.locDirName5(loc, config) : loc.dirName5;
-    console.log('this is the name of second direc name 5 ' + loc.dirName5);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath5 = resource.hasOwnProperty('locDirPath5') ? resource.locDirPath5(loc, config) : loc.dirPath5;
-
     loc.dirName6 = resource.hasOwnProperty('locDirName6') ? resource.locDirName6(loc, config) : loc.dirName6;
-    console.log('this is the name of second direc name 6 ' + loc.dirName6);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath6 = resource.hasOwnProperty('locDirPath6') ? resource.locDirPath6(loc, config) : loc.dirPath6;
-
     loc.dirName7 = resource.hasOwnProperty('locDirName7') ? resource.locDirName7(loc, config) : loc.dirName7;
-    console.log('this is the name of second direc name 7 ' + loc.dirName7);
-    // loc.dirName2 = loc.dirName + '\\models';
     loc.dirPath7 = resource.hasOwnProperty('locDirPath7') ? resource.locDirPath7(loc, config) : loc.dirPath7;
 
     if (resource.hasOwnProperty('declaration') &&
@@ -218,6 +199,57 @@ export class AngularCli {
       };
     });
 
+    const files2: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
+      const fileName2: string = file2.name(config);
+      return {
+       // name: path.join(loc.dirPath2, fileName2.startsWith('-') ? `${loc.fileName2}${fileName2}` : `${loc.fileName2}.${fileName2}`),
+       name: path.join(loc.dirPath2,  `${loc.fileName}Page.${fileName2}`),
+       content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+       
+      };
+    });
+
+    const files3: IFiles[] = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
+      const fileName3: string = file3.name(config);
+      return {
+        name: path.join(loc.dirPath3, fileName3.startsWith('-') ? `${loc.fileName3}${fileName3}` : `${loc.fileName3}.${fileName3}`),
+        content: this.fc.getTemplateContent(file3.type, config, loc.fileName3, loc.params),
+      };
+    });
+
+    const files4: IFiles[] = resource.files4.filter(file4 => (file4.condition) ? file4.condition(config, loc.params) : true).map((file4) => {
+      const fileName4: string = file4.name(config);
+      return {
+        name: path.join(loc.dirPath4, fileName4.startsWith('-') ? `${loc.fileName4}${fileName4}` : `${loc.fileName4}.${fileName4}`),
+        content: this.fc.getTemplateContent(file4.type, config, loc.fileName4, loc.params),
+      };
+    });
+
+    const files5: IFiles[] = resource.files5.filter(file5 => (file5.condition) ? file5.condition(config, loc.params) : true).map((file5) => {
+      const fileName5: string = file5.name(config);
+      return {
+        name: path.join(loc.dirPath5, fileName5.startsWith('-') ? `${loc.fileName5}${fileName5}` : `${loc.fileName5}.${fileName5}`),
+        content: this.fc.getTemplateContent(file5.type, config, loc.fileName5, loc.params),
+      };
+    });
+
+    const files6: IFiles[] = resource.files6.filter(file6 => (file6.condition) ? file6.condition(config, loc.params) : true).map((file6) => {
+      const fileName6: string = file6.name(config);
+      return {
+        name: path.join(loc.dirPath6, fileName6.startsWith('-') ? `${loc.fileName6}${fileName6}` : `${loc.fileName6}.${fileName6}`),
+        content: this.fc.getTemplateContent(file6.type, config, loc.fileName6, loc.params),
+      };
+    });
+
+    const files7: IFiles[] = resource.files7.filter(file7 => (file7.condition) ? file7.condition(config, loc.params) : true).map((file7) => {
+      const fileName7: string = file7.name(config);
+      return {
+        name: path.join(loc.dirPath7, fileName7.startsWith('-') ? `${loc.fileName7}${fileName7}` : `${loc.fileName7}.${fileName7}`),
+        content: this.fc.getTemplateContent(file7.type, config, loc.fileName7, loc.params),
+      };
+    });
+
+
 
     if (resource.hasOwnProperty('createFolder') && resource.createFolder(config)) {
       
@@ -230,6 +262,14 @@ export class AngularCli {
       await createFolder7(loc);
     }
     await createFiles(loc, files);
+    await createFiles2(loc, files2);
+    await createFiles3(loc, files3);
+    await createFiles4(loc, files4);
+    await createFiles5(loc, files5);
+    await createFiles6(loc, files6);
+    await createFiles7(loc, files7);
+    
+    
   
   }
 }
