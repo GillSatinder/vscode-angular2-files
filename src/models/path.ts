@@ -45,11 +45,11 @@ export interface IPath {
   fullPath7?: string;
   rootPath7?: string;
 
-    sameFileName?: string;
-    sameDirName?: string;
-    sameDirPath?: string;
-    sameFullPath?: string;
-    sameRootPath?: string;
-  
-  
+  sameFileName?: string;
+  sameDirName?: string;
+  sameDirPath?: string;
+  sameFullPath?: string;
+  sameRootPath?: string;
+
+
 }

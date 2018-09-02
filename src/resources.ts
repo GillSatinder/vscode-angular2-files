@@ -120,33 +120,7 @@ export const resources = new Map<ResourceType, IResource>([
     { name: config => `service.ts`, type: TemplateType.Service, condition: (config, params) => config.version === 'ng5' },
     { name: config => `service.ts`, type: TemplateType.ServiceNg6, condition: (config, params) => config.version === 'ng6' },
     { name: config => `service.spec.ts`, type: TemplateType.ServiceSpec, condition: (config, params) => config.defaults.service.spec }],
-    files2: 
-    [{ name: config => `ts`, type: TemplateType.Component }],
-    sameFiles :
-    [{ name: config => `ts`, type: TemplateType.Component }],
-    files3: 
-    [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files4: 
-    [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files5: 
-    [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files6: [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
-    files7: [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
+    
     options: [OptionType.Routing,
       OptionType.RoutingScope,
       OptionType.Spec,
@@ -163,26 +137,57 @@ export const resources = new Map<ResourceType, IResource>([
     locDirName2: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName2 : loc.dirName2,
     locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
     createFolder2: config => !config.defaults.module.flat,
+    files2: 
+    [{ name: config => `ts`, type: TemplateType.Component }],
+    sameFiles :
+    [{ name: config => `ts`, type: TemplateType.Component }],
+    
 
     // for store folder
     locDirName3: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName3 : loc.dirName3,
     locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
     createFolder3: config => !config.defaults.module.flat,
+    files3: 
+    [{ name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
+    { name: config => `action.ts`, type: TemplateType.AerionProjectStoreActionts },
+    { name: config => `effect.ts`, type: TemplateType.AerionProjectStoreEffectts }, 
+    { name: config => `effect.ts`, type: TemplateType.AerionProjectStroreEffectSpec }, 
+    { name: config => `reducer.spec.ts`, type: TemplateType.AerionProjectStroreReducerSpec }, 
+    { name: config => `reducer.ts`, type: TemplateType.AerionProjectStoreReducerts }, 
+    { name: confif => `state.interface.ts`, type: TemplateType.AerionProjectStoreInterface }],
 
     locDirName4: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName4 : loc.dirName4,
     locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
     createFolder4: config => !config.defaults.module.flat,
+    files4: 
+    [{ name: config => `component.ts`, type: TemplateType.Component },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
 
     locDirName5: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName5 : loc.dirName5,
     locDirPath5: (loc, config) => path.join(loc.dirPath5, loc.dirName5),
     createFolder5: config => !config.defaults.module.flat,
+    files5: 
+    [{ name: config => `component.ts`, type: TemplateType.Component },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
 
     locDirName6: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName6 : loc.dirName6,
     locDirPath6: (loc, config) => path.join(loc.dirPath6, loc.dirName6),
     createFolder6: config => !config.defaults.module.flat,
+    files6: [{ name: config => `component.ts`, type: TemplateType.Component },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
 
     locDirName7: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName7 : loc.dirName7,
     locDirPath7: (loc, config) => path.join(loc.dirPath7, loc.dirName7),
     createFolder7: config => !config.defaults.module.flat,
+    files7: [{ name: config => `component.ts`, type: TemplateType.Component },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
   }],
 ]);

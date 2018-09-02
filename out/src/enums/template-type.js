@@ -24,5 +24,12 @@ var TemplateType;
     TemplateType["AerionProjectSpec"] = "aerionProject.spec.tmpl";
     TemplateType["AerionProjectHtml"] = "aerionProject.html.tmpl";
     TemplateType["AerionProjectStyle"] = "aerionProject.style.tmpl";
+    TemplateType["AerionProjectStroreActionSpec"] = "aerionProject.action.spec.ts";
+    TemplateType["AerionProjectStoreActionts"] = "aerionProject.action.ts";
+    TemplateType["AerionProjectStroreReducerSpec"] = "aerionProject.action.spec.ts";
+    TemplateType["AerionProjectStoreReducerts"] = "aerionProject.action.ts";
+    TemplateType["AerionProjectStroreEffectSpec"] = "aerionProject.action.spec.ts";
+    TemplateType["AerionProjectStoreEffectts"] = "aerionProject.action.ts";
+    TemplateType["AerionProjectStoreInterface"] = "aerionProject.action.spec.ts";
 })(TemplateType = exports.TemplateType || (exports.TemplateType = {}));
 //# sourceMappingURL=template-type.js.map

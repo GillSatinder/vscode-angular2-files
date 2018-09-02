@@ -206,7 +206,7 @@ export class AngularCli {
         content: this.fc.getTemplateContent(file.type, config, loc.fileName, loc.params),
       };
     });
-
+     // for models
     const files2: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
       const fileName2: string = file2.name(config);
       return {
@@ -215,20 +215,29 @@ export class AngularCli {
 
       };
     });
-
+      // for models 
     const sameFiles: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
       // this is the extension of the file.
       const fileName2: string = file2.name(config);
       // const fileName2 = 'iol';
       return {
-       
         name: path.join(loc.dirPath2, `${loc.fileName}.${fileName2}`),
         content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
-
       };
     });
 
+
+
+     // for store
     const files3: IFiles[] = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
+      const fileName3: string = file3.name(config);
+      return {
+        name: path.join(loc.dirPath3, `${loc.fileName}.${fileName3}`),
+        content: this.fc.getTemplateContent(file3.type, config, loc.fileName, loc.params),
+      };
+    });
+    
+    const storeFiles: IFiles [] = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
       const fileName3: string = file3.name(config);
       return {
         name: path.join(loc.dirPath3, fileName3.startsWith('-') ? `${loc.fileName3}${fileName3}` : `${loc.fileName3}.${fileName3}`),
@@ -236,6 +245,8 @@ export class AngularCli {
       };
     });
 
+
+    // -----------store files------------
     const files4: IFiles[] = resource.files4.filter(file4 => (file4.condition) ? file4.condition(config, loc.params) : true).map((file4) => {
       const fileName4: string = file4.name(config);
       return {
