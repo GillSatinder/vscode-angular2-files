@@ -1,0 +1,169 @@
+import {${upperName}Component} from './project-create.component';
+import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, OnDestroy} from '@angular/core';
+import {ProjectService} from '../project-service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {empty, Observable, of, Subscription} from 'rxjs';
+import {HttpParams} from '@angular/common/http';
+import {BaseComponent} from '../../base.component';
+import any = jasmine.any;
+import {Project} from '../models/projects';
+import {FormSubmission} from '../../../interfaces/formSubmission';
+
+
+
+class MockProjectService {
+  validationErrors$: Observable<{}[]> = of();
+  create() {}
+}
+
+class MockActivatedRoute {
+  params: Observable<any> = of({'id': 1});
+}
+
+class MockRouter {}
+
+class MockFormBuilder {
+  group() {}
+}
+
+class MockFormGroup {}
+
+class MockBaseComponent implements OnDestroy {
+
+  form: FormGroup;
+  ngOnDestroy(): void {
+    this.unsubscribeSubscription();
+  }
+  unsubscribeSubscription() {}
+}
+
+
+describe('${upperName}Component', () => {
+  let component: ProjectCreateComponent;
+  let fixture: ComponentFixture<${upperName}Component>;
+  let projectService: ProjectService;
+  let route: ActivatedRoute;
+  let baseComponent: BaseComponent;
+  let formBuilder: FormBuilder;
+  let form: FormGroup;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+
+      declarations: [${upperName}Component],
+      providers: [
+        {provide: ProjectService, useClass: MockProjectService},
+        {provide: ActivatedRoute, useClass: MockActivatedRoute},
+        {provide: Router, useClass: MockRouter},
+        {provide: BaseComponent, useClass: MockBaseComponent},
+        {provide: FormBuilder, useClass: MockFormBuilder},
+        {provide: FormGroup, useClass: MockFormGroup}
+      ],
+      imports: [
+        FormsModule,
+        BrowserModule,
+        ReactiveFormsModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(${upperName}Component);
+    component = fixture.componentInstance;
+    projectService = fixture.debugElement.injector.get(ProjectService);
+    route = fixture.debugElement.injector.get(ActivatedRoute);
+    baseComponent = fixture.debugElement.injector.get(BaseComponent);
+    formBuilder = fixture.debugElement.injector.get(FormBuilder);
+    form = fixture.debugElement.injector.get(FormGroup);
+  });
+
+  it('should create', () => {
+
+   // verify
+    expect(component).toBeDefined();
+  });
+
+  describe('ngOnInit', () => {
+    it('should call the buildForm() method and subscribe the validationError message of ProjectService', () => {
+
+      // setup
+      spyOn(component, 'buildForm');
+
+      // act
+      component.ngOnInit();
+
+      // verify
+      expect(component.buildForm).toHaveBeenCalled();
+      projectService.validationErrors$.subscribe(res => {
+        expect(res).toBeDefined();
+      });
+      route.params.subscribe(res => {
+        expect(res['id']).toBe(1);
+      });
+    });
+  });
+
+  describe('buildForm()', () => {
+    it('evaluates the values of form and calls the onValueChanged method of base component', () => {
+
+    // setup
+      formBuilder  = new FormBuilder();
+      const model = new Project();
+      component.model = model;
+      component.form = formBuilder.group(model.formControls);
+     spyOn(component.formBuilder, 'group').and.returnValue(component.form);
+     spyOn(component.form, 'valueChanges').and.returnValue(of({'name': 'ss'}));
+     spyOn(component, 'onValueChanged').and.returnValue('');
+
+     // act
+     component.buildForm();
+
+     // verify
+     expect(component.form).toBeDefined();
+     expect(component.onValueChanged).toHaveBeenCalled();
+    });
+  });
+
+  describe('onSubmit()', () => {
+    it('should submit the valid form', () => {
+
+      // setup
+      const model = new Project();
+      component.model = model;
+      spyOn(component.model, 'patchByForm').and.returnValue('');
+      spyOn(projectService, 'create').and.returnValue('');
+      const fs: FormSubmission<Project> = {value: model, valid: true};
+
+       // act
+       component.onSubmit(fs);
+
+       // verify
+       expect(component.model.patchByForm).toHaveBeenCalled();
+       expect(projectService.create).toHaveBeenCalled();
+    });
+  });
+
+  describe('onSubmit()', () => {
+    it('should not submit the invalid form', () => {
+
+      // setup
+      const model = new Project();
+      component.model = model;
+      spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
+      const fs: FormSubmission<Project> = {value: model, valid: false};
+
+      // act
+      component.onSubmit(fs);
+
+      // verify
+      expect(component.setFormTouchedAndDirtyIfNeeded).toHaveBeenCalled();
+    });
+  });
+
+
+});
+

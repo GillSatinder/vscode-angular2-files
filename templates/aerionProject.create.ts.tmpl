@@ -1,0 +1,82 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Project } from '../models/projects';
+import { FormBuilder } from '@angular/forms';
+import { BaseComponent } from '../../base.component';
+import { FormSubmission } from '../../../interfaces/formSubmission';
+import { ProjectService } from '../project-service';
+import { UUID } from 'angular2-uuid';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
+@Component({
+ selector: '${cmpSelector}',
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+})
+export class ${upperName}Component extends BaseComponent implements OnInit, OnDestroy {
+
+  model: Project;
+  validationSubscriptions: Subscription;
+  isCreateMode: boolean;
+  /**
+   *Creates an instance of ProjectCreateComponent.
+   * @param {FormBuilder} formBuilder
+   * @memberof ProjectCreateComponent
+   */
+  constructor(formBuilder: FormBuilder,
+              private projectService: ProjectService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super(formBuilder);
+  }
+
+  /**
+   *Oninit method
+   *
+   * @memberof ProjectCreateComponent
+   */
+  ngOnInit(): void {
+    this.model = new Project();
+    this.model.id = UUID.UUID();
+    this.buildForm();
+    this.validationSubscriptions = this.projectService.validationErrors$.subscribe(errors => {
+      if (errors != null) {
+        for (const error in errors) {
+          if (error) {
+            this.model.formErrors[error] = errors[error];
+          }
+        }
+      }
+    });
+
+    this.routeSubscription = this.route.params
+      .subscribe((params: Params) => {
+        const projectId = params['id'];
+      });
+  }
+
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    super.ngOnDestroy();
+    this.unsubscribeSubscription([this.validationSubscriptions]);
+
+  }
+
+  buildForm(): void {
+    this.form = this.formBuilder.group(this.model.formControls);
+    this.formSubscription = this.form.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+    this.onValueChanged(); // (re)set validation messages now
+  }
+
+  onSubmit(formSubmission: FormSubmission<Project>) {
+    if (formSubmission.valid) {
+      this.model.patchByForm(formSubmission.value);
+      this.projectService.create(this.model);
+    } else {
+      this.setFormTouchedAndDirtyIfNeeded();
+    }
+  }
+}
