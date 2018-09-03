@@ -17,16 +17,19 @@ export enum TemplateType {
     Enum = 'enum.tmpl',
     Inteface = 'interface.tmpl',
     Route = 'route.tmpl',
-    
+
     AerionProject = 'aerionProject.tmpl',
     AerionProjectSpec = 'aerionProject.spec.tmpl',
     AerionProjectHtml = 'aerionProject.html.tmpl',
     AerionProjectStyle = 'aerionProject.style.tmpl',
-    AerionProjectStroreActionSpec = 'aerionProject.action.spec.ts',
-    AerionProjectStoreActionts = 'aerionProject.action.ts',
-    AerionProjectStroreReducerSpec = 'aerionProject.action.spec.ts',
-    AerionProjectStoreReducerts = 'aerionProject.action.ts',
-    AerionProjectStroreEffectSpec = 'aerionProject.action.spec.ts',
-    AerionProjectStoreEffectts = 'aerionProject.action.ts',
-    AerionProjectStoreInterface = 'aerionProject.action.spec.ts',
+    AerionProjectStroreActionSpec = 'aerionProject.action.spec.tmpl',
+    AerionProjectStoreActionts = 'action.tmpl',
+    AerionProjectStroreReducerSpec = 'aerionProject.reducer.spec.tmpl',
+    AerionProjectStoreReducerts = 'aerionProject.reducer.tmpl',
+    AerionProjectStroreEffectSpec = 'aerionProject.action.effect.tmpl',
+    AerionProjectStoreEffectts = 'aerionProject.effect.tmpl',
+    AerionProjectStoreInterface = 'aerionProject.store.interface.tmpl',
+
+    AerionProjectModelts = 'aerionProjectModel.tmpl',
+    AerionProjectModelPagets = 'aerionProjectModelPage.tmpl',
 }

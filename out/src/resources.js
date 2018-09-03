@@ -135,13 +135,15 @@ exports.resources = new Map([
             locDirName3: (loc, config) => (!config.defaults.module.flat) ? loc.fileName3 : loc.dirName3,
             locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
             createFolder3: config => !config.defaults.module.flat,
-            files3: [{ name: config => `action.spec.ts`, type: template_type_1.TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
+            files3: [
+                // { name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
                 { name: config => `action.ts`, type: template_type_1.TemplateType.AerionProjectStoreActionts },
                 { name: config => `effect.ts`, type: template_type_1.TemplateType.AerionProjectStoreEffectts },
-                { name: config => `effect.ts`, type: template_type_1.TemplateType.AerionProjectStroreEffectSpec },
+                { name: config => `effect.spec.ts`, type: template_type_1.TemplateType.AerionProjectStroreEffectSpec },
                 { name: config => `reducer.spec.ts`, type: template_type_1.TemplateType.AerionProjectStroreReducerSpec },
                 { name: config => `reducer.ts`, type: template_type_1.TemplateType.AerionProjectStoreReducerts },
-                { name: confif => `state.interface.ts`, type: template_type_1.TemplateType.AerionProjectStoreInterface }],
+                { name: confif => `state.interface.ts`, type: template_type_1.TemplateType.AerionProjectStoreInterface }
+            ],
             locDirName4: (loc, config) => (!config.defaults.module.flat) ? loc.fileName4 : loc.dirName4,
             locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
             createFolder4: config => !config.defaults.module.flat,

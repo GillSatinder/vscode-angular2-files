@@ -148,10 +148,11 @@ export const resources = new Map<ResourceType, IResource>([
     locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
     createFolder3: config => !config.defaults.module.flat,
     files3: 
-    [{ name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
+    [
+      // { name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
     { name: config => `action.ts`, type: TemplateType.AerionProjectStoreActionts },
     { name: config => `effect.ts`, type: TemplateType.AerionProjectStoreEffectts }, 
-    { name: config => `effect.ts`, type: TemplateType.AerionProjectStroreEffectSpec }, 
+    { name: config => `effect.spec.ts`, type: TemplateType.AerionProjectStroreEffectSpec }, 
     { name: config => `reducer.spec.ts`, type: TemplateType.AerionProjectStroreReducerSpec }, 
     { name: config => `reducer.ts`, type: TemplateType.AerionProjectStoreReducerts }, 
     { name: confif => `state.interface.ts`, type: TemplateType.AerionProjectStoreInterface }],

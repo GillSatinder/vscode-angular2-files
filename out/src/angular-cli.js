@@ -192,10 +192,11 @@ class AngularCli {
             // for store
             const files3 = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
                 const fileName3 = file3.name(config);
-                return {
+                const test = {
                     name: path.join(loc.dirPath3, `${loc.fileName}.${fileName3}`),
                     content: this.fc.getTemplateContent(file3.type, config, loc.fileName, loc.params),
                 };
+                return test;
             });
             const storeFiles = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
                 const fileName3 = file3.name(config);
