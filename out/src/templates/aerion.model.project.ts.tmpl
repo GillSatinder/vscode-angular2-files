@@ -1,0 +1,44 @@
+import { Deserializable } from '../../../models/deserializable';
+import { BaseModelInterface } from '../../../interfaces/base.model';
+import { Validators } from '@angular/forms';
+
+export class Project implements Deserializable, BaseModelInterface {
+
+  /** Gets or sets Id */
+  id: string;
+  /** Gets or sets Name */
+  name: string;
+  /** Gets or sets Description */
+  description: string;
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
+  formControls = {
+    'name': [this.name, [Validators.required]],
+    'description': [this.description],
+  };
+  validationMessages = {
+    'name': {
+      'required': 'Name is required.',
+    }
+  };
+
+  formErrors = {
+    'name': '',
+    'description': ''
+  };
+
+  deserialize(input: any): this {
+    Object.assign(this, input);
+    return this;
+  }
+
+
+  patchByForm(form: any) {
+    this.name = form['name'];
+    this.description = form['description'];
+  }
+}
+

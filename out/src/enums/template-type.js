@@ -20,18 +20,44 @@ var TemplateType;
     TemplateType["Enum"] = "enum.tmpl";
     TemplateType["Inteface"] = "interface.tmpl";
     TemplateType["Route"] = "route.tmpl";
+    // basic aerion project files
     TemplateType["AerionProject"] = "aerionProject.tmpl";
     TemplateType["AerionProjectSpec"] = "aerionProject.spec.tmpl";
     TemplateType["AerionProjectHtml"] = "aerionProject.html.tmpl";
     TemplateType["AerionProjectStyle"] = "aerionProject.style.tmpl";
-    TemplateType["AerionProjectStroreActionSpec"] = "aerionProject.action.spec.tmpl";
-    TemplateType["AerionProjectStoreActionts"] = "action.tmpl";
-    TemplateType["AerionProjectStroreReducerSpec"] = "aerionProject.reducer.spec.tmpl";
-    TemplateType["AerionProjectStoreReducerts"] = "aerionProject.reducer.tmpl";
-    TemplateType["AerionProjectStroreEffectSpec"] = "aerionProject.action.effect.tmpl";
-    TemplateType["AerionProjectStoreEffectts"] = "aerionProject.effect.tmpl";
-    TemplateType["AerionProjectStoreInterface"] = "aerionProject.store.interface.tmpl";
-    TemplateType["AerionProjectModelts"] = "aerionProjectModel.tmpl";
-    TemplateType["AerionProjectModelPagets"] = "aerionProjectModelPage.tmpl";
+    // end basic aerion project files
+    // project-create files 
+    TemplateType["AerionProjectCreatets"] = "aerionProject.create.ts.tmpl";
+    TemplateType["AerionProjectCreateSpec"] = "aerionProject.create.spec.tmpl";
+    TemplateType["AerionProjectCreateHtml"] = "aerionProject.create.html.tmpl";
+    TemplateType["AerionProjectCreateStyle"] = "aerionProject.create.style.tmpl";
+    // project-edit files
+    TemplateType["AerionProjectEditts"] = "aerionProject.edit.ts.tmpl";
+    TemplateType["AerionProjectEditSpec"] = "aerionProject.edit.spec.tmpl";
+    TemplateType["AerionProjectEditHtml"] = "aerionProject.edit.html.tmpl";
+    TemplateType["AerionProjectEditStyle"] = "aerionProject.edit.style.tmpl";
+    // project-list files
+    TemplateType["AerionProjectListts"] = "aerionProject.list.ts.tmpl";
+    TemplateType["AerionProjectListSpec"] = "aerionProject.list.spec.tmpl";
+    TemplateType["AerionProjectListHtml"] = "aerionProject.list.html.tmpl";
+    TemplateType["AerionProjectListStyle"] = "aerionProject.list.style.tmpl";
+    // project form files
+    TemplateType["AerionProjectFormts"] = "aerionProject.form.ts.tmpl";
+    TemplateType["AerionProjectFormSpec"] = "aerionProject.form.spec.tmpl";
+    TemplateType["AerionProjectFormHtml"] = "aerionProject.form.html.tmpl";
+    TemplateType["AerionProjectFormStyle"] = "aerionProject.form.style.tmpl";
+    // all store files
+    TemplateType["AerionProjectStroreActionSpec"] = "aerion.action.spec.tmpl";
+    TemplateType["AerionProjectStoreActionts"] = "aerion.action.ts.tmpl";
+    TemplateType["AerionProjectStroreReducerSpec"] = "aerion.reducer.spec.tmpl";
+    TemplateType["AerionProjectStoreReducerts"] = "aerion.reducer.ts.tmpl";
+    TemplateType["AerionProjectStroreEffectSpec"] = "aerion.effect.spec.tmpl";
+    TemplateType["AerionProjectStoreEffectts"] = "aerion.effect.ts.tmpl";
+    TemplateType["AerionProjectStoreInterface"] = "aerion.state.interface.ts.tmpl";
+    // end of store files
+    // model files
+    TemplateType["AerionProjectModelts"] = "aerion.model.project.ts.tmpl";
+    TemplateType["AerionProjectModelPagets"] = "aerion.model.projectPage.ts.tmpl";
+    // end of model files
 })(TemplateType = exports.TemplateType || (exports.TemplateType = {}));
 //# sourceMappingURL=template-type.js.map

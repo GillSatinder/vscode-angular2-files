@@ -138,9 +138,10 @@ export const resources = new Map<ResourceType, IResource>([
     locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
     createFolder2: config => !config.defaults.module.flat,
     files2: 
-    [{ name: config => `ts`, type: TemplateType.Component }],
+    [{ name: config => `Page.ts`, type: TemplateType.AerionProjectModelts }, 
+     {  name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
     sameFiles :
-    [{ name: config => `ts`, type: TemplateType.Component }],
+     [{ name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
     
 
     // for store folder
@@ -148,8 +149,7 @@ export const resources = new Map<ResourceType, IResource>([
     locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),
     createFolder3: config => !config.defaults.module.flat,
     files3: 
-    [
-      // { name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
+    [{ name: config => `action.spec.ts`, type: TemplateType.AerionProjectStroreActionSpec, condition: (config, params) => config.defaults.component.spec },
     { name: config => `action.ts`, type: TemplateType.AerionProjectStoreActionts },
     { name: config => `effect.ts`, type: TemplateType.AerionProjectStoreEffectts }, 
     { name: config => `effect.spec.ts`, type: TemplateType.AerionProjectStroreEffectSpec }, 
@@ -157,38 +157,48 @@ export const resources = new Map<ResourceType, IResource>([
     { name: config => `reducer.ts`, type: TemplateType.AerionProjectStoreReducerts }, 
     { name: confif => `state.interface.ts`, type: TemplateType.AerionProjectStoreInterface }],
 
+    // end store folder
+
+
+    // create component
+
     locDirName4: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName4 : loc.dirName4,
     locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
     createFolder4: config => !config.defaults.module.flat,
     files4: 
-    [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
+    [{ name: config => `component.ts`, type: TemplateType.AerionProjectCreatets },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.AerionProjectCreateStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.AerionProjectCreateHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectCreateSpec, condition: (config, params) => config.defaults.component.spec }],
 
+    // edit component
     locDirName5: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName5 : loc.dirName5,
     locDirPath5: (loc, config) => path.join(loc.dirPath5, loc.dirName5),
     createFolder5: config => !config.defaults.module.flat,
     files5: 
-    [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
+    [{ name: config => `component.ts`, type: TemplateType.AerionProjectEditts },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.AerionProjectEditStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.AerionProjectEditHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectEditSpec, condition: (config, params) => config.defaults.component.spec }],
 
+
+    // form component
     locDirName6: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName6 : loc.dirName6,
     locDirPath6: (loc, config) => path.join(loc.dirPath6, loc.dirName6),
     createFolder6: config => !config.defaults.module.flat,
-    files6: [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
+    files6:  [{ name: config => `component.ts`, type: TemplateType.AerionProjectFormts },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.AerionProjectFormStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.AerionProjectFormHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectFormSpec, condition: (config, params) => config.defaults.component.spec }],
+    
 
+    // list component
     locDirName7: (loc, config) => (!config.defaults.module.flat) ?  loc.fileName7 : loc.dirName7,
     locDirPath7: (loc, config) => path.join(loc.dirPath7, loc.dirName7),
     createFolder7: config => !config.defaults.module.flat,
-    files7: [{ name: config => `component.ts`, type: TemplateType.Component },
-    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
-    { name: config => `component.html`, type: TemplateType.ComponentHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
-    { name: config => `component.spec.ts`, type: TemplateType.ConponentSpec, condition: (config, params) => config.defaults.component.spec }],
+    files7: [{ name: config => `component.ts`, type: TemplateType.AerionProjectListts },
+    { name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.AerionProjectListStyle, condition: (config, params) => !config.defaults.component.inlineStyle },
+    { name: config => `component.html`, type: TemplateType.AerionProjectListHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
+    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectListSpec, condition: (config, params) => config.defaults.component.spec }],
   }],
 ]);

@@ -1,0 +1,193 @@
+import { Injectable } from '@angular/core';
+import { Http, RequestOptionsArgs, Headers, RequestOptions } from '@angular/http';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent, SubscriptionLike, PartialObserver } from 'rxjs';
+import { map, switchMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
+import * as ProjectActions from './project.actions';
+import { ProjectActionTypes } from './project.actions';
+import { Router } from '@angular/router';
+import { Project } from '../models/projects';
+import { URLSearchParams } from '@angular/http';
+import { ProjectPage } from '../models/projectPage';
+import * as RouterActions from '../../../actions/router.actions';
+import { ToasterService } from 'angular2-toaster';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../../../app.store';
+import { PageRequest } from '../../../models/pageRequest';
+
+@Injectable()
+export class ProjectEffects {
+  private endPoint = '/api/v1/projects';  // URL to web API
+  constructor(private store$: Store<AppStore>,
+              private http: Http,
+              private actions$: Actions,
+              private router: Router,
+              protected toasterService: ToasterService) {
+  }
+
+  @Effect() getAllProjects$ = this.actions$
+    // Listen for the 'GET_ALL_PROJECTS' action
+    .ofType(ProjectActionTypes.GET_ALL_PROJECTS).pipe(
+      switchMap((action: ProjectActions.GetAllProjects) => {
+        // prepare params
+        let urlSearchParams = null;
+        if (action) {
+          urlSearchParams = action.payload.toUrlSearchParams();
+        }
+        const requestOptions = new RequestOptions();
+        requestOptions.params = urlSearchParams.toString();
+
+        // prepare headers
+        return this.http.get(this.endPoint, requestOptions).pipe(
+          // If successful, dispatch success action with result
+
+          map((response: Response) => {
+            const projectPage = response.json();
+            if (projectPage) {
+              return new ProjectPage().deserialize(projectPage);
+            }
+            return null;
+          }),
+          map((projectPage: ProjectPage) => {
+            return new ProjectActions.SetProjectPage(projectPage);
+          })
+          // If request fails, dispatch failed action
+          , catchError((err, caught) => {
+            return of(new ProjectActions.ApiFailed(err));
+          })
+        );
+      })
+    );
+
+  @Effect() createProject$ = this.actions$
+    // Listen for the 'CREATE_PROJECT' action
+    .ofType(ProjectActionTypes.CREATE_PROJECT).pipe(
+      switchMap((action: ProjectActions.CreateProject) => {
+        // prepare headers
+        return this.http.post(this.endPoint, action.payload).pipe(
+          // If successful, dispatch success action with result
+          map((response: Response) => {
+            const projectJson = response.json();
+            let project = null;
+            if (projectJson) {
+              project = new Project().deserialize(projectJson);
+            }
+            this.toasterService.pop('success', 'Project created', 'The project was successffully Created');
+
+            return new ProjectActions.CreateProjectSuccess(project);
+          })
+          // If request fails, dispatch failed action
+          , catchError((err: Response, caught) => {
+            // https://github.com/ngrx/platform/issues/646#issuecomment-381437629
+            if (err.status === 422) {
+              return of(new ProjectActions.ValidationFailed(err.json()));
+            }
+            return of(new ProjectActions.ApiFailed(err));
+          })
+        );
+      })
+
+    );
+
+  @Effect() createProjectSuccess$ = this.actions$
+    // Listen for the 'CREATE_PROJECT' action
+    .ofType(ProjectActionTypes.CREATE_PROJECT_SUCCESS).pipe(
+      map((action: ProjectActions.CreateProjectSuccess) => new RouterActions.Go({
+        // https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#navigation-actions
+        path: ['/projects/edit/' + action.payload.id]
+      }))
+    );
+
+
+  @Effect() getProject$ = this.actions$
+    // Listen for the 'GET_PROJECT' action
+    .ofType(ProjectActionTypes.GET_PROJECT).pipe(
+      switchMap((action: ProjectActions.GetProject) => {
+        return this.http.get(this.endPoint + '/GetSingle/' + action.payload).pipe(
+          // If successful, dispatch success action with result
+          map((response: Response) => {
+            const project = response ? response.json() : null;
+            if (project) {
+              return new Project().deserialize(project);
+            }
+            return null;
+          }),
+          map((project: Project) => {
+            return new ProjectActions.GetProjectSuccess(project);
+          })
+          // If request fails, dispatch failed action
+          , catchError((err, caught) => {
+            return of(new ProjectActions.ApiFailed(err));
+          })
+        );
+      })
+    );
+
+
+  @Effect() updateProject$ = this.actions$
+    // Listen for the 'UpdateProject' action
+    .ofType(ProjectActionTypes.UPDATE_PROJECT).pipe(
+      switchMap((action: ProjectActions.UpdateProject) => {
+        return this.http.put(this.endPoint + '/?id=' + action.payload.id, action.payload).pipe(
+          // If successful, dispatch success action with result
+          map((response: Response) => {
+            if (response.status === 200) {
+              this.toasterService.pop('success', 'Project updated', 'The project was successffully updated');
+              return new ProjectActions.UpdateProjectSuccess();
+            }
+            return new ProjectActions.ApiFailed(response);
+          })
+          // If request fails, dispatch failed action
+          , catchError((err, caught) => {
+            if (err.status === 422) {
+              return of(new ProjectActions.ValidationFailed(err.json()));
+            }
+
+            return of(new ProjectActions.ApiFailed(err));
+          })
+        );
+      })
+    );
+
+  @Effect() deleteProject$ = this.actions$
+    // Listen for the 'UpdateProject' action
+    .ofType(ProjectActionTypes.DELETE_PROJECT).pipe(
+      switchMap((action: ProjectActions.DeleteProject) => {
+        return this.http.delete(this.endPoint + '/?id=' + action.payload).pipe(
+          // If successful, dispatch success action with result
+          map((response: Response) => {
+            if (response.status === 200) {
+              this.toasterService.pop('success', 'Project Deleted', 'The project was successffully updated');
+              return new ProjectActions.DeleteProjectSuccess();
+            }
+            return new ProjectActions.ApiFailed(response);
+          })
+          // If request fails, dispatch failed action
+          , catchError((err, caught) => {
+            if (err.status === 422) {
+              return of(new ProjectActions.ValidationFailed(err.json()));
+            }
+
+            return of(new ProjectActions.ApiFailed(err));
+          })
+        );
+      })
+    );
+
+  @Effect() deleteProjectSuccess$ = this.actions$
+    // Listen for the 'UpdateProject' action
+    .ofType(ProjectActionTypes.DELETE_PROJECT_SUCCESS).pipe(
+      withLatestFrom(this.store$.select(x => x.projects.projectPage ))
+      , map(([action, page]) => {
+        console.log(action);
+        console.log(page);
+        // make a new page request with the current page details as we deleted one from the list
+        const pageRequest = new PageRequest();
+        pageRequest.page = page.currentPage;
+        pageRequest.pageSize = page.pageSize;
+        pageRequest.searchTerm = page.searchTerm;
+        return new ProjectActions.GetAllProjects(pageRequest);
+      })
+    );
+
+}

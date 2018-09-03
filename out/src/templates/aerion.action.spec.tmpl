@@ -1,0 +1,168 @@
+import {Project} from '../models/projects';
+import {
+  ApiFailed,
+  CreateProject,
+  CreateProjectSuccess,
+  DeleteProject, DeleteProjectSuccess, GetAllProjects, GetProject, GetProjectSuccess,
+  ProjectActionTypes, SetProjectPage,
+  UpdateProject,
+  UpdateProjectSuccess, ValidationFailed
+} from './project.actions';
+import {PageRequest} from '../../../models/pageRequest';
+import {ProjectPage} from '../models/projectPage';
+
+describe('CreateProject', () => {
+  it('should create an action', () => {
+
+    // setup
+    const payload = new Project({id: '', name: '', description: ''});
+    const action = new CreateProject(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.CREATE_PROJECT);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('CreateProjectSuccess', () => {
+    it('should create an action', () => {
+
+      // setup
+      const payload = new Project({id: '', name: '', description: ''});
+      const action = new CreateProjectSuccess(payload);
+
+      // verify
+      expect(action.type).toEqual(ProjectActionTypes.CREATE_PROJECT_SUCCESS);
+      expect(action.payload).toEqual(payload);
+    });
+});
+
+describe('UpdateProject', () => {
+  it('should create an action', () => {
+
+        // setup
+        const payload = new Project({id: '', name: '', description: ''});
+        const action = new UpdateProject(payload);
+
+        // verify
+        expect(action.type).toEqual(ProjectActionTypes.UPDATE_PROJECT);
+        expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('UpdateProjectSuccess', () => {
+  it('should create an action', () => {
+
+    // setup
+    const action = new UpdateProjectSuccess();
+
+    // verify
+// both are working, choose any one as per the condition.
+    expect({...action}).toEqual({type: ProjectActionTypes.UPDATE_PROJECT_SUCCESS});
+    expect(action.type).toEqual(ProjectActionTypes.UPDATE_PROJECT_SUCCESS);
+  });
+});
+
+describe('DeleteProject', () => {
+  it('should create a delete action', () => {
+    // setup
+    const payload = 'id';
+    const action = new DeleteProject(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.DELETE_PROJECT);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('DeleteProjectSuccess', () => {
+  it('should create a delete action', () => {
+
+    // setup
+    const action = new DeleteProjectSuccess();
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.DELETE_PROJECT_SUCCESS);
+    expect({...action}).toEqual({type: ProjectActionTypes.DELETE_PROJECT_SUCCESS});
+  });
+});
+
+describe('GetAllProjects', () => {
+  it('should create an GetAllProjects action', () => {
+
+    // setup
+    const payload = new PageRequest();
+    payload.asDefault();
+    const action = new GetAllProjects(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.GET_ALL_PROJECTS);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('GetProject', () => {
+  it('should get the action for getProject', () => {
+
+    // setup
+    const payload = '1';
+    const action = new GetProject(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.GET_PROJECT);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('SetProjectPage()', () => {
+  it('should get the action for setProjectPage', () => {
+
+    // setup
+    const payload = new ProjectPage();
+    const action = new SetProjectPage(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.SET_PROJECT_PAGE);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('ApiFailed', () => {
+  it('should create an action for ApiFailed', () => {
+
+    // setup
+    const payload = 'any';
+    const action = new ApiFailed(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.APIFailed);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('ValidationFailed', () => {
+  it('should create an action for ValidationFailed', () => {
+
+    // setup
+    const payload = 'any';
+    const action = new ValidationFailed(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.VALIDATION_FAILED);
+    expect(action.payload).toEqual(payload);
+  });
+});
+
+describe('GetProjectSuccess', () => {
+  it('should create an action for ApiFailed', () => {
+
+    // setup
+    const payload = new Project({id: '', name: '', description: ''});
+    const action = new GetProjectSuccess(payload);
+
+    // verify
+    expect(action.type).toEqual(ProjectActionTypes.GET_PROJECT_SUCCESS);
+    expect(action.payload).toEqual(payload);
+  });
+});
+

@@ -1,0 +1,93 @@
+import { Action } from '@ngrx/store';
+import { Project } from '../models/projects';
+import { ProjectPage } from '../models/projectPage';
+import { PageRequest } from '../../../models/pageRequest';
+
+export enum ProjectActionTypes {
+  GET_ALL_PROJECTS = '[PROJECT] GET_ALL_PROJECTS',
+  GET_PROJECT = '[PROJECT] GET_PROJECT',
+  GET_PROJECT_SUCCESS = '[PROJECT] GET_PROJECT_SUCCESS',
+
+  CREATE_PROJECT = '[PROJECT] CREATE_PROJECT',
+  CREATE_PROJECT_SUCCESS = '[PROJECT] CREATE_PROJECT_SUCCESS',
+  UPDATE_PROJECT = '[PROJECT] UPDATE_PROJECT',
+  UPDATE_PROJECT_SUCCESS = '[PROJECT] UPDATE_PROJECT_SUCCESS',
+  DELETE_PROJECT = '[PROJECT] DELETE_PROJECT',
+  DELETE_PROJECT_SUCCESS = '[PROJECT] DELETE_PROJECT_SUCCESS',
+  SET_PROJECT_PAGE = '[PROJECT] SET_PROJECT_PAGE',
+  APIFailed = '[PROJECT] API_FAILED',
+
+  VALIDATION_FAILED = '[PROJECT] VALIDATION_FAILED',
+
+}
+
+export class CreateProject implements Action {
+  readonly type = ProjectActionTypes.CREATE_PROJECT;
+  constructor(public payload: Project) { }
+}
+export class CreateProjectSuccess implements Action {
+  readonly type = ProjectActionTypes.CREATE_PROJECT_SUCCESS;
+  constructor(public payload: Project) { }
+}
+
+export class UpdateProject implements Action {
+  readonly type = ProjectActionTypes.UPDATE_PROJECT;
+  constructor(public payload: Project) { }
+}
+
+export class UpdateProjectSuccess implements Action {
+  readonly type = ProjectActionTypes.UPDATE_PROJECT_SUCCESS;
+}
+
+export class DeleteProject implements Action {
+  readonly type = ProjectActionTypes.DELETE_PROJECT;
+  constructor(public payload: string) { }
+}
+export class DeleteProjectSuccess implements Action {
+  readonly type = ProjectActionTypes.DELETE_PROJECT_SUCCESS;
+}
+
+export class GetAllProjects implements Action {
+  readonly type = ProjectActionTypes.GET_ALL_PROJECTS;
+  constructor(public payload: PageRequest) { }
+
+}
+export class GetProject implements Action {
+  readonly type = ProjectActionTypes.GET_PROJECT;
+  constructor(public payload: string) { }
+}
+
+export class SetProjectPage implements Action {
+  readonly type = ProjectActionTypes.SET_PROJECT_PAGE;
+  constructor(public payload: ProjectPage) { }
+}
+
+export class ApiFailed implements Action {
+  readonly type = ProjectActionTypes.APIFailed;
+  constructor(public payload: any) { }
+}
+
+export class ValidationFailed implements Action {
+  readonly type = ProjectActionTypes.VALIDATION_FAILED;
+  constructor(public payload: any) { }
+}
+
+export class GetProjectSuccess implements Action {
+  readonly type = ProjectActionTypes.GET_PROJECT_SUCCESS;
+  constructor(public payload: Project) { }
+}
+
+export type ProjectActionsUnion =
+  | CreateProject
+  | CreateProjectSuccess
+  | UpdateProject
+  | UpdateProjectSuccess
+  | DeleteProject
+  | DeleteProjectSuccess
+  | GetAllProjects
+  | GetProject
+  | SetProjectPage
+  | ApiFailed
+  | ValidationFailed
+  | GetProjectSuccess
+  ;

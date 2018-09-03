@@ -1,0 +1,24 @@
+import { Deserializable } from '../../../models/deserializable';
+import { PagedData } from '../../../models/pagedData';
+import { Project } from './projects';
+
+export class ProjectPage implements PagedData<Project>, Deserializable {
+
+  totalResults: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+  searchTerm: string;
+  pagedData: Project[];
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
+  deserialize(input: any): this {
+    Object.assign(this, input);
+    this.pagedData = input.pagedData.map(project => new Project().deserialize(project));
+    return this;
+  }
+}
+

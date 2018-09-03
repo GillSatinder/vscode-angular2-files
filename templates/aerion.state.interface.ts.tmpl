@@ -1,0 +1,10 @@
+import { Project } from '../models/projects';
+import { ProjectPage } from '../models/projectPage';
+
+export interface ProjectState {
+  projectPage: ProjectPage;
+  selectedProject: Project;
+  isLoading: boolean;
+  errorMessage: string;
+  validationErrors: any[];
+}

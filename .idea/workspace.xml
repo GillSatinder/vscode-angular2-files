@@ -517,9 +517,113 @@
     <entry file="file://$PROJECT_DIR$/templates/directive.tmpl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-     <entry file="file://$PROJECT_DIR$/templates/action.tmpl">
+
+    <!-- basic aerion project files for all components -->
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.tmpl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.html.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.style.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+
+    <!-- end basic files -->
+
+    <!-- for project-list component -->
+ <entry file="file://$PROJECT_DIR$/templates/aerionProject.list.html.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.list.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.list.style.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.list.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+
+<!-- for project-edit component -->
+
+ <entry file="file://$PROJECT_DIR$/templates/aerionProject.edit.html.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.edit.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.edit.style.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.edit.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+<!-- for project-form component -->
+
+ <entry file="file://$PROJECT_DIR$/templates/aerionProject.form.html.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.form.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.form.style.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.form.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+<!-- for project-create component -->
+
+ <entry file="file://$PROJECT_DIR$/templates/aerionProject.create.html.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.create.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.create.style.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+     <entry file="file://$PROJECT_DIR$/templates/aerionProject.create.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <!-- model files -->
+    <entry file="file://$PROJECT_DIR$/templates/aerion.model.project.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/aerion.model.projectPage.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+
+    <!-- end model files -->
+    
+    <!-- store files start from here -->
+      <entry file="file://$PROJECT_DIR$/templates/aerion.action.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+      <entry file="file://$PROJECT_DIR$/templates/aerion.action.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/aerion.reducer.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+      <entry file="file://$PROJECT_DIR$/templates/aerion.reducer.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+      <entry file="file://$PROJECT_DIR$/templates/aerion.effect.spec.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+      <entry file="file://$PROJECT_DIR$/templates/aerion.effect.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+      <entry file="file://$PROJECT_DIR$/templates/aerion.state.interface.ts.tmpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+
+<!-- store files end here  -->
     <entry file="file://$PROJECT_DIR$/templates/enum.tmpl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>

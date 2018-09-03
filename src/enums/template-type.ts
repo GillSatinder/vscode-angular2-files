@@ -18,18 +18,58 @@ export enum TemplateType {
     Inteface = 'interface.tmpl',
     Route = 'route.tmpl',
 
+    // basic aerion project files
     AerionProject = 'aerionProject.tmpl',
     AerionProjectSpec = 'aerionProject.spec.tmpl',
     AerionProjectHtml = 'aerionProject.html.tmpl',
     AerionProjectStyle = 'aerionProject.style.tmpl',
-    AerionProjectStroreActionSpec = 'aerionProject.action.spec.tmpl',
-    AerionProjectStoreActionts = 'action.tmpl',
-    AerionProjectStroreReducerSpec = 'aerionProject.reducer.spec.tmpl',
-    AerionProjectStoreReducerts = 'aerionProject.reducer.tmpl',
-    AerionProjectStroreEffectSpec = 'aerionProject.action.effect.tmpl',
-    AerionProjectStoreEffectts = 'aerionProject.effect.tmpl',
-    AerionProjectStoreInterface = 'aerionProject.store.interface.tmpl',
 
-    AerionProjectModelts = 'aerionProjectModel.tmpl',
-    AerionProjectModelPagets = 'aerionProjectModelPage.tmpl',
+    // end basic aerion project files
+
+
+    // project-create files 
+    AerionProjectCreatets = 'aerionProject.create.ts.tmpl',
+    AerionProjectCreateSpec = 'aerionProject.create.spec.tmpl',
+    AerionProjectCreateHtml = 'aerionProject.create.html.tmpl',
+    AerionProjectCreateStyle = 'aerionProject.create.style.tmpl',
+
+    // project-edit files
+    AerionProjectEditts = 'aerionProject.edit.ts.tmpl',
+    AerionProjectEditSpec = 'aerionProject.edit.spec.tmpl',
+    AerionProjectEditHtml = 'aerionProject.edit.html.tmpl',
+    AerionProjectEditStyle = 'aerionProject.edit.style.tmpl',
+
+    // project-list files
+
+    AerionProjectListts = 'aerionProject.list.ts.tmpl',
+    AerionProjectListSpec = 'aerionProject.list.spec.tmpl',
+    AerionProjectListHtml = 'aerionProject.list.html.tmpl',
+    AerionProjectListStyle = 'aerionProject.list.style.tmpl',
+
+    // project form files
+
+    AerionProjectFormts = 'aerionProject.form.ts.tmpl',
+    AerionProjectFormSpec = 'aerionProject.form.spec.tmpl',
+    AerionProjectFormHtml = 'aerionProject.form.html.tmpl',
+    AerionProjectFormStyle = 'aerionProject.form.style.tmpl',
+
+
+
+
+    // all store files
+    AerionProjectStroreActionSpec = 'aerion.action.spec.tmpl',
+    AerionProjectStoreActionts = 'aerion.action.ts.tmpl',
+    AerionProjectStroreReducerSpec = 'aerion.reducer.spec.tmpl',
+    AerionProjectStoreReducerts = 'aerion.reducer.ts.tmpl',
+    AerionProjectStroreEffectSpec = 'aerion.effect.spec.tmpl',
+    AerionProjectStoreEffectts = 'aerion.effect.ts.tmpl',
+    AerionProjectStoreInterface = 'aerion.state.interface.ts.tmpl',
+
+   // end of store files
+
+   // model files
+    AerionProjectModelts = 'aerion.model.project.ts.tmpl',
+    AerionProjectModelPagets = 'aerion.model.projectPage.ts.tmpl',
+
+    // end of model files
 }

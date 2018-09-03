@@ -1,0 +1,209 @@
+import * as fromProjectReducer from './../store/project.reducer';
+import * as fromProjectAction from './../store/project.actions';
+import {ProjectPage} from '../models/projectPage';
+import {Project} from '../models/projects';
+import {PageRequest} from '../../../models/pageRequest';
+
+
+
+describe('ProjectReducer', () => {
+  it('should set the project page', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = new ProjectPage({
+      totalResults: 2,
+      totalPages: 18,
+      currentPage: 2,
+      pageSize: 9,
+      searchTerm: '',
+      pagedData: []
+    });
+    const  action = new fromProjectAction.SetProjectPage(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(false);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(null);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should get all the Projects', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const pageRequest = new PageRequest();
+    const payload = pageRequest.asDefault();
+    const action = new fromProjectAction.GetAllProjects(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(true);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(null);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create project', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const action = new fromProjectAction.CreateProject(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(true);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(null);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create project success', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const action = new fromProjectAction.CreateProjectSuccess(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(false);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(null);
+    expect(state.selectedProject).toEqual(action.payload);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create validation failed action', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = 'new payload';
+    const action = new fromProjectAction.ValidationFailed(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(false);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(action.payload);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for Api Failed', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = 'new payload';
+    const action = new fromProjectAction.ApiFailed(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(false);
+    expect(state.errorMessage).toEqual(action.payload);
+    expect(state.validationErrors).toEqual(null);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for getProject', () => {
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = 'Get new project';
+    const action = new fromProjectAction.GetProject(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(true);
+    expect(state.errorMessage).toEqual(null);
+    expect(state.validationErrors).toEqual(null);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for getProjectSuccess', () => {
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const action = new fromProjectAction.GetProjectSuccess(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.selectedProject).toEqual(action.payload);
+    expect(state.isLoading).toEqual(false);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for updateProject', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const action = new fromProjectAction.UpdateProject(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(true);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for updateProjectSuccess', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const action = new fromProjectAction.UpdateProjectSuccess();
+    const state =  fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state.isLoading).toEqual(false);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for deleteProject', () => {
+    // setup
+    const {initialState} = fromProjectReducer;
+    const payload = '1';
+    const action = new fromProjectAction.DeleteProject(payload);
+    const state = fromProjectReducer.reducer(initialState, action);
+
+
+    // verify
+    expect(state).not.toEqual(initialState);
+    expect(state.isLoading).toEqual(true);
+  });
+});
+
+describe('ProjectReducer', () => {
+  it('should create an action for deleteProjectSuccess', () => {
+
+    // setup
+    const {initialState} = fromProjectReducer;
+    const action = new fromProjectAction.DeleteProjectSuccess();
+    const state =  fromProjectReducer.reducer(initialState, action);
+
+    // verify
+    expect(state.isLoading).toEqual(false);
+  });
+});
+

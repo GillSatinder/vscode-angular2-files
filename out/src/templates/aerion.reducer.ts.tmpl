@@ -1,0 +1,102 @@
+import { ProjectActionTypes, ProjectActionsUnion } from './project.actions';
+import { ProjectState } from './project.state.interface';
+
+export const initialState: ProjectState = {
+  projectPage: null,
+  selectedProject: null,
+  isLoading: false,
+  errorMessage: null,
+  validationErrors: null,
+};
+
+export function reducer(state: ProjectState = initialState, action: ProjectActionsUnion): ProjectState {
+  switch (action.type) {
+    case ProjectActionTypes.SET_PROJECT_PAGE:
+      return {
+        ...state,
+        projectPage: action.payload,
+        isLoading: false,
+        errorMessage: null,
+        validationErrors: null
+      };
+    case ProjectActionTypes.GET_ALL_PROJECTS:
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null,
+        validationErrors: null
+      };
+
+    case ProjectActionTypes.CREATE_PROJECT:
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null,
+        validationErrors: null
+      };
+
+    case ProjectActionTypes.CREATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        selectedProject: action.payload,
+        errorMessage: null,
+        validationErrors: null
+      };
+    case ProjectActionTypes.VALIDATION_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: null,
+        validationErrors: action.payload
+      };
+    case ProjectActionTypes.APIFailed:
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload,
+        validationErrors: null
+      };
+    case ProjectActionTypes.GET_PROJECT:
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null,
+        validationErrors: null
+      };
+
+    case ProjectActionTypes.GET_PROJECT_SUCCESS:
+      return {
+        ...state,
+        selectedProject: action.payload,
+        isLoading: false
+      };
+      case ProjectActionTypes.UPDATE_PROJECT:
+      return {
+        ...state,
+        isLoading: true
+      };
+      case ProjectActionTypes.UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+
+      case ProjectActionTypes.DELETE_PROJECT:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+      case ProjectActionTypes.DELETE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+    default:
+      return state;
+  }
+}
+
+// export const isLoggedIn = (state: ProjectState) => state.isLoggedIn;
+// export const getUserFromToken = (state: ProjectState) => state.token;
