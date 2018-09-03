@@ -1,0 +1,72 @@
+import {${upperName}Component} from './project-form.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormSubmission} from '../../../interfaces/formSubmission';
+import {Project} from '../models/projects';
+
+describe('${upperName}Component', () => {
+  let component: ${upperName}Component;
+  let fixture: ComponentFixture<${upperName}Component>;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [${upperName}Component],
+      providers: [],
+      imports: [
+        FormsModule,
+        BrowserModule,
+        ReactiveFormsModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(${upperName}Component);
+    component = fixture.componentInstance;
+
+  });
+  it('should create', () => {
+
+    // verify
+    expect(component).toBeDefined();
+  });
+
+  describe('onSubmit', () => {
+    it('should submit the form', () => {
+
+      // setup
+      const model = new Project();
+      component.model = model;
+      const fs: FormSubmission<Project> = {value: model, valid: true};
+      spyOn(component.formSubmit, 'emit');
+
+      // act
+      component.onSubmit(fs);
+
+      // verify
+      expect(component.formSubmit.emit).toHaveBeenCalled();
+
+    });
+  });
+
+  describe('onSubmit', () => {
+    it('should submit the form', () => {
+
+      // setup
+      const model = new Project();
+      component.model = model;
+      const fs: FormSubmission<Project> = {value: model, valid: false};
+      spyOn(component, 'setFormTouchedAndDirtyIfNeeded');
+
+      // act
+      component.onSubmit(fs);
+
+      // verify
+      expect(component.setFormTouchedAndDirtyIfNeeded).toHaveBeenCalled();
+
+    });
+  });
+});
+

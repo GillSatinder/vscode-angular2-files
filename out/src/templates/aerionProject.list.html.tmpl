@@ -1,1 +1,37 @@
-this is html for list
+<div class="table-responsive">
+  <div class="table-responsive">
+    <table class="table m-t-30 table-hover no-wrap">
+      <thead>
+        <tr>
+          <th>Name</th>
+
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template [ngIf]="(projectPage$ | async)">
+          <tr *ngFor="let project of (projectPage$|async)?.pagedData">
+            <td>{{project.name}}</td>
+            <td>
+              <swal #deleteSwal title="Delete {{ project.name }}?" text="This cannot be undone" type="question" [showCancelButton]="true"
+                [focusCancel]="true" (confirm)="onDeleteProject(project.id)">
+              </swal>
+
+              <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"
+                [swal]="deleteSwal">
+                <i class="ti-close" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" (click)="onEditClick(project.id)" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip"
+                data-original-title="Edit">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+    <app-paging [pagedData]="(projectPage$ | async)" (pageChange)="onPageChange($event)"></app-paging>
+  </div>
+</di

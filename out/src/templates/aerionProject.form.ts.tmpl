@@ -1,0 +1,35 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Project } from '../models/projects';
+import { FormSubmission } from '../../../interfaces/formSubmission';
+import { BaseComponent } from '../../base.component';
+import { BaseModelInterface } from '../../../interfaces/base.model';
+
+@Component({
+  selector: '${cmpSelector}',
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+})
+export class ${upperName}Component extends BaseComponent {
+
+  @Input()
+  formGroup: FormGroup;
+
+  @Input()
+  model: Project;
+
+  @Output()
+  formSubmit: EventEmitter<FormSubmission<Project>> = new EventEmitter<FormSubmission<Project>>();
+
+  constructor(public formBuilder: FormBuilder) {
+    super(formBuilder);
+  }
+
+  onSubmit(formSubmission: FormSubmission<Project>) {
+    if (formSubmission.valid) {
+      this.formSubmit.emit(formSubmission);
+    } else {
+      this.setFormTouchedAndDirtyIfNeeded();
+    }
+  }
+}

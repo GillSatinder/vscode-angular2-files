@@ -1,93 +1,93 @@
 import { Action } from '@ngrx/store';
-import { Project } from '../models/projects';
-import { ProjectPage } from '../models/projectPage';
+import { ${inputName.charAt(0).toUpperCase() + inputName.slice(1)} } from '../models/${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s';
+import { ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page } from '../models/${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page';
 import { PageRequest } from '../../../models/pageRequest';
 
-export enum ProjectActionTypes {
-  GET_ALL_PROJECTS = '[PROJECT] GET_ALL_PROJECTS',
-  GET_PROJECT = '[PROJECT] GET_PROJECT',
-  GET_PROJECT_SUCCESS = '[PROJECT] GET_PROJECT_SUCCESS',
+export enum ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes {
+  GET_ALL_${inputName.toUpperCase()}S = '[${inputName.toUpperCase()}] GET_ALL_${inputName.toUpperCase()}S',
+  GET_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] GET_${inputName.toUpperCase()}',
+  GET_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] GET_${inputName.toUpperCase()}_SUCCESS',
 
-  CREATE_PROJECT = '[PROJECT] CREATE_PROJECT',
-  CREATE_PROJECT_SUCCESS = '[PROJECT] CREATE_PROJECT_SUCCESS',
-  UPDATE_PROJECT = '[PROJECT] UPDATE_PROJECT',
-  UPDATE_PROJECT_SUCCESS = '[PROJECT] UPDATE_PROJECT_SUCCESS',
-  DELETE_PROJECT = '[PROJECT] DELETE_PROJECT',
-  DELETE_PROJECT_SUCCESS = '[PROJECT] DELETE_PROJECT_SUCCESS',
-  SET_PROJECT_PAGE = '[PROJECT] SET_PROJECT_PAGE',
-  APIFailed = '[PROJECT] API_FAILED',
+  CREATE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] CREATE_${inputName.toUpperCase()}',
+  CREATE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] CREATE_${inputName.toUpperCase()}_SUCCESS',
+  UPDATE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] UPDATE_${inputName.toUpperCase()}',
+  UPDATE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] UPDATE_${inputName.toUpperCase()}_SUCCESS',
+  DELETE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] DELETE_${inputName.toUpperCase()}',
+  DELETE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] DELETE_${inputName.toUpperCase()}_SUCCESS',
+  SET_${inputName.toUpperCase()}_PAGE = '[${inputName.toUpperCase()}] SET_${inputName.toUpperCase()}_PAGE',
+  APIFailed = '[${inputName.toUpperCase()}] API_FAILED',
 
-  VALIDATION_FAILED = '[PROJECT] VALIDATION_FAILED',
+  VALIDATION_FAILED = '[${inputName.toUpperCase()}] VALIDATION_FAILED',
 
 }
 
-export class CreateProject implements Action {
-  readonly type = ProjectActionTypes.CREATE_PROJECT;
-  constructor(public payload: Project) { }
+export class Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()};
+  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
 }
-export class CreateProjectSuccess implements Action {
-  readonly type = ProjectActionTypes.CREATE_PROJECT_SUCCESS;
-  constructor(public payload: Project) { }
-}
-
-export class UpdateProject implements Action {
-  readonly type = ProjectActionTypes.UPDATE_PROJECT;
-  constructor(public payload: Project) { }
+export class Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()}_SUCCESS;
+  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
 }
 
-export class UpdateProjectSuccess implements Action {
-  readonly type = ProjectActionTypes.UPDATE_PROJECT_SUCCESS;
+export class Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()};
+  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
 }
 
-export class DeleteProject implements Action {
-  readonly type = ProjectActionTypes.DELETE_PROJECT;
+export class Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()}_SUCCESS;
+}
+
+export class Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()};
   constructor(public payload: string) { }
 }
-export class DeleteProjectSuccess implements Action {
-  readonly type = ProjectActionTypes.DELETE_PROJECT_SUCCESS;
+export class Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()}_SUCCESS;
 }
 
-export class GetAllProjects implements Action {
-  readonly type = ProjectActionTypes.GET_ALL_PROJECTS;
+export class GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_ALL_${inputName.toUpperCase()}S;
   constructor(public payload: PageRequest) { }
 
 }
-export class GetProject implements Action {
-  readonly type = ProjectActionTypes.GET_PROJECT;
+export class Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()};
   constructor(public payload: string) { }
 }
 
-export class SetProjectPage implements Action {
-  readonly type = ProjectActionTypes.SET_PROJECT_PAGE;
-  constructor(public payload: ProjectPage) { }
+export class Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.SET_${inputName.toUpperCase()}_PAGE;
+  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page) { }
 }
 
 export class ApiFailed implements Action {
-  readonly type = ProjectActionTypes.APIFailed;
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.APIFailed;
   constructor(public payload: any) { }
 }
 
 export class ValidationFailed implements Action {
-  readonly type = ProjectActionTypes.VALIDATION_FAILED;
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.VALIDATION_FAILED;
   constructor(public payload: any) { }
 }
 
-export class GetProjectSuccess implements Action {
-  readonly type = ProjectActionTypes.GET_PROJECT_SUCCESS;
-  constructor(public payload: Project) { }
+export class Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
+  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()}_SUCCESS;
+  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
 }
 
-export type ProjectActionsUnion =
-  | CreateProject
-  | CreateProjectSuccess
-  | UpdateProject
-  | UpdateProjectSuccess
-  | DeleteProject
-  | DeleteProjectSuccess
-  | GetAllProjects
-  | GetProject
-  | SetProjectPage
+export type ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionsUnion =
+  | Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
+  | Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
+  | Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
+  | Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
+  | Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
+  | Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
+  | GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s
+  | Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
+  | Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page
   | ApiFailed
   | ValidationFailed
-  | GetProjectSuccess
+  | Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
   ;

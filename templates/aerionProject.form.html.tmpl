@@ -1,1 +1,23 @@
-this is form
+<!--component html goes here -->
+<form [formGroup]="formGroup" class="m-t-40 row" (ngSubmit)="onSubmit(formGroup)">
+
+  <div class="form-group col-sm-12 col-md-6 col-xl-4" [ngClass]="{'has-danger': model.formErrors.name }">
+    <label class="form-control-label" for="name">Name</label>
+    <input class="form-control" type="text" placeholder="Project Name" id="name" formControlName="name">
+    <span *ngIf="model.formErrors.name" class="form-control-feedback">{{ model.formErrors.name }} </span>
+  </div>
+
+  <div class="form-group m-t-20 col-md-12" [ngClass]="{'has-danger': model.formErrors.description }">
+    <label class="form-control-label" for="description">Description</label>
+    <textarea class="form-control" type="text" id="description" placeholder="Project Description" formControlName="description"></textarea>
+    <span *ngIf="model.formErrors.description" class="form-control-feedback">{{ model.formErrors.description }} </span>
+  </div>
+
+  <div class="form-group m-t-20">
+    <div class="col-md-12">
+      <button class="btn btn-success waves-effect waves-light m-r-10" type="submit">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
