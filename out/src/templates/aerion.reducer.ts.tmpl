@@ -1,8 +1,8 @@
-import { ProjectActionTypes, ProjectActionsUnion } from './project.actions';
-import { ProjectState } from './project.state.interface';
+import { ProjectActionTypes, ProjectActionsUnion } from './${inputName}.actions';
+import { ProjectState } from './${inputName}.state.interface';
 
 export const initialState: ProjectState = {
-  projectPage: null,
+  ${inputName}Page: null,
   selectedProject: null,
   isLoading: false,
   errorMessage: null,
@@ -14,7 +14,7 @@ export function reducer(state: ProjectState = initialState, action: ProjectActio
     case ProjectActionTypes.SET_PROJECT_PAGE:
       return {
         ...state,
-        projectPage: action.payload,
+        ${inputName}Page: action.payload,
         isLoading: false,
         errorMessage: null,
         validationErrors: null

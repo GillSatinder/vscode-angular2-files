@@ -14,7 +14,7 @@
             <td>{{project.name}}</td>
             <td>
               <swal #deleteSwal title="Delete {{ project.name }}?" text="This cannot be undone" type="question" [showCancelButton]="true"
-                [focusCancel]="true" (confirm)="onDeleteProject(project.id)">
+                [focusCancel]="true" (confirm)="onDelete${upperName}(project.id)">
               </swal>
 
               <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"

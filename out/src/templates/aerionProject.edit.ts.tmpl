@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Project } from '../models/projects';
+import { ${upperName} } from '../models/projects';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { BaseComponent } from '../../base.component';
 import { FormSubmission } from '../../../interfaces/formSubmission';
-import { ProjectService } from '../project-service';
+import { ${upperName}Service } from '../project-service';
 import { UUID } from 'angular2-uuid';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -17,7 +17,7 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class  ${upperName}Component extends BaseComponent implements OnInit, OnDestroy {
 
-  model: Project;
+  model: ${upperName};
   validationSubscriptions: Subscription;
   isCreateMode: boolean;
 
@@ -27,7 +27,7 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
    * @param {FormBuilder} formBuilder
    * @memberof ${upperName}Component
    */
-  constructor(formBuilder: FormBuilder, private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {
+  constructor(formBuilder: FormBuilder, private projectService: ${upperName}Service, private route: ActivatedRoute, private router: Router) {
     super(formBuilder);
   }
 
@@ -41,7 +41,7 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
       const projectId = params['id'];
       this.projectService.get(projectId);
     }, error => { });
-     this.projectService.selectedProject$.subscribe(result => {
+     this.projectService.selected${upperName}$.subscribe(result => {
       if (result) {
         this.model = result;
         this.buildForm();
@@ -76,7 +76,7 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  onSubmit(formSubmission: FormSubmission<Project>) {
+  onSubmit(formSubmission: FormSubmission<${upperName}>) {
     if (formSubmission.valid) {
       this.model.patchByForm(formSubmission.value);
       this.projectService.update(this.model);

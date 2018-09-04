@@ -2,16 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { hot, cold } from 'jasmine-marbles';
 import {Observable, of, throwError} from 'rxjs';
-import * as MyActions from './../store/project.actions';
-import {ProjectEffects} from './project.effects';
+import * as MyActions from './../store/${inputName}.actions';
+import {ProjectEffects} from './${inputName}.effects';
 import {PageRequest} from '../../../models/pageRequest';
 import {ActionsSubject, ReducerManager, StateObservable, Store, StoreModule} from '@ngrx/store';
 import {Http, Response, ResponseOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {ToasterService} from 'angular2-toaster';
 import {Actions, EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
-import {ProjectPage} from '../models/projectPage';
-import {Project} from '../models/projects';
+import {ProjectPage} from '../models/${inputName}Page';
+import {Project} from '../models/${inputName}s';
 import {AppStore} from '../../../app.store';
 import {EffectMetadata} from '@ngrx/effects/src/effects_metadata';
 class MockStateObservable {}
@@ -68,7 +68,7 @@ describe('ProjectEffects', () => {
 
   // Successful attempt for getAllProjects
   describe('getAllProjects', () => {
-    it('should get all the projects successfully', () => {
+    it('should get all the ${inputName}s successfully', () => {
       const pageObjectFromService = {
         totalResults: 18,
         totalPages: 2,
@@ -119,18 +119,18 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Successful attempt to create a project
+  // Successful attempt to create a ${inputName}
   describe('CreateProject', () => {
-    it('should create a project successfully', () => {
+    it('should create a ${inputName} successfully', () => {
 
       // setup
-      const project = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
-      const project2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response = new Response(new ResponseOptions({body: JSON.stringify(project)}));
+      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response = new Response(new ResponseOptions({body: JSON.stringify(${inputName})}));
       spyOn(http, 'post').and.returnValue(of(response));
       spyOn(toasterService, 'pop').and.returnValue('success');
-      const action = new MyActions.CreateProject(project);
-      const completion = new MyActions.CreateProjectSuccess(new Project().deserialize(project2));
+      const action = new MyActions.CreateProject(${inputName});
+      const completion = new MyActions.CreateProjectSuccess(new Project().deserialize(${inputName}2));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
@@ -140,17 +140,17 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Unsuccessful attempt to create a project
+  // Unsuccessful attempt to create a ${inputName}
   describe('CreateProject', () => {
-    it('should give an error on creating a project', () => {
+    it('should give an error on creating a ${inputName}', () => {
 
       // setup
-      const project = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
-      const project2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response = new Response(new ResponseOptions({body: JSON.stringify(project)}));
+      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response = new Response(new ResponseOptions({body: JSON.stringify(${inputName})}));
       spyOn(http, 'post').and.returnValue(throwError({status: 500, message: 'server error'}));
       spyOn(toasterService, 'pop').and.returnValue('success');
-      const action = new MyActions.CreateProject(project);
+      const action = new MyActions.CreateProject(${inputName});
       const completion = new MyActions.ApiFailed({status: 500, message: 'server error'});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
@@ -161,15 +161,15 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Successfully get the project
+  // Successfully get the ${inputName}
   describe('GetProject', () => {
-    it('should get the project successfully', () => {
+    it('should get the ${inputName} successfully', () => {
       // setup
-      const project2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response  = new Response(new ResponseOptions({body: JSON.stringify(project2)}));
+      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response  = new Response(new ResponseOptions({body: JSON.stringify(${inputName}2)}));
       spyOn(http, 'get').and.returnValue(of(response));
       const action = new MyActions.GetProject('1');
-      const completion = new MyActions.GetProjectSuccess(new Project().deserialize(project2));
+      const completion = new MyActions.GetProjectSuccess(new Project().deserialize(${inputName}2));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
@@ -179,9 +179,9 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Unsuccessful attempt to get the project
+  // Unsuccessful attempt to get the ${inputName}
   describe('GetProject', () => {
-    it('should give error on unsuccessful attempt of getting the project', () => {
+    it('should give error on unsuccessful attempt of getting the ${inputName}', () => {
 
       // setup
       spyOn(http, 'get').and.returnValue(throwError({status: 500, message: 'server error'}));
@@ -196,14 +196,14 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Successful attempt to update the project
+  // Successful attempt to update the ${inputName}
   describe('UpdateProject', () => {
-    it('should update the project successfully', () => {
+    it('should update the ${inputName} successfully', () => {
 
       // setup
-      const project = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
       const response = new Response(new ResponseOptions({status: 200}));
-      const action = new MyActions.UpdateProject(project);
+      const action = new MyActions.UpdateProject(${inputName});
       const completion = new MyActions.UpdateProjectSuccess();
       spyOn(http, 'put').and.returnValue(of(response));
       actions = hot('--a-', {a: action});
@@ -215,14 +215,14 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Unsuccessful attempt to update the project
+  // Unsuccessful attempt to update the ${inputName}
   describe('UpdateProject', () => {
-    it('should display the error on unsuccessfully updating the project', () => {
+    it('should display the error on unsuccessfully updating the ${inputName}', () => {
 
       // setup
-      const project = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
       spyOn(http, 'put').and.returnValue(throwError({status: 500}));
-      const action = new MyActions.UpdateProject(project);
+      const action = new MyActions.UpdateProject(${inputName});
       const completion = new MyActions.ApiFailed({status: 500});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
@@ -233,9 +233,9 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Successfully deleting the project
+  // Successfully deleting the ${inputName}
   describe('DeleteProject', () => {
-    it('should delete the project', () => {
+    it('should delete the ${inputName}', () => {
 
       // setup
       const response = new Response(new ResponseOptions({status: 200}));
@@ -251,9 +251,9 @@ describe('ProjectEffects', () => {
     });
   });
 
-  // Unsuccessfully delete the project
+  // Unsuccessfully delete the ${inputName}
   describe('DeleteProject', () => {
-    it('should display the error on deleting the project', () => {
+    it('should display the error on deleting the ${inputName}', () => {
 
       // setup
       spyOn(http, 'delete').and.returnValue(throwError({status: 500}));
@@ -270,15 +270,15 @@ describe('ProjectEffects', () => {
 
   describe('DeleteProjectSuccess', () => {
 
-    it('should delete the project and get the pagerequest', () => {
+    it('should delete the ${inputName} and get the pagerequest', () => {
       const list: Project [] = [new Project({id: '1', name: 'ss', description: 'ww'}),
         new Project({id: '2', name: 'tt', description: 'ww'})];
-      const projectPage = new ProjectPage({currentPage: 1, pageSize: 5, searchTerm: 'null',
+      const ${inputName}Page = new ProjectPage({currentPage: 1, pageSize: 5, searchTerm: 'null',
         totalResults: 25, totalPages: 5, pagedData: list});
       const action = new MyActions.DeleteProjectSuccess();
       store.dispatch(action);
 
-     // spyOn(store, 'select').and.returnValue(of ([action, projectPage]));
+     // spyOn(store, 'select').and.returnValue(of ([action, ${inputName}Page]));
       const completion = new MyActions.GetAllProjects(new PageRequest());
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});

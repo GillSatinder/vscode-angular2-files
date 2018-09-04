@@ -3,12 +3,12 @@ import { Http, RequestOptionsArgs, Headers, RequestOptions } from '@angular/http
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent, SubscriptionLike, PartialObserver } from 'rxjs';
 import { map, switchMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
-import * as ProjectActions from './project.actions';
-import { ProjectActionTypes } from './project.actions';
+import * as ProjectActions from './${inputName}.actions';
+import { ProjectActionTypes } from './${inputName}.actions';
 import { Router } from '@angular/router';
-import { Project } from '../models/projects';
+import { Project } from '../models/${inputName}s';
 import { URLSearchParams } from '@angular/http';
-import { ProjectPage } from '../models/projectPage';
+import { ProjectPage } from '../models/${inputName}Page';
 import * as RouterActions from '../../../actions/router.actions';
 import { ToasterService } from 'angular2-toaster';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ import { PageRequest } from '../../../models/pageRequest';
 
 @Injectable()
 export class ProjectEffects {
-  private endPoint = '/api/v1/projects';  // URL to web API
+  private endPoint = '/api/v1/${inputName}s';  // URL to web API
   constructor(private store$: Store<AppStore>,
               private http: Http,
               private actions$: Actions,
@@ -42,14 +42,14 @@ export class ProjectEffects {
           // If successful, dispatch success action with result
 
           map((response: Response) => {
-            const projectPage = response.json();
-            if (projectPage) {
-              return new ProjectPage().deserialize(projectPage);
+            const ${inputName}Page = response.json();
+            if (${inputName}Page) {
+              return new ProjectPage().deserialize(${inputName}Page);
             }
             return null;
           }),
-          map((projectPage: ProjectPage) => {
-            return new ProjectActions.SetProjectPage(projectPage);
+          map((${inputName}Page: ProjectPage) => {
+            return new ProjectActions.SetProjectPage(${inputName}Page);
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
@@ -67,14 +67,14 @@ export class ProjectEffects {
         return this.http.post(this.endPoint, action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
-            const projectJson = response.json();
-            let project = null;
-            if (projectJson) {
-              project = new Project().deserialize(projectJson);
+            const ${inputName}Json = response.json();
+            let ${inputName} = null;
+            if (${inputName}Json) {
+              ${inputName} = new Project().deserialize(${inputName}Json);
             }
-            this.toasterService.pop('success', 'Project created', 'The project was successffully Created');
+            this.toasterService.pop('success', 'Project created', 'The ${inputName} was successffully Created');
 
-            return new ProjectActions.CreateProjectSuccess(project);
+            return new ProjectActions.CreateProjectSuccess(${inputName});
           })
           // If request fails, dispatch failed action
           , catchError((err: Response, caught) => {
@@ -94,7 +94,7 @@ export class ProjectEffects {
     .ofType(ProjectActionTypes.CREATE_PROJECT_SUCCESS).pipe(
       map((action: ProjectActions.CreateProjectSuccess) => new RouterActions.Go({
         // https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#navigation-actions
-        path: ['/projects/edit/' + action.payload.id]
+        path: ['/${inputName}s/edit/' + action.payload.id]
       }))
     );
 
@@ -106,14 +106,14 @@ export class ProjectEffects {
         return this.http.get(this.endPoint + '/GetSingle/' + action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
-            const project = response ? response.json() : null;
-            if (project) {
-              return new Project().deserialize(project);
+            const ${inputName} = response ? response.json() : null;
+            if (${inputName}) {
+              return new Project().deserialize(${inputName});
             }
             return null;
           }),
-          map((project: Project) => {
-            return new ProjectActions.GetProjectSuccess(project);
+          map((${inputName}: Project) => {
+            return new ProjectActions.GetProjectSuccess(${inputName});
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
@@ -132,7 +132,7 @@ export class ProjectEffects {
           // If successful, dispatch success action with result
           map((response: Response) => {
             if (response.status === 200) {
-              this.toasterService.pop('success', 'Project updated', 'The project was successffully updated');
+              this.toasterService.pop('success', 'Project updated', 'The ${inputName} was successffully updated');
               return new ProjectActions.UpdateProjectSuccess();
             }
             return new ProjectActions.ApiFailed(response);
@@ -157,7 +157,7 @@ export class ProjectEffects {
           // If successful, dispatch success action with result
           map((response: Response) => {
             if (response.status === 200) {
-              this.toasterService.pop('success', 'Project Deleted', 'The project was successffully updated');
+              this.toasterService.pop('success', 'Project Deleted', 'The ${inputName} was successffully updated');
               return new ProjectActions.DeleteProjectSuccess();
             }
             return new ProjectActions.ApiFailed(response);
@@ -177,7 +177,7 @@ export class ProjectEffects {
   @Effect() deleteProjectSuccess$ = this.actions$
     // Listen for the 'UpdateProject' action
     .ofType(ProjectActionTypes.DELETE_PROJECT_SUCCESS).pipe(
-      withLatestFrom(this.store$.select(x => x.projects.projectPage ))
+      withLatestFrom(this.store$.select(x => x.${inputName}s.${inputName}Page ))
       , map(([action, page]) => {
         console.log(action);
         console.log(page);

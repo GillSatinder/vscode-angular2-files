@@ -213,6 +213,8 @@ class AngularCli {
             });
             const files5 = resource.files5.filter(file5 => (file5.condition) ? file5.condition(config, loc.params) : true).map((file5) => {
                 const fileName5 = file5.name(config);
+                console.log('this is the config', config);
+                console.log('this is the loc.params', loc.params);
                 return {
                     name: path.join(loc.dirPath5, fileName5.startsWith('-') ? `${loc.fileName5}${fileName5}` : `${loc.fileName5}.${fileName5}`),
                     content: this.fc.getTemplateContent(file5.type, config, loc.fileName5, loc.params),

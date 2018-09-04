@@ -2,19 +2,19 @@ import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnDestroy} from '@angular/core';
-import {ProjectService} from '../project-service';
+import {${upperName}Service} from '../project-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {empty, Observable, of, Subscription} from 'rxjs';
 import {BaseComponent} from '../../base.component';
-import {ProjectEditComponent} from './project-edit.component';
-import {Project} from '../models/projects';
+import {${upperName}EditComponent} from './project-edit.component';
+import {${upperName}} from '../models/projects';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 import any = jasmine.any;
 
-class MockProjectService {
-  project = new Project();
+class Mock${upperName}Service {
+  project = new ${upperName}();
   validationErrors$: Observable<{}[]> = of(['404', 'server error'] );
-  slectedProject$: Observable<Project> = of(this.project);
+  slected${upperName}$: Observable<${upperName}> = of(this.project);
 
   create() {}
 
@@ -53,7 +53,7 @@ describe('${upperName}Component', () => {
   let component: ${upperName}Component;
   let fixture: ComponentFixture<${upperName}Component>;
   let route: ActivatedRoute;
-  let projectService: ProjectService;
+  let projectService: ${upperName}Service;
   let formBuilder: FormBuilder;
 
   beforeEach(async(() => {
@@ -61,7 +61,7 @@ describe('${upperName}Component', () => {
 
       declarations: [${upperName}Component],
       providers: [
-        {provide: ProjectService, useClass: MockProjectService},
+        {provide: ${upperName}Service, useClass: Mock${upperName}Service},
         {provide: ActivatedRoute, useClass: MockActivatedRoute},
         {provide: Router, useClass: MockRouter},
         {provide: BaseComponent, useClass: MockBaseComponent},
@@ -83,7 +83,7 @@ describe('${upperName}Component', () => {
     component = fixture.componentInstance;
     route = fixture.debugElement.injector.get(ActivatedRoute);
     formBuilder = fixture.debugElement.injector.get(FormBuilder);
-    projectService = fixture.debugElement.injector.get(ProjectService);
+    projectService = fixture.debugElement.injector.get(${upperName}Service);
   });
 
   it('should create', () => {
@@ -97,14 +97,14 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder = new FormBuilder();
-      const model = new Project();
+      const model = new ${upperName}();
       model.formErrors = {name: 'error', description: 'server error'};
       component.model = model;
       component.form = formBuilder.group(model.formControls);
       spyOn(projectService, 'get').and.returnValue('ss');
       spyOn(component, 'buildForm');
       spyOn(component.form, 'patchValue');
-      projectService.selectedProject$ = of(new Project());
+      projectService.selected${upperName}$ = of(new ${upperName}());
 
 
 
@@ -116,7 +116,7 @@ describe('${upperName}Component', () => {
         expect(projectService.get).toHaveBeenCalled();
       });
       expect(component.routeSubscription).toBeDefined();
-      projectService.selectedProject$.subscribe(res => {
+      projectService.selected${upperName}$.subscribe(res => {
         expect(component.model).toBeDefined();
        expect(component.buildForm).toHaveBeenCalled();
        expect(component.form.patchValue).toHaveBeenCalled();
@@ -133,7 +133,7 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder  = new FormBuilder();
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
       component.form = formBuilder.group(model.formControls);
       spyOn(component.formBuilder, 'group').and.returnValue(component.form);
@@ -153,11 +153,11 @@ describe('${upperName}Component', () => {
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
       spyOn(component.model, 'patchByForm').and.returnValue('');
       spyOn(projectService, 'update').and.returnValue('');
-      const fs: FormSubmission<Project> = {value: model, valid: true};
+      const fs: FormSubmission<${upperName}> = {value: model, valid: true};
 
       // act
       component.onSubmit(fs);
@@ -171,10 +171,10 @@ describe('${upperName}Component', () => {
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
-      const fs: FormSubmission<Project> = {value: model, valid: false};
+      const fs: FormSubmission<${upperName}> = {value: model, valid: false};
 
       // act
       component.onSubmit(fs);

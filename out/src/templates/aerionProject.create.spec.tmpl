@@ -1,20 +1,20 @@
-import {${upperName}Component} from './project-create.component';
+import {${upperName}Component} from './${upperName}-create.component';
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, OnDestroy} from '@angular/core';
-import {ProjectService} from '../project-service';
+import {${upperName}Service} from '../${upperName}-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {empty, Observable, of, Subscription} from 'rxjs';
 import {HttpParams} from '@angular/common/http';
 import {BaseComponent} from '../../base.component';
 import any = jasmine.any;
-import {Project} from '../models/projects';
+import {${upperName}} from '../models/${upperName}s';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 
 
 
-class MockProjectService {
+class Mock${serviceName} {
   validationErrors$: Observable<{}[]> = of();
   create() {}
 }
@@ -42,9 +42,9 @@ class MockBaseComponent implements OnDestroy {
 
 
 describe('${upperName}Component', () => {
-  let component: ProjectCreateComponent;
+  let component: ${upperName}Component;
   let fixture: ComponentFixture<${upperName}Component>;
-  let projectService: ProjectService;
+  let  ${serviceNameVariable}: ${serviceName};
   let route: ActivatedRoute;
   let baseComponent: BaseComponent;
   let formBuilder: FormBuilder;
@@ -55,7 +55,7 @@ describe('${upperName}Component', () => {
 
       declarations: [${upperName}Component],
       providers: [
-        {provide: ProjectService, useClass: MockProjectService},
+        {provide: ${serviceName}, useClass: Mock${serviceName},
         {provide: ActivatedRoute, useClass: MockActivatedRoute},
         {provide: Router, useClass: MockRouter},
         {provide: BaseComponent, useClass: MockBaseComponent},
@@ -74,7 +74,7 @@ describe('${upperName}Component', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(${upperName}Component);
     component = fixture.componentInstance;
-    projectService = fixture.debugElement.injector.get(ProjectService);
+    ${serviceNameVariable} = fixture.debugElement.injector.get(${serviceName});
     route = fixture.debugElement.injector.get(ActivatedRoute);
     baseComponent = fixture.debugElement.injector.get(BaseComponent);
     formBuilder = fixture.debugElement.injector.get(FormBuilder);
@@ -88,7 +88,7 @@ describe('${upperName}Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should call the buildForm() method and subscribe the validationError message of ProjectService', () => {
+    it('should call the buildForm() method and subscribe the validationError message of ${upperName}Service', () => {
 
       // setup
       spyOn(component, 'buildForm');
@@ -98,7 +98,7 @@ describe('${upperName}Component', () => {
 
       // verify
       expect(component.buildForm).toHaveBeenCalled();
-      projectService.validationErrors$.subscribe(res => {
+      ${serviceName}.validationErrors$.subscribe(res => {
         expect(res).toBeDefined();
       });
       route.params.subscribe(res => {
@@ -112,7 +112,7 @@ describe('${upperName}Component', () => {
 
     // setup
       formBuilder  = new FormBuilder();
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
       component.form = formBuilder.group(model.formControls);
      spyOn(component.formBuilder, 'group').and.returnValue(component.form);
@@ -132,18 +132,18 @@ describe('${upperName}Component', () => {
     it('should submit the valid form', () => {
 
       // setup
-      const model = new Project();
+      const model = new ${modelName}();
       component.model = model;
       spyOn(component.model, 'patchByForm').and.returnValue('');
-      spyOn(projectService, 'create').and.returnValue('');
-      const fs: FormSubmission<Project> = {value: model, valid: true};
+      spyOn(${serviceNameVariable}, 'create').and.returnValue('');
+      const fs: FormSubmission<${upperName}> = {value: model, valid: true};
 
        // act
        component.onSubmit(fs);
 
        // verify
        expect(component.model.patchByForm).toHaveBeenCalled();
-       expect(projectService.create).toHaveBeenCalled();
+       expect(${serviceNameVariable}.create).toHaveBeenCalled();
     });
   });
 
@@ -151,10 +151,10 @@ describe('${upperName}Component', () => {
     it('should not submit the invalid form', () => {
 
       // setup
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
-      const fs: FormSubmission<Project> = {value: model, valid: false};
+      const fs: FormSubmission<${upperName}> = {value: model, valid: false};
 
       // act
       component.onSubmit(fs);

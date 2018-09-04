@@ -1,6 +1,6 @@
 import { Deserializable } from '../../../models/deserializable';
 import { PagedData } from '../../../models/pagedData';
-import { Project } from './projects';
+import { Project } from './${inputName}s';
 
 export class ProjectPage implements PagedData<Project>, Deserializable {
 
@@ -17,7 +17,7 @@ export class ProjectPage implements PagedData<Project>, Deserializable {
 
   deserialize(input: any): this {
     Object.assign(this, input);
-    this.pagedData = input.pagedData.map(project => new Project().deserialize(project));
+    this.pagedData = input.pagedData.map(${inputName} => new Project().deserialize(${inputName}));
     return this;
   }
 }

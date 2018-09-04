@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Project } from '../models/projects';
+import { ${upperName} } from '../models/projects';
 import { FormSubmission } from '../../../interfaces/formSubmission';
 import { BaseComponent } from '../../base.component';
 import { BaseModelInterface } from '../../../interfaces/base.model';
@@ -16,16 +16,16 @@ export class ${upperName}Component extends BaseComponent {
   formGroup: FormGroup;
 
   @Input()
-  model: Project;
+  model: ${upperName};
 
   @Output()
-  formSubmit: EventEmitter<FormSubmission<Project>> = new EventEmitter<FormSubmission<Project>>();
+  formSubmit: EventEmitter<FormSubmission<${upperName}>> = new EventEmitter<FormSubmission<${upperName}>>();
 
   constructor(public formBuilder: FormBuilder) {
     super(formBuilder);
   }
 
-  onSubmit(formSubmission: FormSubmission<Project>) {
+  onSubmit(formSubmission: FormSubmission<${upperName}>) {
     if (formSubmission.valid) {
       this.formSubmit.emit(formSubmission);
     } else {

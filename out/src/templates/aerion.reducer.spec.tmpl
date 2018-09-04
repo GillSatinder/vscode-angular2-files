@@ -1,13 +1,13 @@
-import * as fromProjectReducer from './../store/project.reducer';
-import * as fromProjectAction from './../store/project.actions';
-import {ProjectPage} from '../models/projectPage';
-import {Project} from '../models/projects';
+import * as fromProjectReducer from './../store/${inputName}.reducer';
+import * as fromProjectAction from './../store/${inputName}.actions';
+import {ProjectPage} from '../models/${inputName}Page';
+import {Project} from '../models/${inputName}s';
 import {PageRequest} from '../../../models/pageRequest';
 
 
 
 describe('ProjectReducer', () => {
-  it('should set the project page', () => {
+  it('should set the ${inputName} page', () => {
 
     // setup
     const {initialState} = fromProjectReducer;
@@ -49,11 +49,11 @@ describe('ProjectReducer', () => {
 });
 
 describe('ProjectReducer', () => {
-  it('should create project', () => {
+  it('should create ${inputName}', () => {
 
     // setup
     const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
     const action = new fromProjectAction.CreateProject(payload);
     const state = fromProjectReducer.reducer(initialState, action);
 
@@ -66,11 +66,11 @@ describe('ProjectReducer', () => {
 });
 
 describe('ProjectReducer', () => {
-  it('should create project success', () => {
+  it('should create ${inputName} success', () => {
 
     // setup
     const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
     const action = new fromProjectAction.CreateProjectSuccess(payload);
     const state = fromProjectReducer.reducer(initialState, action);
 
@@ -122,7 +122,7 @@ describe('ProjectReducer', () => {
   it('should create an action for getProject', () => {
     // setup
     const {initialState} = fromProjectReducer;
-    const payload = 'Get new project';
+    const payload = 'Get new ${inputName}';
     const action = new fromProjectAction.GetProject(payload);
     const state = fromProjectReducer.reducer(initialState, action);
 
@@ -139,7 +139,7 @@ describe('ProjectReducer', () => {
   it('should create an action for getProjectSuccess', () => {
     // setup
     const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
     const action = new fromProjectAction.GetProjectSuccess(payload);
     const state = fromProjectReducer.reducer(initialState, action);
 
@@ -156,7 +156,7 @@ describe('ProjectReducer', () => {
 
     // setup
     const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new project'});
+    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
     const action = new fromProjectAction.UpdateProject(payload);
     const state = fromProjectReducer.reducer(initialState, action);
 

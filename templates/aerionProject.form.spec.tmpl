@@ -4,7 +4,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormSubmission} from '../../../interfaces/formSubmission';
-import {Project} from '../models/projects';
+import {${upperName}} from '../models/projects';
 
 describe('${upperName}Component', () => {
   let component: ${upperName}Component;
@@ -37,9 +37,9 @@ describe('${upperName}Component', () => {
     it('should submit the form', () => {
 
       // setup
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
-      const fs: FormSubmission<Project> = {value: model, valid: true};
+      const fs: FormSubmission<${upperName}> = {value: model, valid: true};
       spyOn(component.formSubmit, 'emit');
 
       // act
@@ -55,9 +55,9 @@ describe('${upperName}Component', () => {
     it('should submit the form', () => {
 
       // setup
-      const model = new Project();
+      const model = new ${upperName}();
       component.model = model;
-      const fs: FormSubmission<Project> = {value: model, valid: false};
+      const fs: FormSubmission<${upperName}> = {value: model, valid: false};
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded');
 
       // act
