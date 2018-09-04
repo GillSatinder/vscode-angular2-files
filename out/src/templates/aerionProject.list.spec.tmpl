@@ -1,1 +1,101 @@
-this is spec for list
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormSubmission} from '../../../interfaces/formSubmission';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
+import {${modelName}ListComponent} from './${modelName.toLowerCase()}-list.component';
+import {${modelName}Service} from '../${modelName.toLowerCase()}-service';
+import {Observable, of} from 'rxjs';
+import {${modelName}Page} from '../models/${modelName.toLowerCase()}Page';
+
+class Mock${modelName}Service {
+  ${modelName.toLowerCase()}Page$: Observable<${modelName}Page> = of();
+  getPage() {}
+  goToEdit() {}
+  delete() {}
+}
+describe('${upperName}Component', () => {
+  let component: ${upperName}Component;
+  let fixture: ComponentFixture<${upperName}Component>;
+  let ${modelName.toLowerCase()}Service: ${modelName}Service;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [${upperName}Component],
+      providers: [
+        {provide: ${modelName}Service, useClass: Mock${modelName}Service}
+      ],
+      imports: [
+        FormsModule,
+        BrowserModule,
+        ReactiveFormsModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA,
+      NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(${upperName}Component);
+    component = fixture.componentInstance;
+    ${modelName.toLowerCase()}Service = fixture.debugElement.injector.get(${modelName}Service);
+
+  });
+  it('should create', () => {
+    // verify
+    expect(component).toBeDefined();
+  });
+
+  describe('ngOnInit', () => {
+    it('should call the ${modelName.toLowerCase()}Page and getPage of ${modelName}Service', () => {
+      // setup
+      spyOn(${modelName.toLowerCase()}Service, 'getPage').and.returnValue('');
+
+      // act
+      component.ngOnInit();
+
+      // verify
+      expect(${modelName.toLowerCase()}Service.getPage).toHaveBeenCalledWith(null);
+    });
+  });
+
+  describe('onPageChange', () => {
+    it('get the page from ${modelName.toLowerCase()}Service', () => {
+      // setup
+      spyOn(${modelName.toLowerCase()}Service, 'getPage');
+
+      // act
+      component.onPageChange(2);
+
+      // verify
+      expect(${modelName.toLowerCase()}Service.getPage).toHaveBeenCalled();
+    });
+  });
+
+  describe('onEditClick()', () => {
+    it('should call the goToEdit() method of ${modelName}Service', () => {
+      // setup
+      spyOn(${modelName.toLowerCase()}Service, 'goToEdit').and.returnValue('');
+
+      // act
+      component.onEditClick('2');
+
+      // verify
+      expect(${modelName.toLowerCase()}Service.goToEdit).toHaveBeenCalled();
+    });
+  });
+
+  describe('onDelete${modelName}()', () => {
+    it('should calls the delete method of ${modelName}Service', () => {
+      // setup
+      spyOn(${modelName.toLowerCase()}Service, 'delete');
+
+      // act
+      component.onDelete${modelName}(1);
+
+      // verify
+      expect(${modelName.toLowerCase()}Service.delete).toHaveBeenCalled();
+
+    });
+  });
+});

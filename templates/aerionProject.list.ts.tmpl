@@ -1,1 +1,59 @@
-this is typescript for list
+import { Component, OnInit } from '@angular/core';
+import { ${modelName}Service } from '../${modelName.toLowerCase()}-service';
+import { Observable } from 'rxjs';
+import { ${modelName}Page } from '../models/${modelName.toLowerCase()}Page';
+import { PageRequest } from '../../../models/pageRequest';
+
+@Component({
+  selector: '${cmpSelector}',
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}-list.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}-list.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+})
+export class ${upperName}Component implements OnInit {
+
+  ${modelName.toLowerCase()}Page$: Observable<${modelName}Page>;
+
+  /**
+   *Creates an instance of ${modelName}ListComponent.
+   * @param ${serviceName} ${serviceNameVariable}
+   * @memberof ${modelName}ListComponent
+   */
+  constructor(protected ${serviceNameVariable}: ${serviceName}) {}
+
+  /**
+   * Initialising method
+   *
+   * @memberof ${modelName}ListComponent
+   */
+  ngOnInit() {
+    this.${modelName.toLowerCase()}Page$ = this.${modelName.toLowerCase()}Service.${modelName.toLowerCase()}Page$;
+    this.${modelName.toLowerCase()}Service.getPage(null);
+  }
+
+  onPageChange(page: number) {
+    const pageRequest = new PageRequest().asDefault();
+    pageRequest.page = page;
+    this.${modelName.toLowerCase()}Service.getPage(pageRequest);
+    // dispatch get page with new number
+  }
+
+  /**
+* On Edit Click handler
+*
+* @memberof ${modelName}Component
+*/
+  onEditClick(${modelName.toLowerCase()}Id: string) {
+    this.${modelName.toLowerCase()}Service.goToEdit(${modelName.toLowerCase()}Id);
+  }
+
+  /**
+   * On delete confirmation handler
+   *
+   * @param {*} ${modelName.toLowerCase()}Id
+   * @memberof ${modelName}ListComponent
+   */
+  onDelete${modelName}(${modelName.toLowerCase()}Id) {
+   this.${modelName.toLowerCase()}Service.delete(${modelName.toLowerCase()}Id);
+  }
+
+}

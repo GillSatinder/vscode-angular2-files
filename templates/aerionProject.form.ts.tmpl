@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ${upperName} } from '../models/projects';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
 import { FormSubmission } from '../../../interfaces/formSubmission';
 import { BaseComponent } from '../../base.component';
 import { BaseModelInterface } from '../../../interfaces/base.model';
 
 @Component({
   selector: '${cmpSelector}',
-  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}.component.html'`},
-  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}-form.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}-form.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
 })
 export class ${upperName}Component extends BaseComponent {
 
@@ -16,16 +16,16 @@ export class ${upperName}Component extends BaseComponent {
   formGroup: FormGroup;
 
   @Input()
-  model: ${upperName};
+  model: ${modelName};
 
   @Output()
-  formSubmit: EventEmitter<FormSubmission<${upperName}>> = new EventEmitter<FormSubmission<${upperName}>>();
+  formSubmit: EventEmitter<FormSubmission<${modelName}>> = new EventEmitter<FormSubmission<${modelName}>>();
 
   constructor(public formBuilder: FormBuilder) {
     super(formBuilder);
   }
 
-  onSubmit(formSubmission: FormSubmission<${upperName}>) {
+  onSubmit(formSubmission: FormSubmission<${modelName}>) {
     if (formSubmission.valid) {
       this.formSubmit.emit(formSubmission);
     } else {
