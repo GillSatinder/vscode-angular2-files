@@ -5,10 +5,15 @@ exports.toTileCase = (str) => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpper
 exports.toUpperCase = (input) => exports.toCamelCase(input.charAt(0).toUpperCase() + input.slice(1));
 // export const toModel = (input: string) => input.substring(0, input.indexOf('-')).charAt(0).toUpperCase() + input.substring(0, input.indexOf('-')).slice(1); 
 function toModel(input) {
-    const initialPart = input.substring(0, input.indexOf('-'));
-    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
-    const wholeString = capitalInitialPart + initialPart.slice(1);
-    return wholeString;
+    if (input.indexOf('-')) {
+        const initialPart = input.substring(0, input.indexOf('-'));
+        const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+        const wholeString = capitalInitialPart + initialPart.slice(1);
+        return wholeString;
+    }
+    else {
+        return input;
+    }
 }
 exports.toModel = toModel;
 function toServiceName(input) {

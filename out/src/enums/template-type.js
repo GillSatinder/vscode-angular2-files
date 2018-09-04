@@ -21,10 +21,13 @@ var TemplateType;
     TemplateType["Inteface"] = "interface.tmpl";
     TemplateType["Route"] = "route.tmpl";
     // basic aerion project files
-    TemplateType["AerionProject"] = "aerionProject.tmpl";
-    TemplateType["AerionProjectSpec"] = "aerionProject.spec.tmpl";
-    TemplateType["AerionProjectHtml"] = "aerionProject.html.tmpl";
-    TemplateType["AerionProjectStyle"] = "aerionProject.style.tmpl";
+    TemplateType["AerionProjectBasicTs"] = "aerionProject.ts.tmpl";
+    TemplateType["AerionProjectBasicSpec"] = "aerionProject.spec.tmpl";
+    TemplateType["AerionProjectBasicHtml"] = "aerionProject.html.tmpl";
+    TemplateType["AerionProjectBasicStyle"] = "aerionProject.style.tmpl";
+    TemplateType["AerionProjectBasicModule"] = "aerionProject.module.tmpl";
+    TemplateType["AerionProjectBasicRoutingModule"] = "aerionProject.routing.module.tmpl";
+    TemplateType["AerionProjectBasicService"] = "aerionProject.service.tmpl";
     // end basic aerion project files
     // project-create files 
     TemplateType["AerionProjectCreatets"] = "aerionProject.create.ts.tmpl";

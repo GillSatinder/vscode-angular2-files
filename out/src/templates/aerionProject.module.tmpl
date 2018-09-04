@@ -1,0 +1,36 @@
+// Angular Imports
+import { NgModule } from '@angular/core';
+
+// This Module's Components
+import { ProjectComponent } from './project.component';
+import { ProjectRoutingModule } from './project.routing.module';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectService } from './project-service';
+import { SharedModule } from '../../common/shared/shared.module';
+import { ProjectCreateComponent } from './project-create/project-create.component';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
+
+@NgModule({
+  imports: [
+    SharedModule,
+    ProjectRoutingModule
+
+  ],
+  declarations: [
+    ProjectComponent,
+    ProjectListComponent,
+    ProjectCreateComponent,
+    ProjectEditComponent,
+    ProjectFormComponent
+  ],
+  exports: [
+    ProjectComponent,
+  ],
+  providers: [
+    ProjectService
+  ]
+})
+export class ProjectModule {
+
+}

@@ -19,10 +19,14 @@ export enum TemplateType {
     Route = 'route.tmpl',
 
     // basic aerion project files
-    AerionProject = 'aerionProject.tmpl',
-    AerionProjectSpec = 'aerionProject.spec.tmpl',
-    AerionProjectHtml = 'aerionProject.html.tmpl',
-    AerionProjectStyle = 'aerionProject.style.tmpl',
+    AerionProjectBasicTs = 'aerionProject.ts.tmpl',
+    AerionProjectBasicSpec = 'aerionProject.spec.tmpl',
+    AerionProjectBasicHtml = 'aerionProject.html.tmpl',
+    AerionProjectBasicStyle = 'aerionProject.style.tmpl',
+    AerionProjectBasicModule = 'aerionProject.module.tmpl',
+    AerionProjectBasicRoutingModule = 'aerionProject.routing.module.tmpl',
+    AerionProjectBasicService = 'aerionProject.service.tmpl',
+
 
     // end basic aerion project files
 
@@ -32,6 +36,7 @@ export enum TemplateType {
     AerionProjectCreateSpec = 'aerionProject.create.spec.tmpl',
     AerionProjectCreateHtml = 'aerionProject.create.html.tmpl',
     AerionProjectCreateStyle = 'aerionProject.create.style.tmpl',
+    
 
     // project-edit files
     AerionProjectEditts = 'aerionProject.edit.ts.tmpl',

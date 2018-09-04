@@ -1,0 +1,55 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { ProjectService } from './project-service';
+import { Subscription, Observable } from 'rxjs';
+import {AuthService} from '../auth/auth.service';
+
+@Component({
+  selector: 'app-project',
+  templateUrl: 'project.component.html',
+  styleUrls: [
+    '../../../assets/styles/pages/contact-app-page.scss',
+    '../../../assets/styles/pages/footable-page.scss',
+  ]
+})
+export class ProjectComponent implements OnInit, OnDestroy {
+
+  @BlockUI('projects-module') loading: NgBlockUI;
+  loadingSubscription: Subscription;
+  errorMessage$: Observable<any>;
+  constructor(private projectService: ProjectService,
+              private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.errorMessage$ = this.projectService.errorMessage$;
+    this.loadingSubscription = this.projectService.loading$.subscribe(loading => {
+      if (loading) {
+        this.loading.start();
+      } else {
+        this.loading.stop();
+      }
+    }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
+    }
+  }
+
+  /**
+   * On create Click handler
+   *
+   * @memberof ProjectComponent
+   */
+  onCreateClick() {
+    this.projectService.goToCreate();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+}

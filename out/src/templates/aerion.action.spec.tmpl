@@ -1,25 +1,22 @@
-import {${inputName.charAt(0).toUpperCase() + inputName.slice(1)}} from '../models/${inputName}s';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {
-  ApiFailed,
-  Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)},
-  Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success,
-  Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}, Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success, GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s, Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}, Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success,
-  ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes, Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page,
-  Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)},
-  Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success, ValidationFailed
-} from './${inputName}.actions';
+  ApiFailed,${serviceName},${inputName},
+  Create${modelName},
+  Create${modelName}Success,
+  Delete${modelName}, Delete${modelName}Success, GetAll${modelName}s, Get${modelName}, Get${modelName}Success,
+} from './${modelName.toLowerCase()}.actions';
 import {PageRequest} from '../../../models/pageRequest';
-import {${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page} from '../models/${inputName}Page';
+import {${modelName}Page} from '../models/${modelName}Page';
 
-describe('Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}', () => {
-  it('should create an action', () => {
+describe('Create${modelName}', () => {
+  it('satinder singh gill ', () => {
 
     // setup
-    const payload = new ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}({id: '', name: '', description: ''});
-    const action = new Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}(payload);
+    const payload = new ${modelName}({id: '', name: '', description: ''});
+    const action = new Create${modelName}(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()});
+    expect(action.type).toEqual(${modelName}ActionTypes.CREATE_${modelName.toUpperCase()});
     expect(action.payload).toEqual(payload);
   });
 });

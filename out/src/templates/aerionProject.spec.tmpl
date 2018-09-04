@@ -1,0 +1,89 @@
+import {ProjectService} from './project-service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {ProjectCreateComponent} from './project-create/project-create.component';
+import {BaseComponent} from '../base.component';
+import {ProjectComponent} from './project.component';
+import {BlockUIModule} from 'ng-block-ui';
+import {Observable, of} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
+
+class MockProjectService {
+  errorMessage$: Observable<any> = of('error');
+  loading$: Observable<boolean> = of(true);
+  goToCreate() {}
+}
+class MockAuthService {}
+describe('ProjectComponent', () => {
+  let component: ProjectComponent;
+  let fixture: ComponentFixture<ProjectComponent>;
+  let projectService: ProjectService;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+
+      declarations: [ProjectComponent],
+      providers: [
+        {provide: ProjectService, useClass: MockProjectService},
+        {provide: AuthService, useClass: MockAuthService},
+      ],
+      imports: [
+        FormsModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        BlockUIModule.forRoot()
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ProjectComponent);
+    component = fixture.componentInstance;
+    projectService = fixture.debugElement.injector.get(ProjectService);
+   // fixture.detectChanges();
+
+  });
+
+  it('should create', () => {
+
+    // verify
+    expect(component).toBeDefined();
+  });
+
+  describe('ngOnInit()', () => {
+    it('should listen to errorMessage and loading of the component', () => {
+      // setup
+      spyOn(component.loading, 'start');
+
+
+      // act
+       component.ngOnInit();
+
+     // verify
+     projectService.loading$.subscribe(res => {
+       expect(res).toBe(true);
+       // if true it will start loading
+       expect(component.loading.start).toHaveBeenCalled();
+     });
+
+     expect(component.errorMessage$).toBeDefined();
+     expect(component.loadingSubscription).toBeDefined();
+    });
+  });
+
+  describe('onCreateClick()',  () =>  {
+    it('calls goToCreate() of ProjectService', () => {
+      // setup
+      spyOn(projectService, 'goToCreate');
+
+      // act
+      component.onCreateClick();
+
+      // verify
+      expect(projectService.goToCreate).toHaveBeenCalled();
+    });
+  });
+});

@@ -8,10 +8,15 @@ export const toUpperCase = (input: string) => toCamelCase(input.charAt(0).toUppe
 // export const toModel = (input: string) => input.substring(0, input.indexOf('-')).charAt(0).toUpperCase() + input.substring(0, input.indexOf('-')).slice(1); 
 
 export function toModel(input: string) {
-  const initialPart = input.substring(0, input.indexOf('-'));
+  if(input.indexOf('-')) {
+    const initialPart = input.substring(0, input.indexOf('-'));
   const capitalInitialPart = initialPart.charAt(0).toUpperCase();
   const wholeString = capitalInitialPart + initialPart.slice(1);
   return wholeString;
+  } else {
+    return input;
+  }
+  
 }
 
 export function toServiceName(input: string) {

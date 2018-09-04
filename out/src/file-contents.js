@@ -54,6 +54,9 @@ class FileContents {
         const serviceName = formatting_1.toServiceName(inputName);
         const serviceNameVariable = formatting_1.toServiceNameVariable(inputName);
         const smallLetterModelName = formatting_1.toSmallModelName(inputName);
+        console.log('this is the template name');
+        console.log(template);
+        console.log(inputName);
         const args = [modelName,
             serviceName,
             serviceNameVariable,
@@ -73,7 +76,7 @@ class FileContents {
             routingScope,
             importCommonModule,
             params];
-        return (this.templatesMap.has(templateName)) ? this.templatesMap.get(templateName)(...args) : '';
+        return (this.templatesMap.has(templateName)) ? this.templatesMap.get(templateName)(...args) : 'error from args';
     }
 }
 exports.FileContents = FileContents;
