@@ -9,7 +9,7 @@ import {empty, Observable, of, Subscription} from 'rxjs';
 import {HttpParams} from '@angular/common/http';
 import {BaseComponent} from '../../base.component';
 import any = jasmine.any;
-import {${modelName}} from '../models/${modelName.toLowerCase()}s';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 
 
@@ -98,7 +98,7 @@ describe('${upperName}Component', () => {
 
       // verify
       expect(component.buildForm).toHaveBeenCalled();
-      ${serviceName}.validationErrors$.subscribe(res => {
+      ${serviceNameVariable}.validationErrors$.subscribe(res => {
         expect(res).toBeDefined();
       });
       route.params.subscribe(res => {
@@ -112,7 +112,7 @@ describe('${upperName}Component', () => {
 
     // setup
       formBuilder  = new FormBuilder();
-      const model = new ${upperName}();
+      const model = new ${modelName}();
       component.model = model;
       component.form = formBuilder.group(model.formControls);
      spyOn(component.formBuilder, 'group').and.returnValue(component.form);
@@ -136,7 +136,7 @@ describe('${upperName}Component', () => {
       component.model = model;
       spyOn(component.model, 'patchByForm').and.returnValue('');
       spyOn(${serviceNameVariable}, 'create').and.returnValue('');
-      const fs: FormSubmission<${upperName}> = {value: model, valid: true};
+      const fs: FormSubmission<${modelName}> = {value: model, valid: true};
 
        // act
        component.onSubmit(fs);
@@ -151,10 +151,10 @@ describe('${upperName}Component', () => {
     it('should not submit the invalid form', () => {
 
       // setup
-      const model = new ${upperName}();
+      const model = new ${modelName}();
       component.model = model;
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
-      const fs: FormSubmission<${upperName}> = {value: model, valid: false};
+      const fs: FormSubmission<${modelName}> = {value: model, valid: false};
 
       // act
       component.onSubmit(fs);

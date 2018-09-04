@@ -9,12 +9,12 @@
         </tr>
       </thead>
       <tbody>
-        <ng-template [ngIf]="(projectPage$ | async)">
-          <tr *ngFor="let project of (projectPage$|async)?.pagedData">
+        <ng-template [ngIf]="(${modelName.toLowerCase()}Page$ | async)">
+          <tr *ngFor="let project of (${modelName.toLowerCase()}Page$|async)?.pagedData">
             <td>{{project.name}}</td>
             <td>
               <swal #deleteSwal title="Delete {{ project.name }}?" text="This cannot be undone" type="question" [showCancelButton]="true"
-                [focusCancel]="true" (confirm)="onDelete${upperName}(project.id)">
+                [focusCancel]="true" (confirm)="onDelete${modelName}(project.id)">
               </swal>
 
               <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"
@@ -32,6 +32,6 @@
         </ng-template>
       </tbody>
     </table>
-    <app-paging [pagedData]="(projectPage$ | async)" (pageChange)="onPageChange($event)"></app-paging>
+    <app-paging [pagedData]="(${modelName.toLowerCase()}Page$ | async)" (pageChange)="onPageChange($event)"></app-paging>
   </div>
 </di

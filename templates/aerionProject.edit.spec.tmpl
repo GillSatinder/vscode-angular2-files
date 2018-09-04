@@ -2,19 +2,19 @@ import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnDestroy} from '@angular/core';
-import {${upperName}Service} from '../project-service';
+import {${modelName}Service} from '../${modelName.toLowerCase()}-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {empty, Observable, of, Subscription} from 'rxjs';
 import {BaseComponent} from '../../base.component';
-import {${upperName}EditComponent} from './project-edit.component';
-import {${upperName}} from '../models/projects';
+import {${upperName}Component} from './project-edit.component';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 import any = jasmine.any;
 
 class Mock${serviceName} {
   project = new ${modelName}();
   validationErrors$: Observable<{}[]> = of(['404', 'server error'] );
-  slected${modelName}$: Observable<${serviceName}> = of(this.project);
+  slected${modelName}$: Observable<${modelName}> = of(this.project);
 
   create() {}
 
@@ -97,14 +97,14 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder = new FormBuilder();
-      const model = new ${serviceName}();
+      const model = new ${modelName}();
       model.formErrors = {name: 'error', description: 'server error'};
       component.model = model;
       component.form = formBuilder.group(model.formControls);
       spyOn(${serviceNameVariable}, 'get').and.returnValue('ss');
       spyOn(component, 'buildForm');
       spyOn(component.form, 'patchValue');
-      ${serviceNameVariable}.selected${upperName}$ = of(new ${serviceName}());
+      ${serviceNameVariable}.selected${modelName}$ = of(new ${modelName}());
 
 
 
@@ -116,7 +116,7 @@ describe('${upperName}Component', () => {
         expect(${serviceNameVariable}.get).toHaveBeenCalled();
       });
       expect(component.routeSubscription).toBeDefined();
-      ${serviceNameVariable}.selected${upperName}$.subscribe(res => {
+      ${serviceNameVariable}.selected${modelName}$.subscribe(res => {
         expect(component.model).toBeDefined();
        expect(component.buildForm).toHaveBeenCalled();
        expect(component.form.patchValue).toHaveBeenCalled();
@@ -133,7 +133,7 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder  = new FormBuilder();
-      const model = new ${serviceName}();
+      const model = new ${modelName}();
       component.model = model;
       component.form = formBuilder.group(model.formControls);
       spyOn(component.formBuilder, 'group').and.returnValue(component.form);
@@ -153,11 +153,11 @@ describe('${upperName}Component', () => {
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new ${serviceName}();
+      const model = new ${modelName}();
       component.model = model;
       spyOn(component.model, 'patchByForm').and.returnValue('');
       spyOn(${serviceNameVariable}, 'update').and.returnValue('');
-      const fs: FormSubmission<${serviceName}> = {value: model, valid: true};
+      const fs: FormSubmission<${modelName}> = {value: model, valid: true};
 
       // act
       component.onSubmit(fs);
@@ -171,10 +171,10 @@ describe('${upperName}Component', () => {
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new ${serviceName}();
+      const model = new ${modelName}();
       component.model = model;
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
-      const fs: FormSubmission<${serviceName}> = {value: model, valid: false};
+      const fs: FormSubmission<${modelName}> = {value: model, valid: false};
 
       // act
       component.onSubmit(fs);
