@@ -22,9 +22,16 @@ export function toServiceName(input: string) {
 }
 
 export function toServiceNameVariable(input: string) {
-    const initialPart = input.substring(0, input.indexOf('-'));
-    const capitalInitialPart = initialPart.charAt(0).toLowerCase();
-    const wholeString = capitalInitialPart + initialPart.slice(1);
+  const initialPart = input.substring(0, input.indexOf('-'));
+  const capitalInitialPart = initialPart.charAt(0).toLowerCase();
+  const wholeString = capitalInitialPart + initialPart.slice(1);
   return wholeString + 'Service';
-  }
+}
+
+export function toSmallModelName(input: string) {
+    const initialPart = input.substring(0, input.indexOf('-'));
+    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+    const wholeString = capitalInitialPart + initialPart.slice(1);
+  return wholeString.toLowerCase();
+}
 

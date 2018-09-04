@@ -25,4 +25,11 @@ function toServiceNameVariable(input) {
     return wholeString + 'Service';
 }
 exports.toServiceNameVariable = toServiceNameVariable;
+function toSmallModelName(input) {
+    const initialPart = input.substring(0, input.indexOf('-'));
+    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+    const wholeString = capitalInitialPart + initialPart.slice(1);
+    return wholeString.toLowerCase();
+}
+exports.toSmallModelName = toSmallModelName;
 //# sourceMappingURL=formatting.js.map

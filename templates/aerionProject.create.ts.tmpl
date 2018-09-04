@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ${upperName} } from '../models/${upperName}s';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
 import { FormBuilder } from '@angular/forms';
 import { BaseComponent } from '../../base.component';
 import { FormSubmission } from '../../../interfaces/formSubmission';
-import { ${upperName}Service } from '../${upperName}-service';
+import { ${serviceName} } from '../${modelName.toLowerCase()}-service';
 import { UUID } from 'angular2-uuid';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -11,8 +11,8 @@ import { switchMap } from 'rxjs/operators';
 
 @Component({
  selector: '${cmpSelector}',
-  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${upperName} Works!\n   </p>\n  \`` : `templateUrl: './${upperName}.component.html'`},
-  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${upperName}.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}-create.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}-create.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
 })
 export class ${upperName}Component extends BaseComponent implements OnInit, OnDestroy {
 
@@ -25,7 +25,7 @@ export class ${upperName}Component extends BaseComponent implements OnInit, OnDe
    * @memberof ${upperName}Component
    */
   constructor(formBuilder: FormBuilder,
-            private ${serviceNameVariable}: ${serviceName};
+            private ${serviceNameVariable}: ${serviceName},
             private route: ActivatedRoute,
             private router: Router) {
     super(formBuilder);
@@ -52,7 +52,7 @@ export class ${upperName}Component extends BaseComponent implements OnInit, OnDe
 
     this.routeSubscription = this.route.params
       .subscribe((params: Params) => {
-        const ${upperName}Id = params['id'];
+        const projectId = params['id'];
       });
   }
 
@@ -71,7 +71,7 @@ export class ${upperName}Component extends BaseComponent implements OnInit, OnDe
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  onSubmit(formSubmission: FormSubmission<${upperName}>) {
+  onSubmit(formSubmission: FormSubmission<${modelName}>) {
     if (formSubmission.valid) {
       this.model.patchByForm(formSubmission.value);
       this.${serviceNameVariable}.create(this.model);

@@ -2,14 +2,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as es6Renderer from 'express-es6-template-engine';
 import { IConfig } from './models/config';
-import { toCamelCase, toUpperCase, toModel, toServiceName, toServiceNameVariable } from './formatting';
+import { toCamelCase, toUpperCase, toModel, toServiceName, toServiceNameVariable, toSmallModelName } from './formatting';
 import { promisify } from './promisify';
 import { TemplateType } from './enums/template-type';
 
 const fsReaddir = promisify(fs.readdir);
 const fsReadFile = promisify(fs.readFile);
 const TEMPLATES_FOLDER = 'templates';
-const TEMPLATE_ARGUMENTS = 'modelName, serviceName, serviceNameVariable, inputName, upperName, interfacePrefix, cmpPrefix, dirPrefix, cmpSelector, dirSelector, componentViewEncapsulation, componentChangeDetection, componentInlineTemplate, componentInlineStyle, defaultsStyleExt, routingScope, importCommonModule, params';
+const TEMPLATE_ARGUMENTS = 'modelName, serviceName, serviceNameVariable, smallLetterModelName, inputName, upperName, interfacePrefix, cmpPrefix, dirPrefix, cmpSelector, dirSelector, componentViewEncapsulation, componentChangeDetection, componentInlineTemplate, componentInlineStyle, defaultsStyleExt, routingScope, importCommonModule, params';
 
 export class FileContents {
   private templatesMap: Map<string, Function>;
@@ -51,11 +51,13 @@ export class FileContents {
     const modelName = toModel(inputName);
     const serviceName = toServiceName(inputName);
     const serviceNameVariable = toServiceNameVariable(inputName);
+    const smallLetterModelName = toSmallModelName(inputName);
     
     const args = [modelName,
       serviceName,
       serviceNameVariable,
       inputName,
+      smallLetterModelName,
       toUpperCase(inputName),
       config.defaults.interface.prefix,
       cmpPrefix,

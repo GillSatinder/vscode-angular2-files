@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ${upperName} } from '../models/projects';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
+import { FormBuilder } from '@angular/forms';
 import { BaseComponent } from '../../base.component';
 import { FormSubmission } from '../../../interfaces/formSubmission';
-import { ${upperName}Service } from '../project-service';
+import { ${serviceName} } from '../${modelName.toLowerCase()}-service';
 import { UUID } from 'angular2-uuid';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -12,12 +12,12 @@ import { ToasterService } from 'angular2-toaster';
 
 @Component({
   selector: '${cmpSelector}',
-  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}.component.html'`},
-  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
+  ${componentInlineTemplate ? `template: \`\n   <p>\n  \t\t${inputName} Works!\n   </p>\n  \`` : `templateUrl: './${inputName}-edit.component.html'`},
+  ${componentInlineStyle ? 'styles: []' : `styleUrls: ['./${inputName}-edit.component.${defaultsStyleExt}']`}${componentViewEncapsulation !== 'Emulated' ? `,\n  encapsulation: ViewEncapsulation.${componentViewEncapsulation}` : ''}${componentChangeDetection !== 'Default' ? `,\n  changeDetection: ChangeDetectionStrategy.OnPush` : ''}
 })
 export class  ${upperName}Component extends BaseComponent implements OnInit, OnDestroy {
 
-  model: ${upperName};
+  model: ${modelName};
   validationSubscriptions: Subscription;
   isCreateMode: boolean;
 
@@ -27,7 +27,7 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
    * @param {FormBuilder} formBuilder
    * @memberof ${upperName}Component
    */
-  constructor(formBuilder: FormBuilder, private projectService: ${upperName}Service, private route: ActivatedRoute, private router: Router) {
+  constructor(formBuilder: FormBuilder, private ${serviceNameVariable}: ${serviceName}, private route: ActivatedRoute, private router: Router) {
     super(formBuilder);
   }
 
@@ -39,9 +39,9 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
   ngOnInit(): void {
      this.routeSubscription = this.route.params.subscribe(params => {
       const projectId = params['id'];
-      this.projectService.get(projectId);
+      this.${serviceNameVariable}.get(projectId);
     }, error => { });
-     this.projectService.selected${upperName}$.subscribe(result => {
+     this.${serviceNameVariable}.selected${modelName}$.subscribe(result => {
       if (result) {
         this.model = result;
         this.buildForm();
@@ -49,7 +49,7 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
       }
     }, error => { });
 
-    this.validationSubscriptions = this.projectService.validationErrors$.subscribe(errors => {
+    this.validationSubscriptions = this.${serviceNameVariable}.validationErrors$.subscribe(errors => {
       if (errors != null) {
         for (const error in errors) {
           if (error) {
@@ -70,16 +70,15 @@ export class  ${upperName}Component extends BaseComponent implements OnInit, OnD
 
   buildForm(): void {
     this.form = this.formBuilder.group(this.model.formControls);
-    console.log(this.formSubscription);
     this.formSubscription = this.form.valueChanges
        .subscribe(data => this.onValueChanged(data));
     this.onValueChanged(); // (re)set validation messages now
   }
 
-  onSubmit(formSubmission: FormSubmission<${upperName}>) {
+  onSubmit(formSubmission: FormSubmission<${modelName}>) {
     if (formSubmission.valid) {
       this.model.patchByForm(formSubmission.value);
-      this.projectService.update(this.model);
+      this.${serviceNameVariable}.update(this.model);
     } else {
       this.setFormTouchedAndDirtyIfNeeded();
     }

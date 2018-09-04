@@ -1,15 +1,15 @@
-import {${upperName}Component} from './${upperName}-create.component';
+import {${upperName}Component} from './${modelName.toLowerCase()}-create.component';
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, OnDestroy} from '@angular/core';
-import {${upperName}Service} from '../${upperName}-service';
+import {${serviceName}} from '../${modelName.toLowerCase()}-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {empty, Observable, of, Subscription} from 'rxjs';
 import {HttpParams} from '@angular/common/http';
 import {BaseComponent} from '../../base.component';
 import any = jasmine.any;
-import {${upperName}} from '../models/${upperName}s';
+import {${modelName}} from '../models/${modelName.toLowerCase()}s';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 
 

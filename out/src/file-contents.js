@@ -16,7 +16,7 @@ const promisify_1 = require("./promisify");
 const fsReaddir = promisify_1.promisify(fs.readdir);
 const fsReadFile = promisify_1.promisify(fs.readFile);
 const TEMPLATES_FOLDER = 'templates';
-const TEMPLATE_ARGUMENTS = 'modelName, serviceName, serviceNameVariable, inputName, upperName, interfacePrefix, cmpPrefix, dirPrefix, cmpSelector, dirSelector, componentViewEncapsulation, componentChangeDetection, componentInlineTemplate, componentInlineStyle, defaultsStyleExt, routingScope, importCommonModule, params';
+const TEMPLATE_ARGUMENTS = 'modelName, serviceName, serviceNameVariable, smallLetterModelName, inputName, upperName, interfacePrefix, cmpPrefix, dirPrefix, cmpSelector, dirSelector, componentViewEncapsulation, componentChangeDetection, componentInlineTemplate, componentInlineStyle, defaultsStyleExt, routingScope, importCommonModule, params';
 class FileContents {
     constructor() {
         this.templatesMap = new Map();
@@ -53,10 +53,12 @@ class FileContents {
         const modelName = formatting_1.toModel(inputName);
         const serviceName = formatting_1.toServiceName(inputName);
         const serviceNameVariable = formatting_1.toServiceNameVariable(inputName);
+        const smallLetterModelName = formatting_1.toSmallModelName(inputName);
         const args = [modelName,
             serviceName,
             serviceNameVariable,
             inputName,
+            smallLetterModelName,
             formatting_1.toUpperCase(inputName),
             config.defaults.interface.prefix,
             cmpPrefix,

@@ -11,10 +11,10 @@ import {${upperName}} from '../models/projects';
 import {FormSubmission} from '../../../interfaces/formSubmission';
 import any = jasmine.any;
 
-class Mock${upperName}Service {
-  project = new ${upperName}();
+class Mock${serviceName} {
+  project = new ${modelName}();
   validationErrors$: Observable<{}[]> = of(['404', 'server error'] );
-  slected${upperName}$: Observable<${upperName}> = of(this.project);
+  slected${modelName}$: Observable<${serviceName}> = of(this.project);
 
   create() {}
 
@@ -53,7 +53,7 @@ describe('${upperName}Component', () => {
   let component: ${upperName}Component;
   let fixture: ComponentFixture<${upperName}Component>;
   let route: ActivatedRoute;
-  let projectService: ${upperName}Service;
+  let ${serviceNameVariable}: ${serviceName};
   let formBuilder: FormBuilder;
 
   beforeEach(async(() => {
@@ -61,7 +61,7 @@ describe('${upperName}Component', () => {
 
       declarations: [${upperName}Component],
       providers: [
-        {provide: ${upperName}Service, useClass: Mock${upperName}Service},
+        {provide: ${serviceName}, useClass: Mock${serviceName},
         {provide: ActivatedRoute, useClass: MockActivatedRoute},
         {provide: Router, useClass: MockRouter},
         {provide: BaseComponent, useClass: MockBaseComponent},
@@ -83,7 +83,7 @@ describe('${upperName}Component', () => {
     component = fixture.componentInstance;
     route = fixture.debugElement.injector.get(ActivatedRoute);
     formBuilder = fixture.debugElement.injector.get(FormBuilder);
-    projectService = fixture.debugElement.injector.get(${upperName}Service);
+    ${serviceNameVariable} = fixture.debugElement.injector.get(${serviceName});
   });
 
   it('should create', () => {
@@ -97,14 +97,14 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder = new FormBuilder();
-      const model = new ${upperName}();
+      const model = new ${serviceName}();
       model.formErrors = {name: 'error', description: 'server error'};
       component.model = model;
       component.form = formBuilder.group(model.formControls);
-      spyOn(projectService, 'get').and.returnValue('ss');
+      spyOn(${serviceNameVariable}, 'get').and.returnValue('ss');
       spyOn(component, 'buildForm');
       spyOn(component.form, 'patchValue');
-      projectService.selected${upperName}$ = of(new ${upperName}());
+      ${serviceNameVariable}.selected${upperName}$ = of(new ${serviceName}());
 
 
 
@@ -113,16 +113,16 @@ describe('${upperName}Component', () => {
 
       // verify
       component.routeSubscription = route.params.subscribe(params => {
-        expect(projectService.get).toHaveBeenCalled();
+        expect(${serviceNameVariable}.get).toHaveBeenCalled();
       });
       expect(component.routeSubscription).toBeDefined();
-      projectService.selected${upperName}$.subscribe(res => {
+      ${serviceNameVariable}.selected${upperName}$.subscribe(res => {
         expect(component.model).toBeDefined();
        expect(component.buildForm).toHaveBeenCalled();
        expect(component.form.patchValue).toHaveBeenCalled();
       });
 
-      projectService.validationErrors$.subscribe(res => {
+      ${serviceNameVariable}.validationErrors$.subscribe(res => {
         expect(component.model.formErrors[1]).toEqual('server error');
       });
      });
@@ -133,7 +133,7 @@ describe('${upperName}Component', () => {
 
       // setup
       formBuilder  = new FormBuilder();
-      const model = new ${upperName}();
+      const model = new ${serviceName}();
       component.model = model;
       component.form = formBuilder.group(model.formControls);
       spyOn(component.formBuilder, 'group').and.returnValue(component.form);
@@ -153,28 +153,28 @@ describe('${upperName}Component', () => {
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new ${upperName}();
+      const model = new ${serviceName}();
       component.model = model;
       spyOn(component.model, 'patchByForm').and.returnValue('');
-      spyOn(projectService, 'update').and.returnValue('');
-      const fs: FormSubmission<${upperName}> = {value: model, valid: true};
+      spyOn(${serviceNameVariable}, 'update').and.returnValue('');
+      const fs: FormSubmission<${serviceName}> = {value: model, valid: true};
 
       // act
       component.onSubmit(fs);
 
       // verify
       expect(component.model.patchByForm).toHaveBeenCalled();
-      expect(projectService.update).toHaveBeenCalled();
+      expect(${serviceNameVariable}.update).toHaveBeenCalled();
     });
   });
 
   describe('onSubmit()', () => {
     it('submitting the form', () => {
       // setup
-      const model = new ${upperName}();
+      const model = new ${serviceName}();
       component.model = model;
       spyOn(component, 'setFormTouchedAndDirtyIfNeeded').and.returnValue('');
-      const fs: FormSubmission<${upperName}> = {value: model, valid: false};
+      const fs: FormSubmission<${serviceName}> = {value: model, valid: false};
 
       // act
       component.onSubmit(fs);
