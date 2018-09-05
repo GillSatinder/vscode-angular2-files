@@ -52,9 +52,7 @@ export class FileContents {
     const serviceName = toServiceName(inputName);
     const serviceNameVariable = toServiceNameVariable(inputName);
     const smallLetterModelName = toSmallModelName(inputName);
-    console.log('this is the template name');
-    console.log(template);
-    console.log(inputName);
+   
     
     const args = [modelName,
       serviceName,

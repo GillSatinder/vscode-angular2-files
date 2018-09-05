@@ -139,10 +139,10 @@ export const resources = new Map<ResourceType, IResource>([
     locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
     createFolder2: config => !config.defaults.module.flat,
     files2: 
-    [{ name: config => `Page.ts`, type: TemplateType.AerionProjectModelts }, 
-     {  name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
-    sameFiles :
-     [{ name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
+    [{ name: config => `Page.ts`, type: TemplateType.AerionProjectModelPagets },
+       {  name: config => `.ts`, type: TemplateType.AerionProjectModelts }],
+      // sameFiles :
+      //  [{ name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
     
 
     // for store folder

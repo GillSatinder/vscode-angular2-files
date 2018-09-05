@@ -175,18 +175,19 @@ class AngularCli {
             const files2 = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
                 const fileName2 = file2.name(config);
                 return {
-                    name: path.join(loc.dirPath2, `${loc.fileName}.${fileName2}`),
+                    name: path.join(loc.dirPath2, `${loc.fileName}${fileName2}`),
                     content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
                 };
             });
             //   for models 
-            const sameFiles = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
-                const fileName2 = file2.name(config);
-                return {
-                    name: path.join(loc.dirPath2, `${loc.fileName}.${fileName2}`),
-                    content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
-                };
-            });
+            // const sameFiles: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
+            //   const fileName2: string = file2.name(config);
+            //   return {
+            //    // name: path.join(loc.dirPath2, `${loc.fileName}${fileName2}`),
+            //    name: path.join(loc.dirPath2, ); 
+            //    content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+            //   };
+            // });
             // for store
             const files3 = resource.files3.filter(file3 => (file3.condition) ? file3.condition(config, loc.params) : true).map((file3) => {
                 const fileName3 = file3.name(config);
@@ -213,8 +214,6 @@ class AngularCli {
             });
             const files5 = resource.files5.filter(file5 => (file5.condition) ? file5.condition(config, loc.params) : true).map((file5) => {
                 const fileName5 = file5.name(config);
-                console.log('this is the config', config);
-                console.log('this is the loc.params', loc.params);
                 return {
                     name: path.join(loc.dirPath5, fileName5.startsWith('-') ? `${loc.fileName5}${fileName5}` : `${loc.fileName5}.${fileName5}`),
                     content: this.fc.getTemplateContent(file5.type, config, loc.fileName5, loc.params),
@@ -250,7 +249,7 @@ class AngularCli {
             yield ioutil_1.createFiles5(loc, files5);
             yield ioutil_1.createFiles6(loc, files6);
             yield ioutil_1.createFiles7(loc, files7);
-            yield ioutil_1.createSameFiles(loc, sameFiles);
+            // await createSameFiles(loc, sameFiles);
         });
     }
 }

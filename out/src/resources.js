@@ -129,9 +129,10 @@ exports.resources = new Map([
             locDirName2: (loc, config) => (!config.defaults.module.flat) ? loc.fileName2 : loc.dirName2,
             locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
             createFolder2: config => !config.defaults.module.flat,
-            files2: [{ name: config => `Page.ts`, type: template_type_1.TemplateType.AerionProjectModelts },
-                { name: config => `ts`, type: template_type_1.TemplateType.AerionProjectModelPagets }],
-            sameFiles: [{ name: config => `ts`, type: template_type_1.TemplateType.AerionProjectModelPagets }],
+            files2: [{ name: config => `Page.ts`, type: template_type_1.TemplateType.AerionProjectModelPagets },
+                { name: config => `.ts`, type: template_type_1.TemplateType.AerionProjectModelts }],
+            // sameFiles :
+            //  [{ name: config => `ts`, type: TemplateType.AerionProjectModelPagets }],
             // for store folder
             locDirName3: (loc, config) => (!config.defaults.module.flat) ? loc.fileName3 : loc.dirName3,
             locDirPath3: (loc, config) => path.join(loc.dirPath3, loc.dirName3),

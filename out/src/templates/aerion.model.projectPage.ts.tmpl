@@ -1,8 +1,8 @@
 import { Deserializable } from '../../../models/deserializable';
 import { PagedData } from '../../../models/pagedData';
-import { Project } from './${inputName}s';
+import { Project } from './${modelName.toLowerCase()}s';
 
-export class ProjectPage implements PagedData<Project>, Deserializable {
+export class ${modelName}Page implements PagedData<${modelName}>, Deserializable {
 
   totalResults: number;
   totalPages: number;
@@ -17,7 +17,7 @@ export class ProjectPage implements PagedData<Project>, Deserializable {
 
   deserialize(input: any): this {
     Object.assign(this, input);
-    this.pagedData = input.pagedData.map(${inputName} => new Project().deserialize(${inputName}));
+    this.pagedData = input.pagedData.map(${modelName.toLowerCase()} => new ${modelName}().deserialize(${modelName.toLowerCase()}));
     return this;
   }
 }

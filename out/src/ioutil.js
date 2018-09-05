@@ -121,8 +121,6 @@ const writeSameFiles = (sameFiles) => __awaiter(this, void 0, void 0, function* 
 });
 // Create the new folder
 exports.createFolder = (loc) => __awaiter(this, void 0, void 0, function* () {
-    console.log('this is from folder 1');
-    console.log(loc);
     if (loc.dirName) {
         const exists = yield fsExists(loc.dirPath);
         if (exists) {

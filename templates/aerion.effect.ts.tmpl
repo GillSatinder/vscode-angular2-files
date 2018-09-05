@@ -179,8 +179,7 @@ export class ${modelName}Effects {
     .ofType(${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS).pipe(
       withLatestFrom(this.store$.select(x => x.${modelName.toLowerCase()}s.${modelName.toLowerCase()}Page ))
       , map(([action, page]) => {
-        console.log(action);
-        console.log(page);
+      
         // make a new page request with the current page details as we deleted one from the list
         const pageRequest = new PageRequest();
         pageRequest.page = page.currentPage;

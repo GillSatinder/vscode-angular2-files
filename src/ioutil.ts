@@ -138,8 +138,7 @@ const writeSameFiles = async (sameFiles: IFiles[]) => {
 
 // Create the new folder
 export const createFolder = async (loc: IPath) => {
-  console.log('this is from folder 1');
-  console.log(loc);
+  
   if (loc.dirName) {
     const exists: boolean = await fsExists(loc.dirPath);
     if (exists) {

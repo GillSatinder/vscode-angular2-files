@@ -210,19 +210,20 @@ export class AngularCli {
     const files2: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
       const fileName2: string = file2.name(config);
       return {
-        name: path.join(loc.dirPath2, `${loc.fileName}.${fileName2}`),
+        name: path.join(loc.dirPath2, `${loc.fileName}${fileName2}`),
         content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
 
       };
     });
    //   for models 
-    const sameFiles: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
-      const fileName2: string = file2.name(config);
-      return {
-        name: path.join(loc.dirPath2, `${loc.fileName}.${fileName2}`),
-        content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
-      };
-    });
+    // const sameFiles: IFiles[] = resource.files2.filter(file2 => (file2.condition) ? file2.condition(config, loc.params) : true).map((file2) => {
+    //   const fileName2: string = file2.name(config);
+    //   return {
+    //    // name: path.join(loc.dirPath2, `${loc.fileName}${fileName2}`),
+    //    name: path.join(loc.dirPath2, ); 
+    //    content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+    //   };
+    // });
 
 
 
@@ -256,8 +257,7 @@ export class AngularCli {
 
     const files5: IFiles[] = resource.files5.filter(file5 => (file5.condition) ? file5.condition(config, loc.params) : true).map((file5) => {
       const fileName5: string = file5.name(config);
-      console.log('this is the config', config);
-      console.log('this is the loc.params', loc.params);
+    
       return {
         name: path.join(loc.dirPath5, fileName5.startsWith('-') ? `${loc.fileName5}${fileName5}` : `${loc.fileName5}.${fileName5}`),
         content: this.fc.getTemplateContent(file5.type, config, loc.fileName5, loc.params),
@@ -300,7 +300,7 @@ export class AngularCli {
     await createFiles5(loc, files5);
     await createFiles6(loc, files6);
     await createFiles7(loc, files7);
-    await createSameFiles(loc, sameFiles);
+   // await createSameFiles(loc, sameFiles);
 
 
 
