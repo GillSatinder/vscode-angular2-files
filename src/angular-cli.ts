@@ -211,7 +211,7 @@ export class AngularCli {
       const fileName2: string = file2.name(config);
       return {
         name: path.join(loc.dirPath2, `${loc.fileName}${fileName2}`),
-        content: this.fc.getTemplateContent(file2.type, config, loc.fileName2, loc.params),
+        content: this.fc.getTemplateContent(file2.type, config, loc.fileName, loc.params),
 
       };
     });

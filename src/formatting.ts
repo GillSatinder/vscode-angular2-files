@@ -8,14 +8,15 @@ export const toUpperCase = (input: string) => toCamelCase(input.charAt(0).toUppe
 // export const toModel = (input: string) => input.substring(0, input.indexOf('-')).charAt(0).toUpperCase() + input.substring(0, input.indexOf('-')).slice(1); 
 
 export function toModel(input: string) {
-  if(input.includes('-')) { 
+  if (input.includes('-')) { 
     const initialPart = input.substring(0, input.indexOf('-'));
-  const capitalInitialPart = initialPart.charAt(0).toUpperCase();
-  const wholeString = capitalInitialPart + initialPart.slice(1);
-  return wholeString;
+    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+    const wholeString = capitalInitialPart + initialPart.slice(1);
+    return wholeString;
+  // tslint:disable-next-line:no-else-after-return
   } else {
-   const ip = input.charAt(0).toUpperCase();
-   return ip + input.slice(1);
+    const ip = input.charAt(0).toUpperCase();
+    return ip + input.slice(1);
   
   }
   
@@ -36,9 +37,9 @@ export function toServiceNameVariable(input: string) {
 }
 
 export function toSmallModelName(input: string) {
-    const initialPart = input.substring(0, input.indexOf('-'));
-    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
-    const wholeString = capitalInitialPart + initialPart.slice(1);
+  const initialPart = input.substring(0, input.indexOf('-'));
+  const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+  const wholeString = capitalInitialPart + initialPart.slice(1);
   return wholeString.toLowerCase();
 }
 

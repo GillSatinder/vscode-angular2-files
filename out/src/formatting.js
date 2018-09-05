@@ -10,6 +10,7 @@ function toModel(input) {
         const capitalInitialPart = initialPart.charAt(0).toUpperCase();
         const wholeString = capitalInitialPart + initialPart.slice(1);
         return wholeString;
+        // tslint:disable-next-line:no-else-after-return
     }
     else {
         const ip = input.charAt(0).toUpperCase();
