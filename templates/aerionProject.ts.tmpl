@@ -1,29 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { ProjectService } from './project-service';
+import { ${modelName}Service } from './${modelName.toLowerCase()}-service';
 import { Subscription, Observable } from 'rxjs';
 import {AuthService} from '../auth/auth.service';
-${upperName} this is the model name  .. . ..
+
 @Component({
-  selector: 'app-project',
-  templateUrl: 'project.component.html',
+  selector: 'app-${modelName.toLowerCase()}',
+  templateUrl: '${modelName.toLowerCase()}.component.html',
   styleUrls: [
     '../../../assets/styles/pages/contact-app-page.scss',
     '../../../assets/styles/pages/footable-page.scss',
   ]
 })
-export class ProjectComponent implements OnInit, OnDestroy {
+export class ${modelName}Component implements OnInit, OnDestroy {
 
-  @BlockUI('projects-module') loading: NgBlockUI;
+  @BlockUI('${modelName.toLowerCase()}s-module') loading: NgBlockUI;
   loadingSubscription: Subscription;
   errorMessage$: Observable<any>;
-  constructor(private projectService: ProjectService,
+  constructor(private ${modelName.toLowerCase()}Service: ${modelName}Service,
               private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.errorMessage$ = this.projectService.errorMessage$;
-    this.loadingSubscription = this.projectService.loading$.subscribe(loading => {
+    this.errorMessage$ = this.${modelName.toLowerCase()}Service.errorMessage$;
+    this.loadingSubscription = this.${modelName.toLowerCase()}Service.loading$.subscribe(loading => {
       if (loading) {
         this.loading.start();
       } else {
@@ -42,10 +42,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
   /**
    * On create Click handler
    *
-   * @memberof ProjectComponent
+   * @memberof ${modelName}Component
    */
   onCreateClick() {
-    this.projectService.goToCreate();
+    this.${modelName.toLowerCase()}Service.goToCreate();
   }
 
   logout() {

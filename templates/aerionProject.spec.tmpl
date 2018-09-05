@@ -1,32 +1,32 @@
-import {ProjectService} from './project-service';
+import {${modelName}Service} from './${modelName.toLowerCase()}-service';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
-import {ProjectCreateComponent} from './project-create/project-create.component';
+import {${modelName}CreateComponent} from './${modelName.toLowerCase()}-create/${modelName.toLowerCase()}-create.component';
 import {BaseComponent} from '../base.component';
-import {ProjectComponent} from './project.component';
+import {${modelName}Component} from './${modelName.toLowerCase()}.component';
 import {BlockUIModule} from 'ng-block-ui';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 
-class MockProjectService {
+class Mock${modelName}Service {
   errorMessage$: Observable<any> = of('error');
   loading$: Observable<boolean> = of(true);
   goToCreate() {}
 }
 class MockAuthService {}
-describe('ProjectComponent', () => {
-  let component: ProjectComponent;
-  let fixture: ComponentFixture<ProjectComponent>;
-  let projectService: ProjectService;
+describe('${modelName}Component', () => {
+  let component: ${modelName}Component;
+  let fixture: ComponentFixture<${modelName}Component>;
+  let ${modelName.toLowerCase()}Service: ${modelName}Service;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
 
-      declarations: [ProjectComponent],
+      declarations: [${modelName}Component],
       providers: [
-        {provide: ProjectService, useClass: MockProjectService},
+        {provide: ${modelName}Service, useClass: Mock${modelName}Service},
         {provide: AuthService, useClass: MockAuthService},
       ],
       imports: [
@@ -40,9 +40,9 @@ describe('ProjectComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectComponent);
+    fixture = TestBed.createComponent(${modelName}Component);
     component = fixture.componentInstance;
-    projectService = fixture.debugElement.injector.get(ProjectService);
+    ${modelName.toLowerCase()}Service = fixture.debugElement.injector.get(${modelName}Service);
    // fixture.detectChanges();
 
   });
@@ -63,7 +63,7 @@ describe('ProjectComponent', () => {
        component.ngOnInit();
 
      // verify
-     projectService.loading$.subscribe(res => {
+     ${modelName.toLowerCase()}Service.loading$.subscribe(res => {
        expect(res).toBe(true);
        // if true it will start loading
        expect(component.loading.start).toHaveBeenCalled();
@@ -75,15 +75,15 @@ describe('ProjectComponent', () => {
   });
 
   describe('onCreateClick()',  () =>  {
-    it('calls goToCreate() of ProjectService', () => {
+    it('calls goToCreate() of ${modelName}Service', () => {
       // setup
-      spyOn(projectService, 'goToCreate');
+      spyOn(${modelName.toLowerCase()}Service, 'goToCreate');
 
       // act
       component.onCreateClick();
 
       // verify
-      expect(projectService.goToCreate).toHaveBeenCalled();
+      expect(${modelName.toLowerCase()}Service.goToCreate).toHaveBeenCalled();
     });
   });
 });

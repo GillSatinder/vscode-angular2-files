@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectComponent } from './project.component';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { ProjectCreateComponent } from './project-create/project-create.component';
-import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ${modelName}Component } from './${modelName.toLowerCase()}.component';
+import { ${modelName}ListComponent } from './${modelName.toLowerCase()}-list/${modelName.toLowerCase()}-list.component';
+import { ${modelName}CreateComponent } from './${modelName.toLowerCase()}-create/${modelName.toLowerCase()}-create.component';
+import { ${modelName}EditComponent } from './${modelName.toLowerCase()}-edit/${modelName.toLowerCase()}-edit.component';
 
 
 
 const routes: Routes = [
   {
-    path: '', component: ProjectComponent, children: [
-      { path: 'edit/:id', component: ProjectEditComponent },
-      { path: 'create', component: ProjectCreateComponent },
-      // { path: 'delete/:id', component: ProjectDeleteComponent },
-      { path: '', component: ProjectListComponent,  pathMatch: 'full' },
+    path: '', component: ${modelName}Component, children: [
+      { path: 'edit/:id', component: ${modelName}EditComponent },
+      { path: 'create', component: ${modelName}CreateComponent },
+      // { path: 'delete/:id', component: ${modelName}DeleteComponent },
+      { path: '', component: ${modelName}ListComponent,  pathMatch: 'full' },
     ]
   },
 
@@ -23,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule],
   imports: [RouterModule.forChild(routes)]
 })
-export class ProjectRoutingModule { }
+export class ${modelName}RoutingModule { }

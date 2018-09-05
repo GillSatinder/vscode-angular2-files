@@ -5,70 +5,70 @@ import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fr
 import { map, filter, scan } from 'rxjs/operators';
 // import { BaseService } from '../_services/base.service';
 // import { HttpService } from '../core/http.service';
-import { Project } from './models/projects';
+import { ${modelName} } from './models/${modelName.toLowerCase()}s';
 import { AppStore } from '../../app.store';
-import * as ProjectActions from './store/project.actions';
-import { ProjectPage } from './models/projectPage';
+import * as ${modelName}Actions from './store/${modelName.toLowerCase()}.actions';
+import { ${modelName}Page } from './models/${modelName.toLowerCase()}Page';
 import { PageRequest } from '../../models/pageRequest';
 import * as RouterActions from '../../actions/router.actions';
 
 @Injectable()
-export class ProjectService {
+export class ${modelName}Service {
 
   // Redux based variables
 
-  projectPage$: Observable<ProjectPage>;
+  ${modelName.toLowerCase()}Page$: Observable<${modelName}Page>;
   loading$: Observable<boolean>;
   validationErrors$: Observable<{}[]>;
-  selectedProject$: Observable<Project>;
+  selected${modelName}$: Observable<${modelName}>;
   errorMessage$: Observable<any>;
   constructor(private http: Http, private store: Store<AppStore>) {
-    this.projectPage$ = store.select(x => x.projects.projectPage);
-    this.loading$ = store.select(x => x.projects.isLoading);
-    this.validationErrors$ = this.store.select(x => x.projects.validationErrors);
-    this.selectedProject$ = this.store.select(x => x.projects.selectedProject);
-    this.errorMessage$ = this.store.select(x => x.projects.errorMessage);
+    this.${modelName.toLowerCase()}Page$ = store.select(x => x.${modelName.toLowerCase()}s.${modelName.toLowerCase()}Page);
+    this.loading$ = store.select(x => x.${modelName.toLowerCase()}s.isLoading);
+    this.validationErrors$ = this.store.select(x => x.${modelName.toLowerCase()}s.validationErrors);
+    this.selected${modelName}$ = this.store.select(x => x.${modelName.toLowerCase()}s.selected${modelName});
+    this.errorMessage$ = this.store.select(x => x.${modelName.toLowerCase()}s.errorMessage);
   }
 
   getPage(pageRequest: PageRequest) {
     if (!pageRequest) {
       pageRequest = new PageRequest().asDefault();
     }
-    const action = new ProjectActions.GetAllProjects(pageRequest);
+    const action = new ${modelName}Actions.GetAll${modelName}s(pageRequest);
     return this.store.dispatch(action);
   }
 
-  get(projectId: string) {
-    const action = new ProjectActions.GetProject(projectId);
+  get(${modelName.toLowerCase()}Id: string) {
+    const action = new ${modelName}Actions.Get${modelName}(${modelName.toLowerCase()}Id);
     return this.store.dispatch(action);
   }
 
-  create(project: Project): void {
-    const action = new ProjectActions.CreateProject(project);
+  create(${modelName.toLowerCase()}: ${modelName}): void {
+    const action = new ${modelName}Actions.Create${modelName}(${modelName.toLowerCase()});
     return this.store.dispatch(action);
   }
 
-  update(project: Project): void {
-    const action = new ProjectActions.UpdateProject(project);
+  update(${modelName.toLowerCase()}: ${modelName}): void {
+    const action = new ${modelName}Actions.Update${modelName}(${modelName.toLowerCase()});
     return this.store.dispatch(action);
   }
 
-  delete(projectId: string) {
-    const action = new ProjectActions.DeleteProject(projectId);
+  delete(${modelName.toLowerCase()}Id: string) {
+    const action = new ${modelName}Actions.Delete${modelName}(${modelName.toLowerCase()}Id);
     return this.store.dispatch(action);
   }
 
-  goToEdit(projectId: string) {
+  goToEdit(${modelName.toLowerCase()}Id: string) {
     this.store.dispatch(new RouterActions.Go({
       // https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#navigation-actions
-      path: ['projects/edit/', projectId],
+      path: ['${modelName.toLowerCase()}s/edit/', ${modelName.toLowerCase()}Id],
     }));
   }
 
   goToCreate() {
     this.store.dispatch(new RouterActions.Go({
       // https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#navigation-actions
-      path: ['/projects/create']
+      path: ['/${modelName.toLowerCase()}s/create']
     }));
   }
 }

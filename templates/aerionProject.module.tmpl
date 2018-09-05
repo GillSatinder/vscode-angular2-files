@@ -2,35 +2,35 @@
 import { NgModule } from '@angular/core';
 
 // This Module's Components
-import { ProjectComponent } from './project.component';
-import { ProjectRoutingModule } from './project.routing.module';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { ProjectService } from './project-service';
+import { ${modelName}Component } from './${modelName.toLowerCase()}.component';
+import { ${modelName}RoutingModule } from './${modelName.toLowerCase()}.routing.module';
+import { ${modelName}ListComponent } from './${modelName.toLowerCase()}-list/${modelName.toLowerCase()}-list.component';
+import { ${modelName}Service } from './${modelName.toLowerCase()}-service';
 import { SharedModule } from '../../common/shared/shared.module';
-import { ProjectCreateComponent } from './project-create/project-create.component';
-import { ProjectEditComponent } from './project-edit/project-edit.component';
-import { ProjectFormComponent } from './project-form/project-form.component';
+import { ${modelName}CreateComponent } from './${modelName.toLowerCase()}-create/${modelName.toLowerCase()}-create.component';
+import { ${modelName}EditComponent } from './${modelName.toLowerCase()}-edit/${modelName.toLowerCase()}-edit.component';
+import { ${modelName}FormComponent } from './${modelName.toLowerCase()}-form/${modelName.toLowerCase()}-form.component';
 
 @NgModule({
   imports: [
     SharedModule,
-    ProjectRoutingModule
+    ${modelName}RoutingModule
 
   ],
   declarations: [
-    ProjectComponent,
-    ProjectListComponent,
-    ProjectCreateComponent,
-    ProjectEditComponent,
-    ProjectFormComponent
+    ${modelName}Component,
+    ${modelName}ListComponent,
+    ${modelName}CreateComponent,
+    ${modelName}EditComponent,
+    ${modelName}FormComponent
   ],
   exports: [
-    ProjectComponent,
+    ${modelName}Component,
   ],
   providers: [
-    ProjectService
+    ${modelName}Service
   ]
 })
-export class ProjectModule {
+export class ${modelName}Module {
 
 }
