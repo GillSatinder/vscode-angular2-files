@@ -105,21 +105,24 @@ export const resources = new Map<ResourceType, IResource>([
   }],
   [ResourceType.AerionProject,{
     
+    // basic files 
     locDirName: (loc, config) => (!config.defaults.module.flat) ? loc.fileName : loc.dirName,
     locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
     createFolder: config => !config.defaults.module.flat,
     files: 
-    [{ name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: TemplateType.ComponentStyle },
-    { name: config => `component.html`, type: TemplateType.AerionProjectBasicHtml },
+    [
+    
+    { name: config => `component.html`, type: TemplateType.AerionProjectBasicHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
     { name: config => `component.ts`, type: TemplateType.AerionProjectBasicTs },
     { name: config => `module.ts`, type: TemplateType.AerionProjectBasicModule },
-    { name: config => `routing.module.ts`, type: TemplateType.AerionProjectBasicRoutingModule, condition: (config, params) => config.defaults.module.routing },
-    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectBasicSpec, condition: (config, params) => config.defaults.module.spec },
-    { name: config => `service.ts`, type: TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng5' },
-    { name: config => `service.ts`, type: TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng6' },],
+    { name: config => `routing.module.ts`, type: TemplateType.AerionProjectBasicRoutingModule },
+    { name: config => `component.spec.ts`, type: TemplateType.AerionProjectBasicSpec },
+    { name: config => `-service.ts`, type: TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng6' },
+    ],
     
     
-    options: [OptionType.Routing,
+    options: [
+      OptionType.Routing,
       OptionType.RoutingScope,
       OptionType.Spec,
       OptionType.Flat,
@@ -155,7 +158,7 @@ export const resources = new Map<ResourceType, IResource>([
     { name: config => `reducer.ts`, type: TemplateType.AerionProjectStoreReducerts }, 
     { name: confif => `state.interface.ts`, type: TemplateType.AerionProjectStoreInterface }],
 
-    // end store folder
+    
 
 
     // create component

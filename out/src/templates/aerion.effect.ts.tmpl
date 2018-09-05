@@ -3,12 +3,12 @@ import { Http, RequestOptionsArgs, Headers, RequestOptions } from '@angular/http
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent, SubscriptionLike, PartialObserver } from 'rxjs';
 import { map, switchMap, catchError, tap, withLatestFrom } from 'rxjs/operators';
-import * as ProjectActions from './${inputName}.actions';
-import { ProjectActionTypes } from './${inputName}.actions';
+import * as ${modelName}Actions from './${modelName.toLowerCase()}.actions';
+import { ${modelName}ActionTypes } from './${modelName.toLowerCase()}.actions';
 import { Router } from '@angular/router';
-import { Project } from '../models/${inputName}s';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
 import { URLSearchParams } from '@angular/http';
-import { ProjectPage } from '../models/${inputName}Page';
+import { ${modelName}Page } from '../models/${modelName.toLowerCase()}Page';
 import * as RouterActions from '../../../actions/router.actions';
 import { ToasterService } from 'angular2-toaster';
 import { Store } from '@ngrx/store';
@@ -16,8 +16,8 @@ import { AppStore } from '../../../app.store';
 import { PageRequest } from '../../../models/pageRequest';
 
 @Injectable()
-export class ProjectEffects {
-  private endPoint = '/api/v1/${inputName}s';  // URL to web API
+export class ${modelName}Effects {
+  private endPoint = '/api/v1/${modelName.toLowerCase()}s';  // URL to web API
   constructor(private store$: Store<AppStore>,
               private http: Http,
               private actions$: Actions,
@@ -25,10 +25,10 @@ export class ProjectEffects {
               protected toasterService: ToasterService) {
   }
 
-  @Effect() getAllProjects$ = this.actions$
-    // Listen for the 'GET_ALL_PROJECTS' action
-    .ofType(ProjectActionTypes.GET_ALL_PROJECTS).pipe(
-      switchMap((action: ProjectActions.GetAllProjects) => {
+  @Effect() getAll${modelName}s$ = this.actions$
+    // Listen for the 'GET_ALL_${modelName.toUpperCase()}S' action
+    .ofType(${modelName}ActionTypes.GET_ALL_${modelName.toUpperCase()}S).pipe(
+      switchMap((action: ${modelName}Actions.GetAll${modelName}s) => {
         // prepare params
         let urlSearchParams = null;
         if (action) {
@@ -42,142 +42,142 @@ export class ProjectEffects {
           // If successful, dispatch success action with result
 
           map((response: Response) => {
-            const ${inputName}Page = response.json();
-            if (${inputName}Page) {
-              return new ProjectPage().deserialize(${inputName}Page);
+            const ${modelName.toLowerCase()}Page = response.json();
+            if (${modelName.toLowerCase()}Page) {
+              return new ${modelName}Page().deserialize(${modelName.toLowerCase()}Page);
             }
             return null;
           }),
-          map((${inputName}Page: ProjectPage) => {
-            return new ProjectActions.SetProjectPage(${inputName}Page);
+          map((${modelName.toLowerCase()}Page: ${modelName}Page) => {
+            return new ${modelName}Actions.Set${modelName}Page(${modelName.toLowerCase()}Page);
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
-            return of(new ProjectActions.ApiFailed(err));
+            return of(new ${modelName}Actions.ApiFailed(err));
           })
         );
       })
     );
 
-  @Effect() createProject$ = this.actions$
-    // Listen for the 'CREATE_PROJECT' action
-    .ofType(ProjectActionTypes.CREATE_PROJECT).pipe(
-      switchMap((action: ProjectActions.CreateProject) => {
+  @Effect() create${modelName}$ = this.actions$
+    // Listen for the 'CREATE_${modelName.toUpperCase()}' action
+    .ofType(${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}).pipe(
+      switchMap((action: ${modelName}Actions.Create${modelName}) => {
         // prepare headers
         return this.http.post(this.endPoint, action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
-            const ${inputName}Json = response.json();
-            let ${inputName} = null;
-            if (${inputName}Json) {
-              ${inputName} = new Project().deserialize(${inputName}Json);
+            const ${modelName.toLowerCase()}Json = response.json();
+            let ${modelName.toLowerCase()} = null;
+            if (${modelName.toLowerCase()}Json) {
+              ${modelName.toLowerCase()} = new ${modelName}().deserialize(${modelName.toLowerCase()}Json);
             }
-            this.toasterService.pop('success', 'Project created', 'The ${inputName} was successffully Created');
+            this.toasterService.pop('success', '${modelName} created', 'The ${modelName.toLowerCase()} was successffully Created');
 
-            return new ProjectActions.CreateProjectSuccess(${inputName});
+            return new ${modelName}Actions.Create${modelName}Success(${modelName.toLowerCase()});
           })
           // If request fails, dispatch failed action
           , catchError((err: Response, caught) => {
             // https://github.com/ngrx/platform/issues/646#issuecomment-381437629
             if (err.status === 422) {
-              return of(new ProjectActions.ValidationFailed(err.json()));
+              return of(new ${modelName}Actions.ValidationFailed(err.json()));
             }
-            return of(new ProjectActions.ApiFailed(err));
+            return of(new ${modelName}Actions.ApiFailed(err));
           })
         );
       })
 
     );
 
-  @Effect() createProjectSuccess$ = this.actions$
-    // Listen for the 'CREATE_PROJECT' action
-    .ofType(ProjectActionTypes.CREATE_PROJECT_SUCCESS).pipe(
-      map((action: ProjectActions.CreateProjectSuccess) => new RouterActions.Go({
+  @Effect() create${modelName}Success$ = this.actions$
+    // Listen for the 'CREATE_${modelName.toUpperCase()}' action
+    .ofType(${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}_SUCCESS).pipe(
+      map((action: ${modelName}Actions.Create${modelName}Success) => new RouterActions.Go({
         // https://github.com/ngrx/platform/blob/master/docs/router-store/api.md#navigation-actions
-        path: ['/${inputName}s/edit/' + action.payload.id]
+        path: ['/${modelName.toLowerCase()}s/edit/' + action.payload.id]
       }))
     );
 
 
-  @Effect() getProject$ = this.actions$
-    // Listen for the 'GET_PROJECT' action
-    .ofType(ProjectActionTypes.GET_PROJECT).pipe(
-      switchMap((action: ProjectActions.GetProject) => {
+  @Effect() get${modelName}$ = this.actions$
+    // Listen for the 'GET_${modelName.toUpperCase()}' action
+    .ofType(${modelName}ActionTypes.GET_${modelName.toUpperCase()}).pipe(
+      switchMap((action: ${modelName}Actions.Get${modelName}) => {
         return this.http.get(this.endPoint + '/GetSingle/' + action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
-            const ${inputName} = response ? response.json() : null;
-            if (${inputName}) {
-              return new Project().deserialize(${inputName});
+            const ${modelName.toLowerCase()} = response ? response.json() : null;
+            if (${modelName.toLowerCase()}) {
+              return new ${modelName}().deserialize(${modelName.toLowerCase()});
             }
             return null;
           }),
-          map((${inputName}: Project) => {
-            return new ProjectActions.GetProjectSuccess(${inputName});
+          map((${modelName.toLowerCase()}: ${modelName}) => {
+            return new ${modelName}Actions.Get${modelName}Success(${modelName.toLowerCase()});
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
-            return of(new ProjectActions.ApiFailed(err));
+            return of(new ${modelName}Actions.ApiFailed(err));
           })
         );
       })
     );
 
 
-  @Effect() updateProject$ = this.actions$
-    // Listen for the 'UpdateProject' action
-    .ofType(ProjectActionTypes.UPDATE_PROJECT).pipe(
-      switchMap((action: ProjectActions.UpdateProject) => {
+  @Effect() update${modelName}$ = this.actions$
+    // Listen for the 'Update${modelName}' action
+    .ofType(${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}).pipe(
+      switchMap((action: ${modelName}Actions.Update${modelName}) => {
         return this.http.put(this.endPoint + '/?id=' + action.payload.id, action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
             if (response.status === 200) {
-              this.toasterService.pop('success', 'Project updated', 'The ${inputName} was successffully updated');
-              return new ProjectActions.UpdateProjectSuccess();
+              this.toasterService.pop('success', '${modelName} updated', 'The ${modelName.toLowerCase()} was successffully updated');
+              return new ${modelName}Actions.Update${modelName}Success();
             }
-            return new ProjectActions.ApiFailed(response);
+            return new ${modelName}Actions.ApiFailed(response);
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
             if (err.status === 422) {
-              return of(new ProjectActions.ValidationFailed(err.json()));
+              return of(new ${modelName}Actions.ValidationFailed(err.json()));
             }
 
-            return of(new ProjectActions.ApiFailed(err));
+            return of(new ${modelName}Actions.ApiFailed(err));
           })
         );
       })
     );
 
-  @Effect() deleteProject$ = this.actions$
-    // Listen for the 'UpdateProject' action
-    .ofType(ProjectActionTypes.DELETE_PROJECT).pipe(
-      switchMap((action: ProjectActions.DeleteProject) => {
+  @Effect() delete${modelName}$ = this.actions$
+    // Listen for the 'Update${modelName}' action
+    .ofType(${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}).pipe(
+      switchMap((action: ${modelName}Actions.Delete${modelName}) => {
         return this.http.delete(this.endPoint + '/?id=' + action.payload).pipe(
           // If successful, dispatch success action with result
           map((response: Response) => {
             if (response.status === 200) {
-              this.toasterService.pop('success', 'Project Deleted', 'The ${inputName} was successffully updated');
-              return new ProjectActions.DeleteProjectSuccess();
+              this.toasterService.pop('success', '${modelName} Deleted', 'The ${modelName.toLowerCase()} was successffully updated');
+              return new ${modelName}Actions.Delete${modelName}Success();
             }
-            return new ProjectActions.ApiFailed(response);
+            return new ${modelName}Actions.ApiFailed(response);
           })
           // If request fails, dispatch failed action
           , catchError((err, caught) => {
             if (err.status === 422) {
-              return of(new ProjectActions.ValidationFailed(err.json()));
+              return of(new ${modelName}Actions.ValidationFailed(err.json()));
             }
 
-            return of(new ProjectActions.ApiFailed(err));
+            return of(new ${modelName}Actions.ApiFailed(err));
           })
         );
       })
     );
 
-  @Effect() deleteProjectSuccess$ = this.actions$
-    // Listen for the 'UpdateProject' action
-    .ofType(ProjectActionTypes.DELETE_PROJECT_SUCCESS).pipe(
-      withLatestFrom(this.store$.select(x => x.${inputName}s.${inputName}Page ))
+  @Effect() delete${modelName}Success$ = this.actions$
+    // Listen for the 'Update${modelName}' action
+    .ofType(${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS).pipe(
+      withLatestFrom(this.store$.select(x => x.${modelName.toLowerCase()}s.${modelName.toLowerCase()}Page ))
       , map(([action, page]) => {
         console.log(action);
         console.log(page);
@@ -186,7 +186,7 @@ export class ProjectEffects {
         pageRequest.page = page.currentPage;
         pageRequest.pageSize = page.pageSize;
         pageRequest.searchTerm = page.searchTerm;
-        return new ProjectActions.GetAllProjects(pageRequest);
+        return new ${modelName}Actions.GetAll${modelName}s(pageRequest);
       })
     );
 

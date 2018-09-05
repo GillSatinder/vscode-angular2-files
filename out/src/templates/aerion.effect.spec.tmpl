@@ -2,16 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { hot, cold } from 'jasmine-marbles';
 import {Observable, of, throwError} from 'rxjs';
-import * as MyActions from './../store/${inputName}.actions';
-import {ProjectEffects} from './${inputName}.effects';
+import * as MyActions from './../store/${modelName}.actions';
+import {${modelName}Effects} from './${modelName}.effects';
 import {PageRequest} from '../../../models/pageRequest';
 import {ActionsSubject, ReducerManager, StateObservable, Store, StoreModule} from '@ngrx/store';
 import {Http, Response, ResponseOptions} from '@angular/http';
 import {Router} from '@angular/router';
 import {ToasterService} from 'angular2-toaster';
 import {Actions, EffectsMetadata, getEffectsMetadata} from '@ngrx/effects';
-import {ProjectPage} from '../models/${inputName}Page';
-import {Project} from '../models/${inputName}s';
+import {${modelName}Page} from '../models/${modelName.toLowerCase()}Page';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {AppStore} from '../../../app.store';
 import {EffectMetadata} from '@ngrx/effects/src/effects_metadata';
 class MockStateObservable {}
@@ -32,19 +32,19 @@ class MockHttp {
   delete() {}
 }
 class MockActions {}
-describe('ProjectEffects', () => {
-  let effects: ProjectEffects;
+describe('${modelName}Effects', () => {
+  let effects: ${modelName}Effects;
   let actions: Observable<any>;
   let http: Http;
   let toasterService: ToasterService;
   let store: Store<any>;
-  let metadata: EffectsMetadata<ProjectEffects>;
+  let metadata: EffectsMetadata<${modelName}Effects>;
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
 
     ],
     providers: [
-      ProjectEffects,
+      ${modelName}Effects,
       Store,
       {provide: StateObservable, useClass: MockStateObservable},
       {provide: ActionsSubject, useClass: MockActionsSubject},
@@ -59,16 +59,16 @@ describe('ProjectEffects', () => {
   }));
 
   beforeEach(() => {
-    effects = TestBed.get(ProjectEffects);
+    effects = TestBed.get(${modelName}Effects);
     http = TestBed.get(Http);
     toasterService = TestBed.get(ToasterService);
     store = TestBed.get(Store);
     metadata = getEffectsMetadata(effects);
   });
 
-  // Successful attempt for getAllProjects
-  describe('getAllProjects', () => {
-    it('should get all the ${inputName}s successfully', () => {
+  // Successful attempt for getAll${modelName}s
+  describe('getAll${modelName}s', () => {
+    it('should get all the ${modelName}s successfully', () => {
       const pageObjectFromService = {
         totalResults: 18,
         totalPages: 2,
@@ -80,7 +80,7 @@ describe('ProjectEffects', () => {
 
       const response = new Response(new ResponseOptions({body: JSON.stringify(pageObjectFromService)}));
 
-      const expectedProjectPageObject = {
+      const expected${modelName}PageObject = {
         totalResults: 18,
         totalPages: 2,
         currentPage: 1,
@@ -91,198 +91,198 @@ describe('ProjectEffects', () => {
       spyOn(http, 'get').and.returnValue(of(response));
       const pageRequest = new PageRequest();
       const payload = pageRequest.asDefault();
-      const action = new MyActions.GetAllProjects(payload);
-      const completion = new MyActions.SetProjectPage(new ProjectPage().deserialize(expectedProjectPageObject));
+      const action = new MyActions.GetAll${modelName}s(payload);
+      const completion = new MyActions.Set${modelName}Page(new ${modelName}Page().deserialize(expected${modelName}PageObject));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
-      expect(effects.getAllProjects$).toBeObservable(expected);
-      expect(metadata.getAllProjects$).toEqual({dispatch: true});
+      expect(effects.getAll${modelName}s$).toBeObservable(expected);
+      expect(metadata.getAll${modelName}s$).toEqual({dispatch: true});
     });
   });
 
- // Failed attempt of GetAllProjects
-  describe('getAllProjects', () => {
+ // Failed attempt of GetAll${modelName}s
+  describe('getAll${modelName}s', () => {
     it('should call ApiFailed on unsuccessful attempt', () => {
 
       // setup
       spyOn(http, 'get').and.returnValue(throwError({status: 500, message: 'server error'}));
       const pageRequest = new PageRequest();
       const payload = pageRequest.asDefault();
-      const action = new MyActions.GetAllProjects(payload);
+      const action = new MyActions.GetAll${modelName}s(payload);
       actions = hot('--a-', {a: action});
       const completion = new MyActions.ApiFailed({status: 500, message: 'server error'});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.getAllProjects$).toBeObservable(expected);
-      expect(metadata.getAllProjects$).toEqual({dispatch: true});
+      expect(effects.getAll${modelName}s$).toBeObservable(expected);
+      expect(metadata.getAll${modelName}s$).toEqual({dispatch: true});
     });
   });
 
-  // Successful attempt to create a ${inputName}
-  describe('CreateProject', () => {
-    it('should create a ${inputName} successfully', () => {
+  // Successful attempt to create a ${modelName}
+  describe('Create${modelName}', () => {
+    it('should create a ${modelName} successfully', () => {
 
       // setup
-      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
-      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response = new Response(new ResponseOptions({body: JSON.stringify(${inputName})}));
+      const ${modelName} = new ${modelName}({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${modelName}2 = new ${modelName}({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response = new Response(new ResponseOptions({body: JSON.stringify(${modelName})}));
       spyOn(http, 'post').and.returnValue(of(response));
       spyOn(toasterService, 'pop').and.returnValue('success');
-      const action = new MyActions.CreateProject(${inputName});
-      const completion = new MyActions.CreateProjectSuccess(new Project().deserialize(${inputName}2));
+      const action = new MyActions.Create${modelName}(${modelName});
+      const completion = new MyActions.Create${modelName}Success(new ${modelName}().deserialize(${modelName}2));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.createProject$).toBeObservable(expected);
-      expect(metadata.createProject$).toEqual({dispatch: true});
+      expect(effects.create${modelName}$).toBeObservable(expected);
+      expect(metadata.create${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Unsuccessful attempt to create a ${inputName}
-  describe('CreateProject', () => {
-    it('should give an error on creating a ${inputName}', () => {
+  // Unsuccessful attempt to create a ${modelName}
+  describe('Create${modelName}', () => {
+    it('should give an error on creating a ${modelName}', () => {
 
       // setup
-      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
-      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response = new Response(new ResponseOptions({body: JSON.stringify(${inputName})}));
+      const ${modelName} = new ${modelName}({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${modelName}2 = new ${modelName}({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response = new Response(new ResponseOptions({body: JSON.stringify(${modelName})}));
       spyOn(http, 'post').and.returnValue(throwError({status: 500, message: 'server error'}));
       spyOn(toasterService, 'pop').and.returnValue('success');
-      const action = new MyActions.CreateProject(${inputName});
+      const action = new MyActions.Create${modelName}(${modelName});
       const completion = new MyActions.ApiFailed({status: 500, message: 'server error'});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.createProject$).toBeObservable(expected);
-      expect(metadata.createProject$).toEqual({dispatch: true});
+      expect(effects.create${modelName}$).toBeObservable(expected);
+      expect(metadata.create${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Successfully get the ${inputName}
-  describe('GetProject', () => {
-    it('should get the ${inputName} successfully', () => {
+  // Successfully get the ${modelName}
+  describe('Get${modelName}', () => {
+    it('should get the ${modelName} successfully', () => {
       // setup
-      const ${inputName}2 = new Project({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
-      const response  = new Response(new ResponseOptions({body: JSON.stringify(${inputName}2)}));
+      const ${modelName}2 = new ${modelName}({id: '1', name: 'ss', description: 'ww',  formControls: {name: 'ss', description: 'ww'}});
+      const response  = new Response(new ResponseOptions({body: JSON.stringify(${modelName}2)}));
       spyOn(http, 'get').and.returnValue(of(response));
-      const action = new MyActions.GetProject('1');
-      const completion = new MyActions.GetProjectSuccess(new Project().deserialize(${inputName}2));
+      const action = new MyActions.Get${modelName}('1');
+      const completion = new MyActions.Get${modelName}Success(new ${modelName}().deserialize(${modelName}2));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.getProject$).toBeObservable(expected);
-      expect(metadata.getProject$).toEqual({dispatch: true});
+      expect(effects.get${modelName}$).toBeObservable(expected);
+      expect(metadata.get${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Unsuccessful attempt to get the ${inputName}
-  describe('GetProject', () => {
-    it('should give error on unsuccessful attempt of getting the ${inputName}', () => {
+  // Unsuccessful attempt to get the ${modelName}
+  describe('Get${modelName}', () => {
+    it('should give error on unsuccessful attempt of getting the ${modelName}', () => {
 
       // setup
       spyOn(http, 'get').and.returnValue(throwError({status: 500, message: 'server error'}));
-      const action = new MyActions.GetProject('1');
+      const action = new MyActions.Get${modelName}('1');
       const completion = new MyActions.ApiFailed({status: 500, message: 'server error'});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.getProject$).toBeObservable(expected);
-      expect(metadata.getProject$).toEqual({dispatch: true});
+      expect(effects.get${modelName}$).toBeObservable(expected);
+      expect(metadata.get${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Successful attempt to update the ${inputName}
-  describe('UpdateProject', () => {
-    it('should update the ${inputName} successfully', () => {
+  // Successful attempt to update the ${modelName}
+  describe('Update${modelName}', () => {
+    it('should update the ${modelName} successfully', () => {
 
       // setup
-      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${modelName} = new ${modelName}({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
       const response = new Response(new ResponseOptions({status: 200}));
-      const action = new MyActions.UpdateProject(${inputName});
-      const completion = new MyActions.UpdateProjectSuccess();
+      const action = new MyActions.Update${modelName}(${modelName});
+      const completion = new MyActions.Update${modelName}Success();
       spyOn(http, 'put').and.returnValue(of(response));
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.updateProject$).toBeObservable(expected);
-      expect(metadata.updateProject$).toEqual({dispatch: true});
+      expect(effects.update${modelName}$).toBeObservable(expected);
+      expect(metadata.update${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Unsuccessful attempt to update the ${inputName}
-  describe('UpdateProject', () => {
-    it('should display the error on unsuccessfully updating the ${inputName}', () => {
+  // Unsuccessful attempt to update the ${modelName}
+  describe('Update${modelName}', () => {
+    it('should display the error on unsuccessfully updating the ${modelName}', () => {
 
       // setup
-      const ${inputName} = new Project({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
+      const ${modelName} = new ${modelName}({id: '1', name: 'ss', description: 'ww', formControls: {name: 'ss', description: 'ww'}});
       spyOn(http, 'put').and.returnValue(throwError({status: 500}));
-      const action = new MyActions.UpdateProject(${inputName});
+      const action = new MyActions.Update${modelName}(${modelName});
       const completion = new MyActions.ApiFailed({status: 500});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.updateProject$).toBeObservable(expected);
-      expect(metadata.updateProject$).toEqual({dispatch: true});
+      expect(effects.update${modelName}$).toBeObservable(expected);
+      expect(metadata.update${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Successfully deleting the ${inputName}
-  describe('DeleteProject', () => {
-    it('should delete the ${inputName}', () => {
+  // Successfully deleting the ${modelName}
+  describe('Delete${modelName}', () => {
+    it('should delete the ${modelName}', () => {
 
       // setup
       const response = new Response(new ResponseOptions({status: 200}));
       spyOn(http, 'delete').and.returnValue(of(response));
-      const action = new MyActions.DeleteProject('1');
-      const completion = new MyActions.DeleteProjectSuccess();
+      const action = new MyActions.Delete${modelName}('1');
+      const completion = new MyActions.Delete${modelName}Success();
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.deleteProject$).toBeObservable(expected);
-      expect(metadata.deleteProject$).toEqual({dispatch: true});
+      expect(effects.delete${modelName}$).toBeObservable(expected);
+      expect(metadata.delete${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  // Unsuccessfully delete the ${inputName}
-  describe('DeleteProject', () => {
-    it('should display the error on deleting the ${inputName}', () => {
+  // Unsuccessfully delete the ${modelName}
+  describe('Delete${modelName}', () => {
+    it('should display the error on deleting the ${modelName}', () => {
 
       // setup
       spyOn(http, 'delete').and.returnValue(throwError({status: 500}));
-      const action = new MyActions.DeleteProject('1');
+      const action = new MyActions.Delete${modelName}('1');
       const completion = new MyActions.ApiFailed({status: 500});
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
 
       // verify
-      expect(effects.deleteProject$).toBeObservable(expected);
-      expect(metadata.deleteProject$).toEqual({dispatch: true});
+      expect(effects.delete${modelName}$).toBeObservable(expected);
+      expect(metadata.delete${modelName}$).toEqual({dispatch: true});
     });
   });
 
-  describe('DeleteProjectSuccess', () => {
+  describe('Delete${modelName}Success', () => {
 
-    it('should delete the ${inputName} and get the pagerequest', () => {
-      const list: Project [] = [new Project({id: '1', name: 'ss', description: 'ww'}),
-        new Project({id: '2', name: 'tt', description: 'ww'})];
-      const ${inputName}Page = new ProjectPage({currentPage: 1, pageSize: 5, searchTerm: 'null',
+    it('should delete the ${modelName} and get the pagerequest', () => {
+      const list: ${modelName} [] = [new ${modelName}({id: '1', name: 'ss', description: 'ww'}),
+        new ${modelName}({id: '2', name: 'tt', description: 'ww'})];
+      const ${modelName}Page = new ${modelName}Page({currentPage: 1, pageSize: 5, searchTerm: 'null',
         totalResults: 25, totalPages: 5, pagedData: list});
-      const action = new MyActions.DeleteProjectSuccess();
+      const action = new MyActions.Delete${modelName}Success();
       store.dispatch(action);
 
-     // spyOn(store, 'select').and.returnValue(of ([action, ${inputName}Page]));
-      const completion = new MyActions.GetAllProjects(new PageRequest());
+     // spyOn(store, 'select').and.returnValue(of ([action, ${modelName}Page]));
+      const completion = new MyActions.GetAll${modelName}s(new PageRequest());
       actions = hot('--a-', {a: action});
       const expected = cold('--b', {b: completion});
-      expect(metadata.deleteProjectSuccess$).toEqual({dispatch: true});
+      expect(metadata.delete${modelName}Success$).toEqual({dispatch: true});
     });
   });
 });

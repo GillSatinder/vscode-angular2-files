@@ -1,94 +1,93 @@
 import { Action } from '@ngrx/store';
-${modelName}
-import { ${inputName.charAt(0).toUpperCase() + inputName.slice(1)} } from '../models/${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s';
-import { ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page } from '../models/${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
+import { ${modelName}Page } from '../models/${modelName.toLowerCase() }Page';
 import { PageRequest } from '../../../models/pageRequest';
 
-export enum ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes {
-  GET_ALL_${inputName.toUpperCase()}S = '[${inputName.toUpperCase()}] GET_ALL_${inputName.toUpperCase()}S',
-  GET_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] GET_${inputName.toUpperCase()}',
-  GET_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] GET_${inputName.toUpperCase()}_SUCCESS',
+export enum ${modelName}ActionTypes {
+  GET_ALL_${modelName.toUpperCase()}S = '[${modelName.toUpperCase()}] GET_ALL_${modelName.toUpperCase()}S',
+  GET_${modelName.toUpperCase()} = '[${modelName.toUpperCase()}] GET_${modelName.toUpperCase()}',
+  GET_${modelName.toUpperCase()}_SUCCESS = '[${modelName.toUpperCase()}] GET_${modelName.toUpperCase()}_SUCCESS',
 
-  CREATE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] CREATE_${inputName.toUpperCase()}',
-  CREATE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] CREATE_${inputName.toUpperCase()}_SUCCESS',
-  UPDATE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] UPDATE_${inputName.toUpperCase()}',
-  UPDATE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] UPDATE_${inputName.toUpperCase()}_SUCCESS',
-  DELETE_${inputName.toUpperCase()} = '[${inputName.toUpperCase()}] DELETE_${inputName.toUpperCase()}',
-  DELETE_${inputName.toUpperCase()}_SUCCESS = '[${inputName.toUpperCase()}] DELETE_${inputName.toUpperCase()}_SUCCESS',
-  SET_${inputName.toUpperCase()}_PAGE = '[${inputName.toUpperCase()}] SET_${inputName.toUpperCase()}_PAGE',
-  APIFailed = '[${inputName.toUpperCase()}] API_FAILED',
+  CREATE_${modelName.toUpperCase()} = '[${modelName.toUpperCase()}] CREATE_${modelName.toUpperCase()}',
+  CREATE_${modelName.toUpperCase()}_SUCCESS = '[${modelName.toUpperCase()}] CREATE_${modelName.toUpperCase()}_SUCCESS',
+  UPDATE_${modelName.toUpperCase()} = '[${modelName.toUpperCase()}] UPDATE_${modelName.toUpperCase()}',
+  UPDATE_${modelName.toUpperCase()}_SUCCESS = '[${modelName.toUpperCase()}] UPDATE_${modelName.toUpperCase()}_SUCCESS',
+  DELETE_${modelName.toUpperCase()} = '[${modelName.toUpperCase()}] DELETE_${modelName.toUpperCase()}',
+  DELETE_${modelName.toUpperCase()}_SUCCESS = '[${modelName.toUpperCase()}] DELETE_${modelName.toUpperCase()}_SUCCESS',
+  SET_${modelName.toUpperCase()}_PAGE = '[${modelName.toUpperCase()}] SET_${modelName.toUpperCase()}_PAGE',
+  APIFailed = '[${modelName.toUpperCase()}] API_FAILED',
 
-  VALIDATION_FAILED = '[${inputName.toUpperCase()}] VALIDATION_FAILED',
+  VALIDATION_FAILED = '[${modelName.toUpperCase()}] VALIDATION_FAILED',
 
 }
 
-export class Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()};
-  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
+export class Create${modelName} implements Action {
+  readonly type = ${modelName}ActionTypes.CREATE_${modelName.toUpperCase()};
+  constructor(public payload: ${modelName}) { }
 }
-export class Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()}_SUCCESS;
-  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
-}
-
-export class Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()};
-  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
+export class Create${modelName}Success implements Action {
+  readonly type = ${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}_SUCCESS;
+  constructor(public payload: ${modelName}) { }
 }
 
-export class Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()}_SUCCESS;
+export class Update${modelName} implements Action {
+  readonly type = ${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()};
+  constructor(public payload: ${modelName}) { }
 }
 
-export class Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()};
+export class Update${modelName}Success implements Action {
+  readonly type = ${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}_SUCCESS;
+}
+
+export class Delete${modelName} implements Action {
+  readonly type = ${modelName}ActionTypes.DELETE_${modelName.toUpperCase()};
   constructor(public payload: string) { }
 }
-export class Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()}_SUCCESS;
+export class Delete${modelName}Success implements Action {
+  readonly type = ${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS;
 }
 
-export class GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_ALL_${inputName.toUpperCase()}S;
+export class GetAll${modelName}s implements Action {
+  readonly type = ${modelName}ActionTypes.GET_ALL_${modelName.toUpperCase()}S;
   constructor(public payload: PageRequest) { }
 
 }
-export class Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)} implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()};
+export class Get${modelName} implements Action {
+  readonly type = ${modelName}ActionTypes.GET_${modelName.toUpperCase()};
   constructor(public payload: string) { }
 }
 
-export class Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.SET_${inputName.toUpperCase()}_PAGE;
-  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page) { }
+export class Set${modelName}Page implements Action {
+  readonly type = ${modelName}ActionTypes.SET_${modelName.toUpperCase()}_PAGE;
+  constructor(public payload: ${modelName}Page) { }
 }
 
 export class ApiFailed implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.APIFailed;
+  readonly type = ${modelName}ActionTypes.APIFailed;
   constructor(public payload: any) { }
 }
 
 export class ValidationFailed implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.VALIDATION_FAILED;
+  readonly type = ${modelName}ActionTypes.VALIDATION_FAILED;
   constructor(public payload: any) { }
 }
 
-export class Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success implements Action {
-  readonly type = ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()}_SUCCESS;
-  constructor(public payload: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}) { }
+export class Get${modelName}Success implements Action {
+  readonly type = ${modelName}ActionTypes.GET_${modelName.toUpperCase()}_SUCCESS;
+  constructor(public payload: ${modelName}) { }
 }
 
-export type ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionsUnion =
-  | Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
-  | Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
-  | Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
-  | Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
-  | Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
-  | Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
-  | GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s
-  | Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}
-  | Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page
+export type ${modelName}ActionsUnion =
+  | Create${modelName}
+  | Create${modelName}Success
+  | Update${modelName}
+  | Update${modelName}Success
+  | Delete${modelName}
+  | Delete${modelName}Success
+  | GetAll${modelName}s
+  | Get${modelName}
+  | Set${modelName}Page
   | ApiFailed
   | ValidationFailed
-  | Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success
+  | Get${modelName}Success
   ;

@@ -1,26 +1,26 @@
-import { ProjectActionTypes, ProjectActionsUnion } from './${inputName}.actions';
-import { ProjectState } from './${inputName}.state.interface';
-${modelName}
+import { ${modelName}ActionTypes, ${modelName}ActionsUnion } from './${modelName.toLowerCase()}.actions';
+import { ${modelName}State } from './${modelName.toLowerCase()}.state.interface';
 
-export const initialState: ProjectState = {
-  ${inputName}Page: null,
-  selectedProject: null,
+
+export const initialState: ${modelName}State = {
+  ${modelName.toLowerCase()}Page: null,
+  selected${modelName}: null,
   isLoading: false,
   errorMessage: null,
   validationErrors: null,
 };
 
-export function reducer(state: ProjectState = initialState, action: ProjectActionsUnion): ProjectState {
+export function reducer(state: ${modelName}State = initialState, action: ${modelName}ActionsUnion): ${modelName}State {
   switch (action.type) {
-    case ProjectActionTypes.SET_PROJECT_PAGE:
+    case ${modelName}ActionTypes.SET_${modelName.toUpperCase()}_PAGE:
       return {
         ...state,
-        ${inputName}Page: action.payload,
+        ${modelName.toLowerCase()}Page: action.payload,
         isLoading: false,
         errorMessage: null,
         validationErrors: null
       };
-    case ProjectActionTypes.GET_ALL_PROJECTS:
+    case ${modelName}ActionTypes.GET_ALL_${modelName.toUpperCase()}S:
       return {
         ...state,
         isLoading: true,
@@ -28,7 +28,7 @@ export function reducer(state: ProjectState = initialState, action: ProjectActio
         validationErrors: null
       };
 
-    case ProjectActionTypes.CREATE_PROJECT:
+    case ${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}:
       return {
         ...state,
         isLoading: true,
@@ -36,29 +36,29 @@ export function reducer(state: ProjectState = initialState, action: ProjectActio
         validationErrors: null
       };
 
-    case ProjectActionTypes.CREATE_PROJECT_SUCCESS:
+    case ${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        selectedProject: action.payload,
+        selected${modelName}: action.payload,
         errorMessage: null,
         validationErrors: null
       };
-    case ProjectActionTypes.VALIDATION_FAILED:
+    case ${modelName}ActionTypes.VALIDATION_FAILED:
       return {
         ...state,
         isLoading: false,
         errorMessage: null,
         validationErrors: action.payload
       };
-    case ProjectActionTypes.APIFailed:
+    case ${modelName}ActionTypes.APIFailed:
       return {
         ...state,
         isLoading: false,
         errorMessage: action.payload,
         validationErrors: null
       };
-    case ProjectActionTypes.GET_PROJECT:
+    case ${modelName}ActionTypes.GET_${modelName.toUpperCase()}:
       return {
         ...state,
         isLoading: true,
@@ -66,30 +66,30 @@ export function reducer(state: ProjectState = initialState, action: ProjectActio
         validationErrors: null
       };
 
-    case ProjectActionTypes.GET_PROJECT_SUCCESS:
+    case ${modelName}ActionTypes.GET_${modelName.toUpperCase()}_SUCCESS:
       return {
         ...state,
-        selectedProject: action.payload,
+        selected${modelName}: action.payload,
         isLoading: false
       };
-      case ProjectActionTypes.UPDATE_PROJECT:
+      case ${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}:
       return {
         ...state,
         isLoading: true
       };
-      case ProjectActionTypes.UPDATE_PROJECT_SUCCESS:
+      case ${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}_SUCCESS:
       return {
         ...state,
         isLoading: false
       };
 
-      case ProjectActionTypes.DELETE_PROJECT:
+      case ${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}:
       return {
         ...state,
         isLoading: true
       };
 
-      case ProjectActionTypes.DELETE_PROJECT_SUCCESS:
+      case ${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS:
       return {
         ...state,
         isLoading: false
@@ -99,5 +99,5 @@ export function reducer(state: ProjectState = initialState, action: ProjectActio
   }
 }
 
-// export const isLoggedIn = (state: ProjectState) => state.isLoggedIn;
-// export const getUserFromToken = (state: ProjectState) => state.token;
+// export const isLoggedIn = (state: ${modelName}State) => state.isLoggedIn;
+// export const getUserFromToken = (state: ${modelName}State) => state.token;

@@ -1,15 +1,18 @@
 import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {
-  ApiFailed,${serviceName},${inputName},
+  ApiFailed,
   Create${modelName},
   Create${modelName}Success,
   Delete${modelName}, Delete${modelName}Success, GetAll${modelName}s, Get${modelName}, Get${modelName}Success,
+  ${modelName}ActionTypes, Set${modelName}Page,
+  Update${modelName},
+  Update${modelName}Success, ValidationFailed
 } from './${modelName.toLowerCase()}.actions';
 import {PageRequest} from '../../../models/pageRequest';
-import {${modelName}Page} from '../models/${modelName}Page';
+import {${modelName}Page} from '../models/${modelName.toLowerCase()}Page';
 
 describe('Create${modelName}', () => {
-  it('satinder singh gill ', () => {
+  it('should create an action ', () => {
 
     // setup
     const payload = new ${modelName}({id: '', name: '', description: ''});
@@ -21,105 +24,108 @@ describe('Create${modelName}', () => {
   });
 });
 
-describe('Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success', () => {
+describe('Create${modelName}Success', () => {
     it('should create an action', () => {
 
       // setup
-      const payload = new ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}({id: '', name: '', description: ''});
-      const action = new Create${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success(payload);
+      const payload = new ${modelName}({id: '', name: '', description: ''});
+      const action = new Create${modelName}Success(payload);
 
       // verify
-      expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.CREATE_${inputName.toUpperCase()}_SUCCESS);
+      expect(action.type).toEqual(${modelName}ActionTypes.CREATE_${modelName.toUpperCase()}_SUCCESS);
       expect(action.payload).toEqual(payload);
     });
 });
 
-describe('Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}', () => {
+describe('Update${modelName}', () => {
   it('should create an action', () => {
 
         // setup
-        const payload = new ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}({id: '', name: '', description: ''});
-        const action = new Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}(payload);
+        const payload = new ${modelName}({id: '', name: '', description: ''});
+        const action = new Update${modelName}(payload);
 
         // verify
-        expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()});
+        expect(action.type).toEqual(${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()});
         expect(action.payload).toEqual(payload);
   });
 });
 
-describe('Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success', () => {
+describe('Update${modelName}Success', () => {
   it('should create an action', () => {
 
     // setup
-    const action = new Update${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success();
+    const action = new Update${modelName}Success();
 
     // verify
 // both are working, choose any one as per the condition.
-    expect({...action}).toEqual({type: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()}_SUCCESS});
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.UPDATE_${inputName.toUpperCase()}_SUCCESS);
+    expect({...action}).toEqual({type: ${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}_SUCCESS});
+    expect(action.type).toEqual(${modelName}ActionTypes.UPDATE_${modelName.toUpperCase()}_SUCCESS);
   });
 });
 
-describe('Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}', () => {
+describe('Delete${modelName}', () => {
   it('should create a delete action', () => {
     // setup
     const payload = 'id';
-    const action = new Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}(payload);
+    const action = new Delete${modelName}(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()});
+    expect(action.type).toEqual(${modelName}ActionTypes.DELETE_${modelName.toUpperCase()});
     expect(action.payload).toEqual(payload);
   });
 });
 
-describe('Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success', () => {
+describe('Delete${modelName}Success', () => {
   it('should create a delete action', () => {
 
     // setup
-    const action = new Delete${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success();
+    const action = new Delete${modelName}Success();
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()}_SUCCESS);
-    expect({...action}).toEqual({type: ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.DELETE_${inputName.toUpperCase()}_SUCCESS});
+    expect(action.type).toEqual(${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS);
+    expect({...action}).toEqual({type: ${modelName}ActionTypes.DELETE_${modelName.toUpperCase()}_SUCCESS});
   });
 });
 
-describe('GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s', () => {
-  it('should create an GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s action', () => {
+
+// starting from here now
+
+describe('GetAll${modelName}s', () => {
+  it('should create an GetAll${modelName}s action', () => {
 
     // setup
     const payload = new PageRequest();
     payload.asDefault();
-    const action = new GetAll${inputName.charAt(0).toUpperCase() + inputName.slice(1)}s(payload);
+    const action = new GetAll${modelName}s(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_ALL_${inputName.toUpperCase()}S);
+    expect(action.type).toEqual(${modelName}ActionTypes.GET_ALL_${modelName.toUpperCase()}S);
     expect(action.payload).toEqual(payload);
   });
 });
 
-describe('Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}', () => {
-  it('should get the action for get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}', () => {
+describe('Get${modelName}', () => {
+  it('should get the action for get${modelName}', () => {
 
     // setup
     const payload = '1';
-    const action = new Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}(payload);
+    const action = new Get${modelName}(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()});
+    expect(action.type).toEqual(${modelName}ActionTypes.GET_${modelName.toUpperCase()});
     expect(action.payload).toEqual(payload);
   });
 });
 
-describe('Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page()', () => {
-  it('should get the action for set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page', () => {
+describe('Set${modelName}Page()', () => {
+  it('should get the action for set${modelName}Page', () => {
 
     // setup
-    const payload = new ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page();
-    const action = new Set${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Page(payload);
+    const payload = new ${modelName}Page();
+    const action = new Set${modelName}Page(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.SET_${inputName.toUpperCase()}_PAGE);
+    expect(action.type).toEqual(${modelName}ActionTypes.SET_${modelName.toUpperCase()}_PAGE);
     expect(action.payload).toEqual(payload);
   });
 });
@@ -132,7 +138,7 @@ describe('ApiFailed', () => {
     const action = new ApiFailed(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.APIFailed);
+    expect(action.type).toEqual(${modelName}ActionTypes.APIFailed);
     expect(action.payload).toEqual(payload);
   });
 });
@@ -145,20 +151,20 @@ describe('ValidationFailed', () => {
     const action = new ValidationFailed(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.VALIDATION_FAILED);
+    expect(action.type).toEqual(${modelName}ActionTypes.VALIDATION_FAILED);
     expect(action.payload).toEqual(payload);
   });
 });
 
-describe('Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success', () => {
+describe('Get${modelName}Success', () => {
   it('should create an action for ApiFailed', () => {
 
     // setup
-    const payload = new ${inputName.charAt(0).toUpperCase() + inputName.slice(1)}({id: '', name: '', description: ''});
-    const action = new Get${inputName.charAt(0).toUpperCase() + inputName.slice(1)}Success(payload);
+    const payload = new ${modelName}({id: '', name: '', description: ''});
+    const action = new Get${modelName}Success(payload);
 
     // verify
-    expect(action.type).toEqual(${inputName.charAt(0).toUpperCase() + inputName.slice(1)}ActionTypes.GET_${inputName.toUpperCase()}_SUCCESS);
+    expect(action.type).toEqual(${modelName}ActionTypes.GET_${modelName.toUpperCase()}_SUCCESS);
     expect(action.payload).toEqual(payload);
   });
 });

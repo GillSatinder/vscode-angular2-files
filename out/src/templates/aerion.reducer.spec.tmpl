@@ -1,17 +1,17 @@
-import * as fromProjectReducer from './../store/${inputName}.reducer';
-import * as fromProjectAction from './../store/${inputName}.actions';
-import {ProjectPage} from '../models/${inputName}Page';
-import {Project} from '../models/${inputName}s';
+import * as from${modelName}Reducer from './../store/${modelName.toLowerCase()}.reducer';
+import * as from${modelName}Action from './../store/${modelName.toLowerCase()}.actions';
+import {${modelName}Page} from '../models/${modelName.toLowerCase()}Page';
+import {${modelName}} from '../models/${modelName.toLowerCase()}';
 import {PageRequest} from '../../../models/pageRequest';
 
 
 
-describe('ProjectReducer', () => {
-  it('should set the ${inputName} page', () => {
+describe('${modelName}Reducer', () => {
+  it('should set the ${modelName.toLowerCase()} page', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = new ProjectPage({
+    const {initialState} = from${modelName}Reducer;
+    const payload = new ${modelName}Page({
       totalResults: 2,
       totalPages: 18,
       currentPage: 2,
@@ -19,8 +19,8 @@ describe('ProjectReducer', () => {
       searchTerm: '',
       pagedData: []
     });
-    const  action = new fromProjectAction.SetProjectPage(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const  action = new from${modelName}Action.Set${modelName}Page(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
@@ -30,15 +30,15 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should get all the Projects', () => {
+describe('${modelName}Reducer', () => {
+  it('should get all the ${modelName}s', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
+    const {initialState} = from${modelName}Reducer;
     const pageRequest = new PageRequest();
     const payload = pageRequest.asDefault();
-    const action = new fromProjectAction.GetAllProjects(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const action = new from${modelName}Action.GetAll${modelName}s(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
@@ -48,14 +48,14 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create ${inputName}', () => {
+describe('${modelName}Reducer', () => {
+  it('should create ${modelName.toLowerCase()}', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
-    const action = new fromProjectAction.CreateProject(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const payload = new ${modelName}({id: 1, name: 'ss', description: 'new ${modelName.toLowerCase()}'});
+    const action = new from${modelName}Action.Create${modelName}(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
@@ -65,32 +65,32 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create ${inputName} success', () => {
+describe('${modelName}Reducer', () => {
+  it('should create ${modelName.toLowerCase()} success', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
-    const action = new fromProjectAction.CreateProjectSuccess(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const payload = new ${modelName}({id: 1, name: 'ss', description: 'new ${modelName.toLowerCase()}'});
+    const action = new from${modelName}Action.Create${modelName}Success(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
     expect(state.isLoading).toEqual(false);
     expect(state.errorMessage).toEqual(null);
     expect(state.validationErrors).toEqual(null);
-    expect(state.selectedProject).toEqual(action.payload);
+    expect(state.selected${modelName}).toEqual(action.payload);
   });
 });
 
-describe('ProjectReducer', () => {
+describe('${modelName}Reducer', () => {
   it('should create validation failed action', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
+    const {initialState} = from${modelName}Reducer;
     const payload = 'new payload';
-    const action = new fromProjectAction.ValidationFailed(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const action = new from${modelName}Action.ValidationFailed(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
@@ -100,14 +100,14 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
+describe('${modelName}Reducer', () => {
   it('should create an action for Api Failed', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
+    const {initialState} = from${modelName}Reducer;
     const payload = 'new payload';
-    const action = new fromProjectAction.ApiFailed(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const action = new from${modelName}Action.ApiFailed(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
 
     // verify
@@ -118,13 +118,13 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for getProject', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for get${modelName}', () => {
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = 'Get new ${inputName}';
-    const action = new fromProjectAction.GetProject(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const payload = 'Get new ${modelName.toLowerCase()}';
+    const action = new from${modelName}Action.Get${modelName}(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
 
     // verify
@@ -135,30 +135,30 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for getProjectSuccess', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for get${modelName}Success', () => {
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
-    const action = new fromProjectAction.GetProjectSuccess(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const payload = new ${modelName}({id: 1, name: 'ss', description: 'new ${modelName.toLowerCase()}'});
+    const action = new from${modelName}Action.Get${modelName}Success(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
 
     // verify
     expect(state).not.toEqual(initialState);
-    expect(state.selectedProject).toEqual(action.payload);
+    expect(state.selected${modelName}).toEqual(action.payload);
     expect(state.isLoading).toEqual(false);
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for updateProject', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for update${modelName}', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const payload = new Project({id: 1, name: 'ss', description: 'new ${inputName}'});
-    const action = new fromProjectAction.UpdateProject(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const payload = new ${modelName}({id: 1, name: 'ss', description: 'new ${modelName.toLowerCase()}'});
+    const action = new from${modelName}Action.Update${modelName}(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state).not.toEqual(initialState);
@@ -166,26 +166,26 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for updateProjectSuccess', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for update${modelName}Success', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const action = new fromProjectAction.UpdateProjectSuccess();
-    const state =  fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const action = new from${modelName}Action.Update${modelName}Success();
+    const state =  from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state.isLoading).toEqual(false);
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for deleteProject', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for delete${modelName}', () => {
     // setup
-    const {initialState} = fromProjectReducer;
+    const {initialState} = from${modelName}Reducer;
     const payload = '1';
-    const action = new fromProjectAction.DeleteProject(payload);
-    const state = fromProjectReducer.reducer(initialState, action);
+    const action = new from${modelName}Action.Delete${modelName}(payload);
+    const state = from${modelName}Reducer.reducer(initialState, action);
 
 
     // verify
@@ -194,13 +194,13 @@ describe('ProjectReducer', () => {
   });
 });
 
-describe('ProjectReducer', () => {
-  it('should create an action for deleteProjectSuccess', () => {
+describe('${modelName}Reducer', () => {
+  it('should create an action for delete${modelName}Success', () => {
 
     // setup
-    const {initialState} = fromProjectReducer;
-    const action = new fromProjectAction.DeleteProjectSuccess();
-    const state =  fromProjectReducer.reducer(initialState, action);
+    const {initialState} = from${modelName}Reducer;
+    const action = new from${modelName}Action.Delete${modelName}Success();
+    const state =  from${modelName}Reducer.reducer(initialState, action);
 
     // verify
     expect(state.isLoading).toEqual(false);

@@ -1,9 +1,9 @@
-import { Project } from '../models/${inputName}s';
-import { ProjectPage } from '../models/${inputName}Page';
+import { ${modelName} } from '../models/${modelName.toLowerCase()}';
+import { ${modelName}Page } from '../models/${modelName.toLowerCase()}Page';
 
-export interface ProjectState {
-  ${inputName}Page: ProjectPage;
-  selectedProject: Project;
+export interface ${modelName}State {
+  ${modelName.toLowerCase()}Page: ${modelName}Page;
+  selected${modelName}: ${modelName};
   isLoading: boolean;
   errorMessage: string;
   validationErrors: any[];

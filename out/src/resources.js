@@ -101,18 +101,20 @@ exports.resources = new Map([
                 option_type_1.OptionType.Export],
         }],
     [resource_type_1.ResourceType.AerionProject, {
+            // basic files 
             locDirName: (loc, config) => (!config.defaults.module.flat) ? loc.fileName : loc.dirName,
             locDirPath: (loc, config) => path.join(loc.dirPath, loc.dirName),
             createFolder: config => !config.defaults.module.flat,
-            files: [{ name: config => `component.${config.defaults.component.styleext || config.defaults.styleExt}`, type: template_type_1.TemplateType.ComponentStyle },
-                { name: config => `component.html`, type: template_type_1.TemplateType.AerionProjectBasicHtml },
+            files: [
+                { name: config => `component.html`, type: template_type_1.TemplateType.AerionProjectBasicHtml, condition: (config, params) => !config.defaults.component.inlineTemplate },
                 { name: config => `component.ts`, type: template_type_1.TemplateType.AerionProjectBasicTs },
                 { name: config => `module.ts`, type: template_type_1.TemplateType.AerionProjectBasicModule },
-                { name: config => `routing.module.ts`, type: template_type_1.TemplateType.AerionProjectBasicRoutingModule, condition: (config, params) => config.defaults.module.routing },
-                { name: config => `component.spec.ts`, type: template_type_1.TemplateType.AerionProjectBasicSpec, condition: (config, params) => config.defaults.module.spec },
-                { name: config => `service.ts`, type: template_type_1.TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng5' },
-                { name: config => `service.ts`, type: template_type_1.TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng6' },],
-            options: [option_type_1.OptionType.Routing,
+                { name: config => `routing.module.ts`, type: template_type_1.TemplateType.AerionProjectBasicRoutingModule },
+                { name: config => `component.spec.ts`, type: template_type_1.TemplateType.AerionProjectBasicSpec },
+                { name: config => `-service.ts`, type: template_type_1.TemplateType.AerionProjectBasicService, condition: (config, params) => config.version === 'ng6' },
+            ],
+            options: [
+                option_type_1.OptionType.Routing,
                 option_type_1.OptionType.RoutingScope,
                 option_type_1.OptionType.Spec,
                 option_type_1.OptionType.Flat,
@@ -121,7 +123,8 @@ exports.resources = new Map([
                 option_type_1.OptionType.Export,
                 option_type_1.OptionType.InlineTemplate,
                 option_type_1.OptionType.InlineStyle,
-                option_type_1.OptionType.ViewEncapsulation],
+                option_type_1.OptionType.ViewEncapsulation
+            ],
             // for models folder
             locDirName2: (loc, config) => (!config.defaults.module.flat) ? loc.fileName2 : loc.dirName2,
             locDirPath2: (loc, config) => path.join(loc.dirPath2, loc.dirName2),
@@ -140,7 +143,6 @@ exports.resources = new Map([
                 { name: config => `reducer.spec.ts`, type: template_type_1.TemplateType.AerionProjectStroreReducerSpec },
                 { name: config => `reducer.ts`, type: template_type_1.TemplateType.AerionProjectStoreReducerts },
                 { name: confif => `state.interface.ts`, type: template_type_1.TemplateType.AerionProjectStoreInterface }],
-            // end store folder
             // create component
             locDirName4: (loc, config) => (!config.defaults.module.flat) ? loc.fileName4 : loc.dirName4,
             locDirPath4: (loc, config) => path.join(loc.dirPath4, loc.dirName4),
