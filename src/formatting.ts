@@ -4,35 +4,40 @@ export const toTileCase = (str: string) => str.replace(/\w\S*/g, txt => txt.char
 
 export const toUpperCase = (input: string) => toCamelCase(input.charAt(0).toUpperCase() + input.slice(1));
 
+export function toModel(input: string) { 
 
-// export const toModel = (input: string) => input.substring(0, input.indexOf('-')).charAt(0).toUpperCase() + input.substring(0, input.indexOf('-')).slice(1); 
+  const newLine = toCamelCase(input);
+  const capitalInitialPart = newLine.charAt(0).toUpperCase();
+  const wholeString = capitalInitialPart + newLine.slice(1);
+  return wholeString;
 
-export function toModel(input: string) {
-  if (input.includes('-')) { 
-    const initialPart = input.substring(0, input.indexOf('-'));
-    const capitalInitialPart = initialPart.charAt(0).toUpperCase();
-    const wholeString = capitalInitialPart + initialPart.slice(1);
-    return wholeString;
-  // tslint:disable-next-line:no-else-after-return
-  } else {
-    const ip = input.charAt(0).toUpperCase();
-    return ip + input.slice(1);
+  // if (input.includes('-')) { 
+  //   const initialPart = input.substring(0, input.indexOf('-'));
+  //   const capitalInitialPart = initialPart.charAt(0).toUpperCase();
+  //   const wholeString = capitalInitialPart + initialPart.slice(1);
+  //   return wholeString;
+  // // tslint:disable-next-line:no-else-after-return
+  // } else {
+  //   const ip = input.charAt(0).toUpperCase();
+  //   return ip + input.slice(1);
   
-  }
+  // }
   
 }
 
 export function toServiceName(input: string) {
-  const initialPart = input.substring(0, input.indexOf('-'));
-  const capitalInitialPart = initialPart.charAt(0).toUpperCase();
-  const wholeString = capitalInitialPart + initialPart.slice(1);
+  const newLine = toCamelCase(input);
+  const capitalInitialPart = newLine.charAt(0).toUpperCase();
+  const wholeString = capitalInitialPart + newLine.slice(1);
   return wholeString + 'Service';
+
 }
 
 export function toServiceNameVariable(input: string) {
-  const initialPart = input.substring(0, input.indexOf('-'));
-  const capitalInitialPart = initialPart.charAt(0).toLowerCase();
-  const wholeString = capitalInitialPart + initialPart.slice(1);
+
+  const newLine = toCamelCase(input);
+  const capitalInitialPart = newLine.charAt(0).toLowerCase();
+  const wholeString = capitalInitialPart + newLine.slice(1);
   return wholeString + 'Service';
 }
 
